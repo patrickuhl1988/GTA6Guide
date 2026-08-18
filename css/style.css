@@ -87,7 +87,7 @@ a  { color: var(--cyan); }
   border-bottom: 1px solid var(--line);
   background:
     linear-gradient(180deg, rgba(13, 2, 33, 0.55) 0%, rgba(13, 2, 33, 0.35) 45%, rgba(13, 2, 33, 0.9) 100%),
-    url("../assets/hero-bg.png") center 35% / cover no-repeat,
+    url("../assets/hero-bg.webp") center 35% / cover no-repeat,
     var(--bg);
 }
 .hero > * { position: relative; z-index: 2; }
