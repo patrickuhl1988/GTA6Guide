@@ -1,0 +1,73 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <defs>
+    <pattern id="water" width="26" height="26" patternUnits="userSpaceOnUse">
+      <rect width="26" height="26" fill="#0a1a3a"/>
+      <path d="M0 13 Q6.5 9 13 13 T26 13" stroke="#12305e" stroke-width="1.5" fill="none"/>
+    </pattern>
+    <pattern id="swamp" width="22" height="22" patternUnits="userSpaceOnUse">
+      <rect width="22" height="22" fill="#122b1e"/>
+      <circle cx="6" cy="7" r="1.4" fill="#1e4a33"/>
+      <circle cx="16" cy="16" r="1.4" fill="#1e4a33"/>
+    </pattern>
+    <pattern id="grid" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#3a3a4d"/>
+      <path d="M14 0H0V14" stroke="#55556b" stroke-width="1" fill="none"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#water)"/>
+
+  <!-- Festland Leonida -->
+  <path d="M120 0 L1050 0 Q1010 70 1015 140 Q1020 210 985 260 Q950 310 955 380
+           Q958 430 920 470 Q880 512 875 560 Q872 600 830 618 Q770 640 700 622
+           Q640 606 590 618 Q520 636 470 610 Q420 585 380 596 Q310 615 260 585
+           Q210 556 190 500 Q170 445 140 400 Q100 340 110 260 Q118 190 100 120 Z"
+        fill="#2e3140" stroke="#6a6d85" stroke-width="3"/>
+
+  <!-- Mount Kalaga (Norden) -->
+  <g stroke="#8a8da8" stroke-width="2.5" fill="none">
+    <path d="M300 95 l28 -40 28 40"/><path d="M355 105 l24 -34 24 34"/>
+    <path d="M255 120 l22 -30 22 30"/><path d="M410 88 l20 -28 20 28"/>
+  </g>
+  <text x="330" y="160" fill="#9a9db8" font-size="21" font-weight="600">MOUNT KALAGA</text>
+
+  <!-- Lake Leonida -->
+  <ellipse cx="600" cy="330" rx="80" ry="52" fill="url(#water)" stroke="#4a6da8" stroke-width="2.5"/>
+  <text x="545" y="337" fill="#7a9dd8" font-size="17" font-weight="600">LAKE LEONIDA</text>
+
+  <!-- Grassrivers (Südwesten) -->
+  <path d="M270 470 Q340 440 420 470 Q470 490 460 540 Q450 585 380 590 Q300 594 265 550 Q240 515 270 470 Z"
+        fill="url(#swamp)" stroke="#2e6a48" stroke-width="2.5"/>
+  <text x="290" y="530" fill="#4e9a70" font-size="20" font-weight="600">GRASSRIVERS</text>
+
+  <!-- Vice City (Südosten, Stadtraster) -->
+  <path d="M810 380 L950 380 Q965 450 940 520 L860 560 Q815 520 810 450 Z" fill="url(#grid)" stroke="#8a8da8" stroke-width="2.5"/>
+  <rect x="958" y="392" width="26" height="150" fill="#3a3a4d" stroke="#6a6d85" stroke-width="2"/>
+  <text x="822" y="470" fill="#c0c3d8" font-size="22" font-weight="700">VICE CITY</text>
+
+  <!-- Port Gellhorn (Westküste) -->
+  <rect x="180" y="300" width="70" height="46" fill="url(#grid)" stroke="#7a7d95" stroke-width="2"/>
+  <text x="140" y="372" fill="#9a9db8" font-size="17" font-weight="600">PORT GELLHORN</text>
+
+  <!-- Ambrosia (Inland) -->
+  <rect x="520" y="200" width="58" height="40" fill="url(#grid)" stroke="#7a7d95" stroke-width="2"/>
+  <text x="500" y="266" fill="#9a9db8" font-size="17" font-weight="600">AMBROSIA</text>
+
+  <!-- Leonida Keys (Inselkette Süden) -->
+  <g fill="#2e3140" stroke="#6a6d85" stroke-width="2">
+    <ellipse cx="700" cy="622" rx="26" ry="10" transform="rotate(12 700 622)"/>
+    <ellipse cx="760" cy="638" rx="22" ry="9" transform="rotate(16 760 638)"/>
+    <ellipse cx="815" cy="650" rx="18" ry="8" transform="rotate(20 815 650)"/>
+    <ellipse cx="862" cy="658" rx="14" ry="7" transform="rotate(24 862 658)"/>
+  </g>
+  <path d="M672 618 Q760 640 868 656" stroke="#8a8da8" stroke-width="2.5" fill="none" stroke-dasharray="7 5"/>
+  <text x="640" y="600" fill="#9a9db8" font-size="18" font-weight="600">LEONIDA KEYS</text>
+
+  <!-- Highways -->
+  <g stroke="#7a7d95" stroke-width="4" fill="none" opacity="0.85">
+    <path d="M330 130 Q420 240 540 300 Q660 360 810 420"/>
+    <path d="M215 340 Q400 380 545 355"/>
+    <path d="M870 420 Q800 520 705 615"/>
+    <path d="M560 240 Q600 160 700 110"/>
+  </g>
+</svg>

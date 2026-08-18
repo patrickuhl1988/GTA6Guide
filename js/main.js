@@ -8,19 +8,19 @@
     de: { live: "GTA VI ist da! 🎉", more: "Weitere News anzeigen", official: "Offiziell", rumor: "Gerücht",
           empty: "Aktuell keine Meldungen in dieser Kategorie.", src: "Quelle",
           favMac: "Drücke ⌘ + D zum Speichern", favWin: "Drücke Strg + D zum Speichern",
-          fav: "Als Favorit speichern", copied: "✓ Link kopiert!", share: "Seite teilen" },
+          fav: "Als Favorit speichern", copied: "✓ Link kopiert!", share: "Seite teilen" , pushOk: "✓ Aktiviert – wir melden uns!", pushErr: "Bitte Benachrichtigungen im Browser erlauben.", nlOk: "✓ Eingetragen!", nlErr: "Das hat nicht geklappt – bitte später erneut versuchen." },
     en: { live: "GTA VI is out! 🎉", more: "Show more news", official: "Official", rumor: "Rumor",
           empty: "No items in this category right now.", src: "Source",
           favMac: "Press ⌘ + D to bookmark", favWin: "Press Ctrl + D to bookmark",
-          fav: "Bookmark this site", copied: "✓ Link copied!", share: "Share this page" },
+          fav: "Bookmark this site", copied: "✓ Link copied!", share: "Share this page" , pushOk: "✓ Enabled – we\u2019ll be in touch!", pushErr: "Please allow notifications in your browser.", nlOk: "✓ Subscribed!", nlErr: "That didn\u2019t work – please try again later." },
     zh: { live: "GTA VI 已发售！🎉", more: "显示更多新闻", official: "官方", rumor: "传闻",
           empty: "该分类暂无内容。", src: "来源",
           favMac: "按 ⌘ + D 收藏", favWin: "按 Ctrl + D 收藏",
-          fav: "收藏本站", copied: "✓ 链接已复制！", share: "分享本页" },
+          fav: "收藏本站", copied: "✓ 链接已复制！", share: "分享本页" , pushOk: "✓ 已开启——有消息第一时间通知！", pushErr: "请在浏览器中允许通知。", nlOk: "✓ 订阅成功！", nlErr: "出了点问题，请稍后再试。" },
     hi: { live: "GTA VI आ गया! 🎉", more: "और न्यूज़ देखें", official: "आधिकारिक", rumor: "अफ़वाह",
           empty: "फ़िलहाल इस श्रेणी में कुछ नहीं।", src: "स्रोत",
           favMac: "बुकमार्क के लिए ⌘ + D दबाएँ", favWin: "बुकमार्क के लिए Ctrl + D दबाएँ",
-          fav: "बुकमार्क करें", copied: "✓ लिंक कॉपी हुआ!", share: "पेज शेयर करें" },
+          fav: "बुकमार्क करें", copied: "✓ लिंक कॉपी हुआ!", share: "पेज शेयर करें" , pushOk: "✓ चालू — ख़बर मिलते ही बताएँगे!", pushErr: "कृपया ब्राउज़र में नोटिफ़िकेशन की अनुमति दें।", nlOk: "✓ सब्सक्राइब हो गया!", nlErr: "कुछ गड़बड़ हुई — बाद में फिर कोशिश करें।" },
   };
   var T = I18N[LANG] || I18N.de;
 
@@ -56,6 +56,68 @@
         .catch(function () {});
     }
   } catch (e) {}
+
+  /* ---------- OneSignal: Push-Abos mit Themen-Tags + Newsletter ---------- */
+  function collectTags(el) {
+    var tags = {};
+    var explicit = el.getAttribute("data-tags");
+    if (explicit) {
+      explicit.split(",").forEach(function (t) { if (t.trim()) tags[t.trim()] = "1"; });
+    }
+    var scope = el.closest(".notify-inner, .card, .notify");
+    if (scope) {
+      scope.querySelectorAll("input[data-tag]:checked").forEach(function (cb) {
+        tags[cb.getAttribute("data-tag")] = "1";
+      });
+    }
+    if (Object.keys(tags).length === 0) tags.news = "1";
+    return tags;
+  }
+
+  document.querySelectorAll("[data-push]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var tags = collectTags(btn);
+      if (!window.OneSignalDeferred) return;
+      window.OneSignalDeferred.push(async function (OneSignal) {
+        try {
+          await OneSignal.Notifications.requestPermission();
+          if (OneSignal.Notifications.permission) {
+            OneSignal.User.addTags(tags);
+            btn.textContent = T.pushOk;
+            btn.disabled = true;
+          } else {
+            btn.textContent = T.pushErr;
+            setTimeout(function () { location.reload(); }, 3500);
+          }
+        } catch (e) {
+          btn.textContent = T.pushErr;
+        }
+      });
+    });
+  });
+
+  document.querySelectorAll(".nl-form").forEach(function (form) {
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var input = form.querySelector("input[type=email]");
+      var submit = form.querySelector("button");
+      var email = input && input.value.trim();
+      if (!email || !window.OneSignalDeferred) return;
+      var tags = collectTags(form);
+      tags.newsletter = "1";
+      window.OneSignalDeferred.push(async function (OneSignal) {
+        try {
+          OneSignal.User.addEmail(email);
+          OneSignal.User.addTags(tags);
+          submit.textContent = T.nlOk;
+          submit.disabled = true;
+          input.disabled = true;
+        } catch (e) {
+          submit.textContent = T.nlErr;
+        }
+      });
+    });
+  });
 
   /* Countdown zum Release: 19. November 2026, 00:00 lokale Zeit.
      Sobald Rockstar die Unlock-Zeit nennt, hier anpassen. */

@@ -29,6 +29,15 @@
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "fdc739a8-16ee-4aa7-a1c3-ddf7e8052e94",
+      });
+    });
+  </script>
 </head>
 <body>
   <nav class="nav">
@@ -37,6 +46,7 @@
       <div class="nav-links">
         <a href="index.html">Start</a>
         <a href="guide.html">Guide</a>
+        <a href="map.html">Map</a>
         <a href="editionen.html">Editionen</a>
         <a href="bekannt.html">Was ist bekannt?</a>
       </div>

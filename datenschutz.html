@@ -25,6 +25,15 @@
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "fdc739a8-16ee-4aa7-a1c3-ddf7e8052e94",
+      });
+    });
+  </script>
 </head>
 <body>
   <nav class="nav">
@@ -33,6 +42,7 @@
       <div class="nav-links">
         <a href="index.html">Start</a>
         <a href="guide.html">Guide</a>
+        <a href="map.html">Map</a>
         <a href="editionen.html">Editionen</a>
         <a href="bekannt.html">Was ist bekannt?</a>
       </div>
@@ -71,6 +81,16 @@
         Reichweitenanalyse (Art. 6 Abs. 1 lit. f DSGVO). Cloudflare ist unter dem EU-US Data
         Privacy Framework zertifiziert. Details:
         <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Cloudflare Privacy Policy</a>.</p>
+        <h3>Push-Nachrichten &amp; Newsletter (OneSignal)</h3>
+        <p>Wenn Sie Push-Nachrichten aktivieren oder unseren Newsletter abonnieren, nutzen wir den
+        Dienst OneSignal (OneSignal Inc., USA). Dabei werden – je nach gewähltem Kanal – Ihre
+        Browser-Push-Kennung bzw. Ihre E-Mail-Adresse sowie Ihre gewählten Themen (z.&nbsp;B. News,
+        Release-Erinnerung, Map-Beta) bei OneSignal gespeichert, um Ihnen die gewünschten
+        Benachrichtigungen zuzustellen. Die Nutzung ist freiwillig und erfolgt nur nach Ihrer aktiven
+        Anmeldung (Art. 6 Abs. 1 lit. a DSGVO). Sie können Push-Nachrichten jederzeit in den
+        Browser-Einstellungen deaktivieren und den Newsletter über den Abmeldelink in jeder E-Mail
+        abbestellen. Details: <a href="https://onesignal.com/privacy_policy" rel="noopener">OneSignal
+        Privacy Policy</a>.</p>
         <h3>Sprach-Erkennung (GeoJS)</h3>
         <p>Beim ersten Besuch ermitteln wir über den Dienst GeoJS (geojs.io) anhand Ihrer IP-Adresse
         das Herkunftsland, um Ihnen die passende Sprachversion anzuzeigen (Deutsch, Englisch,
