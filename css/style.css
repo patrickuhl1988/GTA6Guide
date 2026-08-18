@@ -492,3 +492,14 @@ a:focus-visible, button:focus-visible {
 
 .faq .expander > summary { color: var(--text); }
 .faq .expander[open] > summary { color: var(--cyan); }
+
+
+/* ---------- Sektions-Banner ---------- */
+
+.section-img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 21 / 9; object-fit: cover;
+  border: 1px solid rgba(123, 47, 247, 0.3);
+  margin: 0.25rem 0 1.5rem;
+}
+.card > .section-img { aspect-ratio: 3 / 1; margin: -1.4rem -1.5rem 1.2rem; width: calc(100% + 3rem); }
