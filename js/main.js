@@ -64,37 +64,9 @@
 
   var news = window.GTA6_NEWS || [];
 
-  /* Startseite: 4 neueste Top-News + Button für weitere */
+  /* News auf der Startseite: Filter-Tabs, erst 4 Meldungen, Rest per Button */
   var latest = document.getElementById("news-latest");
   if (latest && news.length) {
-    var topNews = news.filter(function (n) { return n.top; });
-    var first = topNews.slice(0, 4);
-    var shownDates = first.map(function (n) { return n.date + n.title; });
-    var rest = news.filter(function (n) {
-      return shownDates.indexOf(n.date + n.title) === -1;
-    }).slice(0, 10);
-    latest.innerHTML = first.map(newsCard).join("");
-    if (rest.length) {
-      var hidden = document.createElement("div");
-      hidden.innerHTML = rest.map(newsCard).join("");
-      hidden.hidden = true;
-      var btn = document.createElement("button");
-      btn.className = "btn";
-      btn.type = "button";
-      btn.textContent = "Weitere News anzeigen (" + rest.length + ")";
-      btn.addEventListener("click", function () {
-        hidden.hidden = false;
-        btn.remove();
-        externalLinksNewTab();
-      });
-      latest.appendChild(btn);
-      latest.appendChild(hidden);
-    }
-  }
-
-  /* News-Seite: Filter-Tabs (Top / Alle / Gerüchte & Leaks) */
-  var all = document.getElementById("news-all");
-  if (all && news.length) {
     var filters = {
       top: function (n) { return n.top; },
       all: function () { return true; },
@@ -102,9 +74,27 @@
     };
     function renderNews(key) {
       var items = news.filter(filters[key]);
-      all.innerHTML = items.length
-        ? items.map(newsCard).join("")
+      var first = items.slice(0, 4);
+      var rest = items.slice(4, 14);
+      latest.innerHTML = first.length
+        ? first.map(newsCard).join("")
         : '<p class="lead">Aktuell keine Meldungen in dieser Kategorie.</p>';
+      if (rest.length) {
+        var hidden = document.createElement("div");
+        hidden.innerHTML = rest.map(newsCard).join("");
+        hidden.hidden = true;
+        var btn = document.createElement("button");
+        btn.className = "btn";
+        btn.type = "button";
+        btn.textContent = "Weitere News anzeigen (" + rest.length + ")";
+        btn.addEventListener("click", function () {
+          hidden.hidden = false;
+          btn.remove();
+          externalLinksNewTab();
+        });
+        latest.appendChild(btn);
+        latest.appendChild(hidden);
+      }
       externalLinksNewTab();
       document.querySelectorAll(".filter-tabs .tab").forEach(function (t) {
         t.classList.toggle("active", t.dataset.filter === key);
