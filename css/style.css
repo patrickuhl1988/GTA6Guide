@@ -95,14 +95,8 @@ a:hover { color: var(--pink); text-decoration-color: rgba(255, 46, 136, 0.5); }
 .nav-links a:hover { color: var(--text); background: rgba(123, 47, 247, 0.2); }
 .nav-links a.active { color: var(--cyan); }
 
-.lang-switch { display: flex; gap: 0.15rem; margin-left: 0.5rem; }
-.lang-switch a {
-  color: var(--text-dim); text-decoration: none;
-  font-size: 0.78rem; font-weight: 600;
-  padding: 0.3rem 0.45rem; border-radius: 4px;
-}
-.lang-switch a:hover { color: var(--text); background: rgba(123, 47, 247, 0.2); }
-.lang-switch a.active { color: var(--pink); }
+.footer-langs { margin-top: 0.5rem; font-size: 0.72rem; opacity: 0.75; }
+.footer-langs a { text-decoration: none; }
 
 /* ---------- Hero mit Retrowave-Horizont (Signature) ---------- */
 

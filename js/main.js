@@ -24,8 +24,9 @@
   };
   var T = I18N[LANG] || I18N.de;
 
-  /* Sprachwahl: manuell gespeicherte Präferenz + Geo-IP beim ersten Besuch */
-  var LANG_FILES = ["", "index.html", "guide.html", "editionen.html", "bekannt.html"];
+  /* Sprache rein per Geo-IP: einmal pro Sitzung, auf jeder Seite */
+  var LANG_FILES = ["", "index.html", "guide.html", "editionen.html", "bekannt.html", "plattformen.html"];
+  var LIMITED = { zh: true, hi: true }; // diese Sprachen haben keine plattformen.html
   function pageFile() {
     var f = location.pathname.split("/").pop();
     return f === "" ? "index.html" : f;
@@ -35,20 +36,13 @@
     if (location.protocol === "file:") return;
     var f = pageFile();
     if (LANG_FILES.indexOf(f) === -1) return;
+    if (LIMITED[target] && f === "plattformen.html") f = "index.html";
     var path = (target === "de" ? "/" : "/" + target + "/") + (f === "index.html" ? "" : f);
     location.replace(path);
   }
-  document.querySelectorAll(".lang-switch a").forEach(function (a) {
-    a.addEventListener("click", function () {
-      try { localStorage.setItem("gta6guide-lang", a.dataset.setlang); } catch (e) {}
-    });
-  });
   try {
-    var stored = localStorage.getItem("gta6guide-lang");
     var isBot = /bot|crawl|spider|slurp|bingpreview/i.test(navigator.userAgent);
-    if (stored && stored !== LANG) {
-      goLang(stored);
-    } else if (!stored && !isBot && LANG === "de" && !sessionStorage.getItem("gta6guide-geo")) {
+    if (!isBot && !sessionStorage.getItem("gta6guide-geo")) {
       sessionStorage.setItem("gta6guide-geo", "1");
       fetch("https://get.geojs.io/v1/ip/country.json")
         .then(function (r) { return r.json(); })
@@ -57,8 +51,7 @@
           var map = { DE: "de", AT: "de", CH: "de", LI: "de", LU: "de",
                       CN: "zh", HK: "zh", MO: "zh", TW: "zh", SG: "zh",
                       IN: "hi" };
-          var target = map[c] || "en";
-          if (target !== "de") goLang(target);
+          goLang(map[c] || "en");
         })
         .catch(function () {});
     }
