@@ -3,6 +3,67 @@
 (function () {
   "use strict";
 
+  var LANG = document.documentElement.lang || "de";
+  var I18N = {
+    de: { live: "GTA VI ist da! 🎉", more: "Weitere News anzeigen", official: "Offiziell", rumor: "Gerücht",
+          empty: "Aktuell keine Meldungen in dieser Kategorie.", src: "Quelle",
+          favMac: "Drücke ⌘ + D zum Speichern", favWin: "Drücke Strg + D zum Speichern",
+          fav: "Als Favorit speichern", copied: "✓ Link kopiert!", share: "Seite teilen" },
+    en: { live: "GTA VI is out! 🎉", more: "Show more news", official: "Official", rumor: "Rumor",
+          empty: "No items in this category right now.", src: "Source",
+          favMac: "Press ⌘ + D to bookmark", favWin: "Press Ctrl + D to bookmark",
+          fav: "Bookmark this site", copied: "✓ Link copied!", share: "Share this page" },
+    zh: { live: "GTA VI 已发售！🎉", more: "显示更多新闻", official: "官方", rumor: "传闻",
+          empty: "该分类暂无内容。", src: "来源",
+          favMac: "按 ⌘ + D 收藏", favWin: "按 Ctrl + D 收藏",
+          fav: "收藏本站", copied: "✓ 链接已复制！", share: "分享本页" },
+    hi: { live: "GTA VI आ गया! 🎉", more: "और न्यूज़ देखें", official: "आधिकारिक", rumor: "अफ़वाह",
+          empty: "फ़िलहाल इस श्रेणी में कुछ नहीं।", src: "स्रोत",
+          favMac: "बुकमार्क के लिए ⌘ + D दबाएँ", favWin: "बुकमार्क के लिए Ctrl + D दबाएँ",
+          fav: "बुकमार्क करें", copied: "✓ लिंक कॉपी हुआ!", share: "पेज शेयर करें" },
+  };
+  var T = I18N[LANG] || I18N.de;
+
+  /* Sprachwahl: manuell gespeicherte Präferenz + Geo-IP beim ersten Besuch */
+  var LANG_FILES = ["", "index.html", "guide.html", "editionen.html", "bekannt.html"];
+  function pageFile() {
+    var f = location.pathname.split("/").pop();
+    return f === "" ? "index.html" : f;
+  }
+  function goLang(target) {
+    if (target === LANG) return;
+    if (location.protocol === "file:") return;
+    var f = pageFile();
+    if (LANG_FILES.indexOf(f) === -1) return;
+    var path = (target === "de" ? "/" : "/" + target + "/") + (f === "index.html" ? "" : f);
+    location.replace(path);
+  }
+  document.querySelectorAll(".lang-switch a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      try { localStorage.setItem("gta6guide-lang", a.dataset.setlang); } catch (e) {}
+    });
+  });
+  try {
+    var stored = localStorage.getItem("gta6guide-lang");
+    var isBot = /bot|crawl|spider|slurp|bingpreview/i.test(navigator.userAgent);
+    if (stored && stored !== LANG) {
+      goLang(stored);
+    } else if (!stored && !isBot && LANG === "de" && !sessionStorage.getItem("gta6guide-geo")) {
+      sessionStorage.setItem("gta6guide-geo", "1");
+      fetch("https://get.geojs.io/v1/ip/country.json")
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          var c = (d && d.country) || "";
+          var map = { DE: "de", AT: "de", CH: "de", LI: "de", LU: "de",
+                      CN: "zh", HK: "zh", MO: "zh", TW: "zh", SG: "zh",
+                      IN: "hi" };
+          var target = map[c] || "en";
+          if (target !== "de") goLang(target);
+        })
+        .catch(function () {});
+    }
+  } catch (e) {}
+
   /* Countdown zum Release: 19. November 2026, 00:00 lokale Zeit.
      Sobald Rockstar die Unlock-Zeit nennt, hier anpassen. */
   const TARGET = new Date(2026, 10, 19, 0, 0, 0);
@@ -24,7 +85,7 @@
 
     if (diff <= 0) {
       el.wrap.innerHTML =
-        '<p class="cd-live">GTA VI ist da! 🎉</p>';
+        '<p class="cd-live">' + T.live + '</p>';
       clearInterval(timer);
       return;
     }
@@ -49,17 +110,21 @@
   /* News rendern (zentrale Datenquelle: js/news-data.js) */
   function newsCard(item) {
     var isOfficial = item.badge === "official";
+    var useDe = LANG === "de";
+    var title = useDe ? item.title : (item.title_en || item.title);
+    var text = useDe ? item.text : (item.text_en || item.text);
+    var dateLabel = useDe ? item.dateLabel : (item.dateLabel_en || item.dateLabel);
     var badge = isOfficial
-      ? '<span class="badge badge-official">Offiziell</span>'
-      : '<span class="badge badge-rumor">Gerücht</span>';
+      ? '<span class="badge badge-official">' + T.official + "</span>"
+      : '<span class="badge badge-rumor">' + T.rumor + "</span>";
     var link = item.url
-      ? ' <a class="src" href="' + item.url + '" rel="noopener">Quelle: ' + item.source + '</a>'
+      ? ' <a class="src" href="' + item.url + '" rel="noopener">' + T.src + ": " + item.source + "</a>"
       : "";
     return (
       '<article class="card news-item ' + (isOfficial ? "is-official" : "is-rumor") + '">' +
-      '<div class="news-meta"><time datetime="' + item.date + '">' + item.dateLabel + "</time>" + badge + "</div>" +
-      "<h3>" + item.title + "</h3>" +
-      "<p>" + item.text + link + "</p></article>"
+      '<div class="news-meta"><time datetime="' + item.date + '">' + dateLabel + "</time>" + badge + "</div>" +
+      "<h3>" + title + "</h3>" +
+      "<p>" + text + link + "</p></article>"
     );
   }
 
@@ -79,7 +144,7 @@
       var rest = items.slice(4, 14);
       latest.innerHTML = first.length
         ? first.map(newsCard).join("")
-        : '<p class="lead">Aktuell keine Meldungen in dieser Kategorie.</p>';
+        : '<p class="lead">' + T.empty + '</p>';
       if (rest.length) {
         var hidden = document.createElement("div");
         hidden.innerHTML = rest.map(newsCard).join("");
@@ -87,7 +152,7 @@
         var btn = document.createElement("button");
         btn.className = "btn";
         btn.type = "button";
-        btn.textContent = "Weitere News anzeigen (" + rest.length + ")";
+        btn.textContent = T.more + " (" + rest.length + ")";
         btn.addEventListener("click", function () {
           hidden.hidden = false;
           btn.remove();

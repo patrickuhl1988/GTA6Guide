@@ -12,6 +12,9 @@ window.GTA6_NEWS = [
     text: "Kurz vor der offiziellen Präsentation kursieren Gameplay-Clips (Jason beim Basketball, Fahrsequenzen, Kämpfe) und ein Bild der angeblich kompletten Leonida-Map. Rockstar lässt das Material per DMCA entfernen – was für Echtheit spricht. Vorsicht: Der Leaker wirbt für Krypto-Zahlungen, hier droht Abzocke. Wir verlinken das Leak-Material bewusst nicht.",
     url: "https://www.pushsquare.com/news/2026/08/gta-6-gameplay-leak-appears-online-ahead-of-official-reveal",
     source: "Push Square"
+    ,dateLabel_en: "August 18, 2026",
+    title_en: "Gameplay and map leaked – nine days before the Extended Look",
+    text_en: "Just ahead of the official presentation, gameplay clips (Jason playing basketball, driving, fighting) and an image of the allegedly complete Leonida map are circulating. Rockstar is removing the material via DMCA – which suggests authenticity. Caution: the leaker is soliciting crypto payments; scam risk. We deliberately do not link the leaked material."
   },
   {
     date: "2026-08-13",
@@ -22,6 +25,9 @@ window.GTA6_NEWS = [
     text: "Take-Two-CEO Strauss Zelnick bestätigt: Die 99,99-$-Ultimate-Edition verkauft sich in der Vorbestellphase deutlich besser als die Standard-Version – ein für die Branche ungewöhnlich hoher Premium-Anteil. Zelnick relativiert selbst: Aktuell bestellen vor allem die eingefleischtesten Fans vor.",
     url: "https://vgtimes.com/games/gta-6/news/",
     source: "Take-Two / VGTimes"
+    ,dateLabel_en: "August 13, 2026",
+    title_en: "89% of pre-orders pick the Ultimate Edition",
+    text_en: "Take-Two CEO Strauss Zelnick confirms: the $99.99 Ultimate Edition is far outselling the Standard version during pre-orders – an unusually high premium share. Zelnick himself notes the most avid fans tend to pre-order first."
   },
   {
     date: "2026-08-13",
@@ -32,6 +38,9 @@ window.GTA6_NEWS = [
     text: "Ein viral gegangenes Netflix-Listing, das den Extended Look als Drei-Teiler mit über 66 Minuten Laufzeit zeigte, hat sich als Fälschung herausgestellt. Wie lang die Präsentation am 27. August wirklich wird, bleibt offen.",
     url: "https://www.gtaboom.com/gta-6-news-7d1f",
     source: "GTA BOOM"
+    ,dateLabel_en: "August 13, 2026",
+    title_en: "Three-episode Netflix listing is fake",
+    text_en: "A viral Netflix listing showing the Extended Look as a three-parter with over 66 minutes of runtime turned out to be fabricated. How long the August 27 presentation will actually be remains open."
   },
   {
     date: "2026-08-10",
@@ -42,6 +51,9 @@ window.GTA6_NEWS = [
     text: "Laut Take-Two-CEO Strauss Zelnick ist die Netflix-Präsentation erst der Auftakt: Bis zum Release am 19. November sollen weitere Trailer und Enthüllungen folgen.",
     url: "https://www.gtaboom.com/gta-6-news-7d1f",
     source: "GTA BOOM"
+    ,dateLabel_en: "August 10, 2026",
+    title_en: "Zelnick: Extended Look is just the “appetizer”",
+    text_en: "According to Take-Two CEO Strauss Zelnick, the Netflix presentation is only the beginning: more trailers and reveals are planned before the November 19 launch."
   },
   {
     date: "2026-08-06",
@@ -52,6 +64,9 @@ window.GTA6_NEWS = [
     text: "Rockstar zeigt am 27. August erstmals ausführliches Material zu GTA VI: Premiere um 21:00 Uhr deutscher Zeit exklusiv auf Netflix, sechs Stunden später kostenlos auf YouTube und der offiziellen Seite. Was genau gezeigt wird, hält Rockstar geheim – erwartet wird deutlich mehr als ein normaler Trailer.",
     url: "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look",
     source: "Rockstar Newswire"
+    ,dateLabel_en: "August 6, 2026",
+    title_en: "“An Extended Look” arrives August 27",
+    text_en: "Rockstar will show extensive GTA VI material for the first time on August 27: premiering at 3 PM ET exclusively on Netflix, then free on YouTube and the official site six hours later. What exactly will be shown is under wraps – expect much more than a regular trailer."
   },
   {
     date: "2026-07-23",
@@ -62,6 +77,9 @@ window.GTA6_NEWS = [
     text: "Im Xbox Store sind Installationskategorien wie „Story“, „Ultimate Edition Upgrade“ und „Extra“ aufgetaucht. Das deutet darauf hin, dass sich Inhalte – möglicherweise auch der noch unangekündigte Online-Modus – getrennt installieren lassen, ähnlich wie bei Call of Duty. Rockstar hat GTA Online für GTA VI bislang nicht offiziell bestätigt.",
     url: "https://www.eurogamer.de/gta-6-xbox-store-leak-konnte-auf-getrennte-downloads-fur-den-online-modus-hindeuten",
     source: "Eurogamer.de"
+    ,dateLabel_en: "July 23, 2026",
+    title_en: "Xbox Store leak hints at GTA Online as a separate download",
+    text_en: "Install categories like “Story”, “Ultimate Edition Upgrade” and “Extra” appeared in the Xbox Store, suggesting content – possibly including the still-unannounced online mode – can be installed separately, similar to Call of Duty. Rockstar has not officially confirmed GTA Online for GTA VI."
   },
   {
     date: "2026-06-25",
@@ -72,6 +90,9 @@ window.GTA6_NEWS = [
     text: "Rockstar öffnet weltweit die Vorbestellungen: Standard Edition für 79,99 $, Ultimate Edition für 99,99 $. Wer vor dem 20. November kauft, erhält das Vintage Vice City Pack; digitale Käufe enthalten zudem einen Monat GTA+. Der Preload beginnt am 12. November, die Handelsversion enthält einen Download-Code statt einer Disc.",
     url: "https://www.rockstargames.com/VI",
     source: "Rockstar Games"
+    ,dateLabel_en: "June 25, 2026",
+    title_en: "Pre-orders open – prices, editions and the Vintage Vice City Pack",
+    text_en: "Rockstar opens pre-orders worldwide: Standard Edition at $79.99, Ultimate at $99.99. Anyone buying before November 20 gets the Vintage Vice City Pack; digital purchases include one month of GTA+. Preload starts November 12, and the retail box contains a download code instead of a disc."
   },
   {
     date: "2025-11-06",
@@ -82,6 +103,9 @@ window.GTA6_NEWS = [
     text: "Rockstar verschiebt GTA VI ein zweites Mal – vom 26. Mai 2026 auf den 19. November 2026. Die zusätzlichen Monate sollen den letzten Feinschliff ermöglichen.",
     url: "https://www.rockstargames.com/newswire",
     source: "Rockstar Newswire"
+    ,dateLabel_en: "November 6, 2025",
+    title_en: "New release date: November 19, 2026",
+    text_en: "Rockstar delays GTA VI a second time – from May 26, 2026 to November 19, 2026. The extra months are meant to allow final polish."
   },
   {
     date: "2025-05-06",
@@ -92,6 +116,9 @@ window.GTA6_NEWS = [
     text: "Der zweite Trailer stellt Jason und Lucia vor und erreicht laut Rockstar 475 Millionen Views in 24 Stunden über alle Plattformen – der größte Video-Launch aller Zeiten. Das Material stammt komplett von der PS5, je zur Hälfte Gameplay und Zwischensequenzen.",
     url: "https://www.youtube.com/watch?v=VQRLujxTm3c",
     source: "Rockstar Games / YouTube"
+    ,dateLabel_en: "May 6, 2025",
+    title_en: "Trailer 2 breaks every record",
+    text_en: "The second trailer introduces Jason and Lucia and, per Rockstar, reaches 475 million views in 24 hours across all platforms – the biggest video launch of all time. Captured entirely on PS5, half gameplay and half cutscenes."
   },
   {
     date: "2025-05-02",
@@ -102,6 +129,9 @@ window.GTA6_NEWS = [
     text: "Rockstar verschiebt GTA VI aus dem ursprünglichen Herbst-2025-Fenster auf den 26. Mai 2026, um die erwartete Qualität liefern zu können.",
     url: "https://www.rockstargames.com/newswire",
     source: "Rockstar Newswire"
+    ,dateLabel_en: "May 2, 2025",
+    title_en: "First delay: 2025 becomes May 2026",
+    text_en: "Rockstar moves GTA VI out of the original fall 2025 window to May 26, 2026 to deliver the expected level of quality."
   },
   {
     date: "2023-12-04",
@@ -112,5 +142,8 @@ window.GTA6_NEWS = [
     text: "Der erste Trailer enthüllt Vice City, Leonida und Lucia – und sammelt 93 Millionen YouTube-Views am ersten Tag.",
     url: "https://www.youtube.com/watch?v=QdBZY2fkU-0",
     source: "Rockstar Games / YouTube"
+    ,dateLabel_en: "December 4, 2023",
+    title_en: "Trailer 1: the reveal",
+    text_en: "The first trailer unveils Vice City, Leonida and Lucia – collecting 93 million YouTube views on day one."
   }
 ];
