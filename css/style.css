@@ -1,0 +1,269 @@
+/* ==========================================================
+   GTA6Guide – Designsystem
+   Palette:  bg #0d0221 · pink #ff2e88 · orange #ff8c42
+             violett #7b2ff7 · cyan #2de2e6
+   Fonts:    Monoton (Logo) · Righteous (Headings) · Inter (Text)
+   ========================================================== */
+
+:root {
+  --bg: #0d0221;
+  --bg-raised: #160934;
+  --bg-card: #1b0d3d;
+  --pink: #ff2e88;
+  --orange: #ff8c42;
+  --violet: #7b2ff7;
+  --cyan: #2de2e6;
+  --text: #eee6ff;
+  --text-dim: #a99cc9;
+  --line: rgba(123, 47, 247, 0.35);
+  --radius: 14px;
+  --maxw: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1, h2, h3 { font-family: "Righteous", "Inter", sans-serif; letter-spacing: 0.02em; }
+h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.75rem; }
+h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+p  { margin-bottom: 1rem; color: var(--text); }
+a  { color: var(--cyan); }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+
+/* ---------- Navigation ---------- */
+
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(13, 2, 33, 0.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 0.6rem 1.25rem;
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.logo {
+  font-family: "Monoton", cursive;
+  font-size: 1.3rem;
+  color: var(--pink);
+  text-decoration: none;
+  text-shadow: 0 0 12px rgba(255, 46, 136, 0.7);
+  white-space: nowrap;
+}
+.logo span { color: var(--cyan); text-shadow: 0 0 12px rgba(45, 226, 230, 0.7); }
+.nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; margin-left: auto; }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none; font-size: 0.88rem;
+  padding: 0.35rem 0.65rem; border-radius: 8px;
+}
+.nav-links a:hover { color: var(--text); background: rgba(123, 47, 247, 0.2); }
+.nav-links a.active { color: var(--cyan); }
+
+/* ---------- Hero mit Retrowave-Horizont (Signature) ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 4.5rem 1.25rem 5.5rem;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 88%, rgba(255, 140, 66, 0.28), transparent 65%),
+    radial-gradient(ellipse 70% 45% at 50% 95%, rgba(255, 46, 136, 0.35), transparent 70%),
+    var(--bg);
+}
+/* Sonne */
+.hero::before {
+  content: "";
+  position: absolute; left: 50%; bottom: 18%;
+  width: 340px; height: 340px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--orange), var(--pink) 70%);
+  filter: blur(2px);
+  opacity: 0.5;
+  -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px);
+          mask-image: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px);
+  pointer-events: none;
+}
+/* Grid-Boden */
+.hero::after {
+  content: "";
+  position: absolute; left: -25%; right: -25%; bottom: -18%;
+  height: 46%;
+  background:
+    repeating-linear-gradient(90deg, rgba(45, 226, 230, 0.5) 0 2px, transparent 2px 70px),
+    repeating-linear-gradient(0deg, rgba(45, 226, 230, 0.5) 0 2px, transparent 2px 44px),
+    linear-gradient(180deg, rgba(13, 2, 33, 0) 0%, rgba(13, 2, 33, 0.85) 100%);
+  transform: perspective(340px) rotateX(58deg);
+  transform-origin: top center;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.hero > * { position: relative; z-index: 2; }
+
+.hero h1 {
+  font-family: "Monoton", cursive;
+  font-weight: 400;
+  font-size: clamp(2rem, 7vw, 4.2rem);
+  color: var(--text);
+  text-shadow:
+    0 0 8px rgba(255, 46, 136, 0.9),
+    0 0 28px rgba(255, 46, 136, 0.6),
+    0 0 60px rgba(123, 47, 247, 0.5);
+  margin-bottom: 0.5rem;
+}
+.hero .sub {
+  color: var(--text-dim);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  margin-bottom: 2.25rem;
+}
+.hero .sub strong { color: var(--cyan); font-weight: 600; }
+
+/* ---------- Countdown ---------- */
+
+.countdown {
+  display: flex; justify-content: center; gap: clamp(0.5rem, 2vw, 1.25rem);
+  flex-wrap: wrap;
+}
+.cd-box {
+  min-width: clamp(70px, 18vw, 110px);
+  padding: 0.9rem 0.5rem 0.7rem;
+  background: rgba(22, 9, 52, 0.75);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 0 18px rgba(123, 47, 247, 0.25), inset 0 0 24px rgba(123, 47, 247, 0.12);
+}
+.cd-num {
+  display: block;
+  font-family: "Righteous", sans-serif;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  color: var(--cyan);
+  text-shadow: 0 0 14px rgba(45, 226, 230, 0.8);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.cd-label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+/* ---------- Sektionen & Karten ---------- */
+
+.section { padding: 3rem 0; }
+.section + .section { border-top: 1px solid var(--line); }
+.section .lead { color: var(--text-dim); max-width: 640px; }
+
+.tiles {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin-top: 1.5rem;
+}
+.tile {
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--pink);
+  box-shadow: 0 6px 24px rgba(255, 46, 136, 0.25);
+}
+.tile h3 { color: var(--cyan); }
+.tile p { color: var(--text-dim); font-size: 0.9rem; margin: 0; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Status-Badges: Offiziell vs. Spekulation ---------- */
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 0.15rem 0.55rem; border-radius: 999px;
+  vertical-align: middle;
+}
+.badge-official   { background: rgba(45, 226, 230, 0.15); color: var(--cyan);  border: 1px solid rgba(45, 226, 230, 0.5); }
+.badge-rumor      { background: rgba(255, 140, 66, 0.15); color: var(--orange); border: 1px solid rgba(255, 140, 66, 0.5); }
+.badge-unknown    { background: rgba(169, 156, 201, 0.12); color: var(--text-dim); border: 1px solid rgba(169, 156, 201, 0.4); }
+
+/* ---------- Timeline ---------- */
+
+.timeline { list-style: none; margin-top: 1.5rem; position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px;
+  background: linear-gradient(180deg, var(--violet), var(--pink));
+}
+.timeline li { position: relative; padding: 0 0 1.5rem 1rem; }
+.timeline li::before {
+  content: ""; position: absolute; left: -1.5rem; top: 8px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--cyan); box-shadow: 0 0 10px rgba(45, 226, 230, 0.9);
+}
+.timeline time { display: block; font-weight: 600; color: var(--pink); font-size: 0.9rem; }
+
+/* ---------- Tabellen ---------- */
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); }
+th { color: var(--cyan); font-family: "Righteous", sans-serif; font-weight: 400; }
+
+/* ---------- Platzhalter ---------- */
+
+.placeholder {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 2rem; text-align: center; color: var(--text-dim);
+  margin-top: 1rem;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 2rem 1.25rem 2.5rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+}
+.footer .disclaimer { max-width: 620px; margin: 0 auto 0.75rem; }
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero::after { animation: grid-drift 6s linear infinite; }
+  @keyframes grid-drift {
+    from { background-position: 0 0, 0 0, 0 0; }
+    to   { background-position: 0 44px, 0 44px, 0 0; }
+  }
+}
+
+/* ---------- Fokus ---------- */
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
