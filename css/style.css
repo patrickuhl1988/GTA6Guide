@@ -334,10 +334,19 @@ th { color: var(--cyan); font-family: "Righteous", sans-serif; font-weight: 400;
   background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-raised) 100%);
   border: 1px solid rgba(123, 47, 247, 0.25);
   border-top: 2px solid var(--accent, var(--cyan));
-  padding: 1.3rem 1.4rem 1.2rem;
+  padding: 0 0 1.2rem;
+  overflow: hidden;
   text-decoration: none; color: var(--text);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+.promo-card .promo-thumb {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 16 / 9; object-fit: cover;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(123, 47, 247, 0.25);
+}
+.promo-card strong, .promo-card > span { padding: 0 1.4rem; }
+.promo-card:hover .promo-thumb { opacity: 0.92; }
 .promo-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4); color: var(--text); }
 .promo-card .promo-icon {
   width: 34px; height: 34px;
