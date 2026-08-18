@@ -1,3 +1,11 @@
+/* Selbst gehostete Fonts (kein Google-CDN, DSGVO-freundlich) */
+@font-face { font-family: "Monoton"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/monoton-400.woff2") format("woff2"); }
+@font-face { font-family: "Righteous"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/righteous-400.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/inter-var.woff2") format("woff2"); }
+
 /* ==========================================================
    GTA6Guide – Designsystem
    Palette:  bg #0d0221 · pink #ff2e88 · orange #ff8c42
