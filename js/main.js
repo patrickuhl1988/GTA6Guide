@@ -64,10 +64,15 @@
 
   var news = window.GTA6_NEWS || [];
 
+  /* Startseite: 4 neueste Top-News + Button für weitere */
   var latest = document.getElementById("news-latest");
   if (latest && news.length) {
-    var first = news.slice(0, 4);
-    var rest = news.slice(4, 14);
+    var topNews = news.filter(function (n) { return n.top; });
+    var first = topNews.slice(0, 4);
+    var shownDates = first.map(function (n) { return n.date + n.title; });
+    var rest = news.filter(function (n) {
+      return shownDates.indexOf(n.date + n.title) === -1;
+    }).slice(0, 10);
     latest.innerHTML = first.map(newsCard).join("");
     if (rest.length) {
       var hidden = document.createElement("div");
@@ -80,15 +85,35 @@
       btn.addEventListener("click", function () {
         hidden.hidden = false;
         btn.remove();
+        externalLinksNewTab();
       });
       latest.appendChild(btn);
       latest.appendChild(hidden);
     }
   }
 
+  /* News-Seite: Filter-Tabs (Top / Alle / Gerüchte & Leaks) */
   var all = document.getElementById("news-all");
   if (all && news.length) {
-    all.innerHTML = news.map(newsCard).join("");
+    var filters = {
+      top: function (n) { return n.top; },
+      all: function () { return true; },
+      rumor: function (n) { return n.badge === "rumor"; },
+    };
+    function renderNews(key) {
+      var items = news.filter(filters[key]);
+      all.innerHTML = items.length
+        ? items.map(newsCard).join("")
+        : '<p class="lead">Aktuell keine Meldungen in dieser Kategorie.</p>';
+      externalLinksNewTab();
+      document.querySelectorAll(".filter-tabs .tab").forEach(function (t) {
+        t.classList.toggle("active", t.dataset.filter === key);
+      });
+    }
+    document.querySelectorAll(".filter-tabs .tab").forEach(function (t) {
+      t.addEventListener("click", function () { renderNews(t.dataset.filter); });
+    });
+    renderNews("top");
   }
 
   /* Eigenwerbung: Teilen & Favorit */
@@ -121,6 +146,17 @@
       setTimeout(function () { favBtn.textContent = "♥ Als Favorit speichern"; }, 4000);
     });
   }
+
+  /* Externe Links in neuem Fenster öffnen (Nutzer bleibt auf der Seite) */
+  function externalLinksNewTab() {
+    document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+      if (a.hostname !== location.hostname) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+    });
+  }
+  externalLinksNewTab();
 
   /* Aktiven Nav-Link markieren */
   const page = location.pathname.split("/").pop() || "index.html";

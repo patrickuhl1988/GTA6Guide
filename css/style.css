@@ -219,6 +219,24 @@ th { color: var(--cyan); font-family: "Righteous", sans-serif; font-weight: 400;
   margin-top: 1rem;
 }
 
+/* ---------- News-Filter-Tabs ---------- */
+
+.filter-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+.filter-tabs .tab {
+  background: transparent; color: var(--text-dim);
+  border: 1px solid var(--line);
+  padding: 0.45rem 1rem;
+  font: 600 0.9rem "Inter", sans-serif;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.filter-tabs .tab:hover { color: var(--text); }
+.filter-tabs .tab.active {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: rgba(45, 226, 230, 0.1);
+}
+
 /* ---------- Eigenwerbung ---------- */
 
 .promo {
