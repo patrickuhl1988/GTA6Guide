@@ -539,14 +539,44 @@ a:focus-visible, button:focus-visible {
     #120732;
   padding: 2.25rem 0;
 }
-.notify-inner {
-  display: grid; gap: 1.75rem;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
+.notify h2 { margin-bottom: 1.1rem; }
+.notify-cards {
+  display: grid; gap: 1.25rem;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 0.85rem;
 }
-@media (max-width: 760px) { .notify-inner { grid-template-columns: 1fr; } }
-.notify h2 { margin-bottom: 0.4rem; }
-.notify-text p { margin-bottom: 0.85rem; color: var(--text-dim); font-size: 0.95rem; }
+@media (max-width: 760px) { .notify-cards { grid-template-columns: 1fr; } }
+.notify-card {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-raised) 100%);
+  border: 1px solid rgba(123, 47, 247, 0.3);
+  padding: 0 0 1.4rem;
+  overflow: hidden;
+}
+.notify-card > h3, .notify-card > p, .notify-card > .notify-tags,
+.notify-card > .btn, .notify-card > .nl-form { margin-left: 1.4rem; margin-right: 1.4rem; }
+.notify-card > h3 { margin-top: 0.4rem; margin-bottom: 0; }
+.notify-card > p { color: var(--text-dim); font-size: 0.92rem; margin-bottom: 0.25rem; }
+.notify-card > .btn { margin-top: auto; }
+.notify-card-art {
+  aspect-ratio: 21 / 7;
+  display: flex; align-items: center; justify-content: center;
+  border-bottom: 1px solid rgba(123, 47, 247, 0.3);
+}
+.notify-card-art svg { width: 52px; height: 52px; }
+.notify-card-art.art-push {
+  background:
+    radial-gradient(ellipse 70% 120% at 50% 130%, rgba(255, 46, 136, 0.35), transparent 65%),
+    #17093a;
+  color: var(--pink);
+}
+.notify-card-art.art-mail {
+  background:
+    radial-gradient(ellipse 70% 120% at 50% 130%, rgba(45, 226, 230, 0.3), transparent 65%),
+    #0f1a3a;
+  color: var(--cyan);
+}
+.notify-card-art img { width: 100%; height: 100%; object-fit: cover; }
 .notify-tags { display: flex; flex-wrap: wrap; gap: 0.45rem 1.1rem; }
 .notify-tags label {
   display: inline-flex; align-items: center; gap: 0.45rem;
@@ -566,8 +596,10 @@ a:focus-visible, button:focus-visible {
   border: solid var(--bg-deep); border-width: 0 2px 2px 0;
   transform: rotate(42deg);
 }
-.notify-controls { display: flex; flex-direction: column; gap: 0.7rem; }
-.notify-controls .btn, .notify-actions .btn { margin: 0; width: 100%; }
+.notify-actions .btn { margin: 0; width: 100%; }
+.notify-card .btn { width: auto; }
+.notify-card .nl-form { flex-direction: column; gap: 0.6rem; }
+.notify-card .nl-form .btn { width: 100%; }
 .nl-form { display: flex; gap: 0.5rem; }
 .nl-form input {
   flex: 1; min-width: 0;
@@ -609,3 +641,23 @@ a:focus-visible, button:focus-visible {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 .map-lock span { font-size: 0.9rem; color: var(--text); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8); }
+
+
+/* ---------- Newsletter-Variante des CTA + "oder"-Trenner ---------- */
+
+.btn-cta-alt {
+  background: linear-gradient(120deg, #17b8bd 0%, var(--violet) 100%);
+  box-shadow: 0 4px 20px rgba(45, 226, 230, 0.25);
+}
+.btn-cta-alt:hover {
+  background: linear-gradient(120deg, #2de2e6 0%, #8a45ff 100%);
+  box-shadow: 0 6px 26px rgba(45, 226, 230, 0.4);
+}
+.or-sep {
+  display: flex; align-items: center; gap: 0.75rem;
+  color: var(--text-dim); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em;
+}
+.or-sep::before, .or-sep::after {
+  content: ""; flex: 1; height: 1px;
+  background: rgba(123, 47, 247, 0.35);
+}

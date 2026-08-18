@@ -65,29 +65,34 @@
   </header>
 
   <section class="notify">
-    <div class="wrap notify-inner">
-      <div class="notify-text">
-        <span class="eyebrow">不错过任何消息</span>
-        <h2>GTA 6 提醒服务</h2>
-        <p>推送或邮件——由你决定我们何时打扰你：</p>
-        <div class="notify-tags">
+    <div class="wrap">
+      <span class="eyebrow">不错过任何消息</span>
+      <h2>GTA 6 提醒服务</h2>
+      <div class="notify-cards">
+        <div class="notify-card">
+          <div class="notify-card-art art-push"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <h3>推送通知</h3>
+          <p>大事发生时第一时间出现在你的屏幕上——主题由你选择：</p>
+          <div class="notify-tags">
             <label><input type="checkbox" data-tag="news" checked> 重大新闻与泄露</label>
-            <label><input type="checkbox" data-tag="events" checked> 预告片与活动（如 8月27日 Extended Look）</label>
+            <label><input type="checkbox" data-tag="events" checked> 预告片与活动（如 Extended Look）</label>
             <label><input type="checkbox" data-tag="release" checked> 预载与发售提醒</label>
             <label><input type="checkbox" data-tag="map_beta"> 地图 Beta 重新开放</label>
             <label><input type="checkbox" data-tag="deals"> 优惠与降价</label>
+          </div>
+          <button class="btn btn-cta" type="button" data-push><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> 开启推送</button>
+        </div>
+        <div class="notify-card">
+          <div class="notify-card-art art-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg></div>
+          <h3>邮件订阅</h3>
+          <p>最重要的 GTA 6 消息汇总寄到你的邮箱——无垃圾邮件，随时退订。</p>
+          <form class="nl-form" data-tags="news,events,release">
+            <input type="email" required placeholder="邮箱地址" aria-label="邮箱地址">
+            <button class="btn btn-cta btn-cta-alt" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> 订阅</button>
+          </form>
         </div>
       </div>
-      <div class="notify-controls">
-        <button class="btn btn-cta" type="button" data-push>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-          开启推送通知</button>
-        <form class="nl-form">
-          <input type="email" required placeholder="邮箱地址" aria-label="邮箱地址">
-          <button class="btn" type="submit">订阅邮件通知</button>
-        </form>
-        <p class="fineprint">通知经由 OneSignal 发送，可随时退订。</p>
-      </div>
+      <p class="fineprint">两者均通过 OneSignal 运行，互相独立。</p>
     </div>
   </section>
 

@@ -64,7 +64,7 @@
     if (explicit) {
       explicit.split(",").forEach(function (t) { if (t.trim()) tags[t.trim()] = "1"; });
     }
-    var scope = el.closest(".notify-inner, .card, .notify");
+    var scope = el.closest(".notify-card, .card, .notify");
     if (scope) {
       scope.querySelectorAll("input[data-tag]:checked").forEach(function (cb) {
         tags[cb.getAttribute("data-tag")] = "1";

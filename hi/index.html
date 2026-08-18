@@ -65,29 +65,34 @@
   </header>
 
   <section class="notify">
-    <div class="wrap notify-inner">
-      <div class="notify-text">
-        <span class="eyebrow">कुछ न छूटे</span>
-        <h2>GTA 6 अलर्ट</h2>
-        <p>पुश नोटिफ़िकेशन या न्यूज़लेटर — आप चुनिए कि हम किस बारे में बताएँ:</p>
-        <div class="notify-tags">
+    <div class="wrap">
+      <span class="eyebrow">कुछ न छूटे</span>
+      <h2>GTA 6 अलर्ट</h2>
+      <div class="notify-cards">
+        <div class="notify-card">
+          <div class="notify-card-art art-push"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+          <h3>पुश नोटिफ़िकेशन</h3>
+          <p>कुछ भी होते ही सीधे आपकी स्क्रीन पर — विषय आप चुनिए:</p>
+          <div class="notify-tags">
             <label><input type="checkbox" data-tag="news" checked> बड़ी ख़बरें और लीक</label>
-            <label><input type="checkbox" data-tag="events" checked> ट्रेलर और इवेंट (जैसे 27 अगस्त का Extended Look)</label>
+            <label><input type="checkbox" data-tag="events" checked> ट्रेलर और इवेंट (जैसे Extended Look)</label>
             <label><input type="checkbox" data-tag="release" checked> प्रीलोड और रिलीज़ रिमाइंडर</label>
             <label><input type="checkbox" data-tag="map_beta"> मैप बीटा दोबारा खुलने पर</label>
             <label><input type="checkbox" data-tag="deals"> डील और क़ीमत में कटौती</label>
+          </div>
+          <button class="btn btn-cta" type="button" data-push><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> पुश चालू करें</button>
+        </div>
+        <div class="notify-card">
+          <div class="notify-card-art art-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg></div>
+          <h3>न्यूज़लेटर</h3>
+          <p>सबसे अहम GTA 6 ख़बरें सीधे आपके इनबॉक्स में — कोई स्पैम नहीं, कभी भी अनसब्सक्राइब करें।</p>
+          <form class="nl-form" data-tags="news,events,release">
+            <input type="email" required placeholder="ईमेल पता" aria-label="ईमेल पता">
+            <button class="btn btn-cta btn-cta-alt" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> सब्सक्राइब करें</button>
+          </form>
         </div>
       </div>
-      <div class="notify-controls">
-        <button class="btn btn-cta" type="button" data-push>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-          पुश नोटिफ़िकेशन चालू करें</button>
-        <form class="nl-form">
-          <input type="email" required placeholder="ईमेल पता" aria-label="ईमेल पता">
-          <button class="btn" type="submit">न्यूज़लेटर सब्सक्राइब करें</button>
-        </form>
-        <p class="fineprint">सूचनाएँ OneSignal से; कभी भी अनसब्सक्राइब करें।</p>
-      </div>
+      <p class="fineprint">दोनों OneSignal से चलते हैं और एक-दूसरे से स्वतंत्र हैं।</p>
     </div>
   </section>
 
