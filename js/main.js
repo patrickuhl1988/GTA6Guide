@@ -91,6 +91,37 @@
     all.innerHTML = news.map(newsCard).join("");
   }
 
+  /* Eigenwerbung: Teilen & Favorit */
+  var shareBtn = document.getElementById("share-btn");
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var data = {
+        title: "GTA6Guide",
+        text: "GTA6Guide – Countdown, Release-Daten und News zu GTA VI",
+        url: "https://gta6guide.de/",
+      };
+      if (navigator.share) {
+        navigator.share(data).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(data.url).then(function () {
+          shareBtn.textContent = "✓ Link kopiert!";
+          setTimeout(function () { shareBtn.textContent = "↗ Seite teilen"; }, 2500);
+        });
+      }
+    });
+  }
+
+  var favBtn = document.getElementById("fav-btn");
+  if (favBtn) {
+    favBtn.addEventListener("click", function () {
+      var isMac = /Mac|iPhone|iPad/.test(navigator.userAgent);
+      favBtn.textContent = isMac
+        ? "Drücke ⌘ + D zum Speichern"
+        : "Drücke Strg + D zum Speichern";
+      setTimeout(function () { favBtn.textContent = "♥ Als Favorit speichern"; }, 4000);
+    });
+  }
+
   /* Aktiven Nav-Link markieren */
   const page = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav-links a").forEach(function (a) {
