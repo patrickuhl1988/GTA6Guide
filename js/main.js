@@ -48,17 +48,18 @@
 
   /* News rendern (zentrale Datenquelle: js/news-data.js) */
   function newsCard(item) {
-    var badge = item.badge === "official"
+    var isOfficial = item.badge === "official";
+    var badge = isOfficial
       ? '<span class="badge badge-official">Offiziell</span>'
       : '<span class="badge badge-rumor">Gerücht</span>';
     var link = item.url
-      ? ' <a href="' + item.url + '" rel="noopener">Quelle: ' + item.source + '</a>'
+      ? ' <a class="src" href="' + item.url + '" rel="noopener">Quelle: ' + item.source + '</a>'
       : "";
     return (
-      '<article class="card news-item">' +
-      "<h3>" + item.title + " " + badge + "</h3>" +
-      '<p><time datetime="' + item.date + '">' + item.dateLabel + "</time> – " +
-      item.text + link + "</p></article>"
+      '<article class="card news-item ' + (isOfficial ? "is-official" : "is-rumor") + '">' +
+      '<div class="news-meta"><time datetime="' + item.date + '">' + item.dateLabel + "</time>" + badge + "</div>" +
+      "<h3>" + item.title + "</h3>" +
+      "<p>" + item.text + link + "</p></article>"
     );
   }
 
