@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 150" role="img" aria-labelledby="t d">
+<title id="t">GTA6GUIDE Neon wordmark</title><desc id="d">Original retrowave wordmark in pink, orange, violet and cyan.</desc>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff2e88"/><stop offset=".38" stop-color="#ff8c42"/><stop offset=".62" stop-color="#7b2ff7"/><stop offset="1" stop-color="#2de2e6"/></linearGradient><filter id="glow" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<g fill="none" stroke="url(#g)" stroke-width="4" filter="url(#glow)"><path d="M22 28H695" opacity=".75"/><path d="M22 123H695" opacity=".75"/></g>
+<text x="28" y="103" font-family="Arial Black, Arial, sans-serif" font-size="82" font-weight="900" font-style="italic" letter-spacing="2" fill="none" stroke="url(#g)" stroke-width="3.5" filter="url(#glow)">GTA6GUIDE</text>
+<text x="28" y="103" font-family="Arial Black, Arial, sans-serif" font-size="82" font-weight="900" font-style="italic" letter-spacing="2" fill="url(#g)" opacity=".2">GTA6GUIDE</text></svg>

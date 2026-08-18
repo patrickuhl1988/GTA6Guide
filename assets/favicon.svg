@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#0d0221"/>
-  <circle cx="16" cy="15" r="9" fill="url(#g)"/>
-  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#ff8c42"/><stop offset="1" stop-color="#ff2e88"/>
-  </linearGradient></defs>
-  <rect x="4" y="16" width="24" height="2" fill="#0d0221"/>
-  <rect x="4" y="20" width="24" height="2" fill="#0d0221"/>
-  <path d="M4 28 L16 18 L28 28" stroke="#2de2e6" stroke-width="1.5" fill="none"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Palm sunset favicon"><defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ff8c42"/><stop offset="1" stop-color="#ff2e88"/></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="7" fill="#0d0221" stroke="#2de2e6" stroke-width="1.5"/><circle cx="16" cy="12" r="8" fill="url(#s)"/><path d="M16 11c-2-3-5-4-8-3 2 0 4 2 5 4-2-1-4 0-6 1 3 0 5 1 7 3l-1 12h5l-1-12c2-2 4-3 7-3-2-1-4-2-6-1 1-2 3-4 5-4-3-1-6 0-8 3z" fill="#0d0221"/><path d="M3 23h26M5 26h22M16 21v9M10 21L6 30M22 21l4 9" stroke="#7b2ff7" stroke-width=".8"/></svg>

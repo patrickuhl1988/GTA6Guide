@@ -78,37 +78,9 @@ a  { color: var(--cyan); }
   padding: 4.5rem 1.25rem 5.5rem;
   border-bottom: 1px solid var(--line);
   background:
-    radial-gradient(ellipse 90% 55% at 50% 88%, rgba(255, 140, 66, 0.28), transparent 65%),
-    radial-gradient(ellipse 70% 45% at 50% 95%, rgba(255, 46, 136, 0.35), transparent 70%),
+    linear-gradient(180deg, rgba(13, 2, 33, 0.55) 0%, rgba(13, 2, 33, 0.35) 45%, rgba(13, 2, 33, 0.9) 100%),
+    url("../assets/hero-bg.png") center 35% / cover no-repeat,
     var(--bg);
-}
-/* Sonne */
-.hero::before {
-  content: "";
-  position: absolute; left: 50%; bottom: 18%;
-  width: 340px; height: 340px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--orange), var(--pink) 70%);
-  filter: blur(2px);
-  opacity: 0.5;
-  -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px);
-          mask-image: repeating-linear-gradient(180deg, #000 0 26px, transparent 26px 34px);
-  pointer-events: none;
-}
-/* Grid-Boden */
-.hero::after {
-  content: "";
-  position: absolute; left: -25%; right: -25%; bottom: -18%;
-  height: 46%;
-  background:
-    repeating-linear-gradient(90deg, rgba(45, 226, 230, 0.5) 0 2px, transparent 2px 70px),
-    repeating-linear-gradient(0deg, rgba(45, 226, 230, 0.5) 0 2px, transparent 2px 44px),
-    linear-gradient(180deg, rgba(13, 2, 33, 0) 0%, rgba(13, 2, 33, 0.85) 100%);
-  transform: perspective(340px) rotateX(58deg);
-  transform-origin: top center;
-  opacity: 0.55;
-  pointer-events: none;
 }
 .hero > * { position: relative; z-index: 2; }
 
@@ -252,13 +224,7 @@ th { color: var(--cyan); font-family: "Righteous", sans-serif; font-weight: 400;
 
 /* ---------- Motion ---------- */
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero::after { animation: grid-drift 6s linear infinite; }
-  @keyframes grid-drift {
-    from { background-position: 0 0, 0 0, 0 0; }
-    to   { background-position: 0 44px, 0 44px, 0 0; }
-  }
-}
+.tile img.icon { width: 28px; height: 28px; margin-bottom: 0.5rem; display: block; }
 
 /* ---------- Fokus ---------- */
 
