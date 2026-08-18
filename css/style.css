@@ -24,7 +24,7 @@
   --text: #eee6ff;
   --text-dim: #a99cc9;
   --line: rgba(123, 47, 247, 0.35);
-  --radius: 14px;
+  --radius: 0px;
   --maxw: 1080px;
 }
 
@@ -181,7 +181,7 @@ a  { color: var(--cyan); }
   display: inline-block;
   font-size: 0.7rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.1em;
-  padding: 0.15rem 0.55rem; border-radius: 999px;
+  padding: 0.15rem 0.55rem; border-radius: 2px;
   vertical-align: middle;
 }
 .badge-official   { background: rgba(45, 226, 230, 0.15); color: var(--cyan);  border: 1px solid rgba(45, 226, 230, 0.5); }
@@ -235,6 +235,48 @@ th { color: var(--cyan); font-family: "Righteous", sans-serif; font-weight: 400;
 .tile img.icon { width: 28px; height: 28px; margin-bottom: 0.5rem; display: block; }
 
 /* ---------- Fokus ---------- */
+
+/* ---------- Keydates (Startseite) ---------- */
+
+.keydates {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 1.25rem; margin-bottom: 1rem;
+}
+.keydate {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--cyan);
+  padding: 1.1rem 1.2rem;
+  text-decoration: none; color: var(--text);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.keydate:hover { transform: translateY(-3px); border-top-color: var(--pink); box-shadow: 0 6px 24px rgba(255, 46, 136, 0.2); }
+.kd-date {
+  font-family: "Righteous", sans-serif;
+  font-size: 1.7rem; color: var(--cyan);
+  text-shadow: 0 0 12px rgba(45, 226, 230, 0.55);
+  line-height: 1.1;
+}
+.keydate:nth-child(2) .kd-date { color: var(--orange); text-shadow: 0 0 12px rgba(255, 140, 66, 0.55); }
+.keydate:nth-child(3) .kd-date { color: var(--pink); text-shadow: 0 0 12px rgba(255, 46, 136, 0.55); }
+.keydate:nth-child(4) .kd-date { color: var(--violet); text-shadow: 0 0 12px rgba(123, 47, 247, 0.65); }
+.kd-title { font-family: "Righteous", sans-serif; font-size: 1.05rem; }
+.kd-sub { font-size: 0.85rem; color: var(--text-dim); }
+
+/* ---------- Button ---------- */
+
+.btn {
+  display: inline-block; margin-top: 0.25rem;
+  background: transparent; color: var(--cyan);
+  border: 1px solid var(--cyan);
+  padding: 0.55rem 1.1rem;
+  font: 600 0.9rem "Inter", sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { background: rgba(45, 226, 230, 0.12); box-shadow: 0 0 16px rgba(45, 226, 230, 0.3); }
 
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--cyan);

@@ -42,21 +42,37 @@
 
   <main class="wrap">
 
-    <section class="section" id="next">
-      <h2>🔥 Als Nächstes: „An Extended Look"</h2>
-      <p class="lead">Am <strong>27. August</strong> zeigt Rockstar erstmals ausführliches Material zu GTA VI –
-      um <strong>21:00 Uhr</strong> (dt. Zeit) exklusiv auf Netflix, ab 3:00 Uhr nachts kostenlos auf YouTube
-      und der offiziellen Seite. <span class="badge badge-official">Offiziell</span></p>
-    </section>
-
     <section class="section" id="daten">
       <h2>Die wichtigsten Daten</h2>
-      <ul class="timeline">
-        <li><time>27. August 2026</time> „An Extended Look" – Premiere auf Netflix. <span class="badge badge-official">Offiziell</span></li>
-        <li><time>12. November 2026</time> Digitaler Preload beginnt. <span class="badge badge-official">Offiziell</span></li>
-        <li><time>19. November 2026</time> <strong>Release</strong> für PS5 &amp; Xbox Series X|S. <span class="badge badge-official">Offiziell</span></li>
-      </ul>
+      <div class="keydates">
+        <a class="keydate" href="https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look" rel="noopener">
+          <span class="kd-date">27. Aug</span>
+          <span class="kd-title">„An Extended Look"</span>
+          <span class="kd-sub">21:00 Uhr auf Netflix, ab 3:00 Uhr auf YouTube</span>
+        </a>
+        <a class="keydate" href="release.html">
+          <span class="kd-date">12. Nov</span>
+          <span class="kd-title">Preload startet</span>
+          <span class="kd-sub">Digitaler Download vor Release</span>
+        </a>
+        <a class="keydate" href="release.html">
+          <span class="kd-date">19. Nov</span>
+          <span class="kd-title">Release</span>
+          <span class="kd-sub">PS5 &amp; Xbox Series X|S</span>
+        </a>
+        <a class="keydate" href="plattformen.html">
+          <span class="kd-date">Offen</span>
+          <span class="kd-title">PC-Version</span>
+          <span class="kd-sub">Erwartet Ende 2027 / Anfang 2028</span>
+        </a>
+      </div>
       <p><a href="release.html">→ Komplette Timeline seit Trailer 1</a></p>
+    </section>
+
+    <section class="section" id="news">
+      <h2>News</h2>
+      <div id="news-latest"></div>
+      <noscript><p><a href="news.html">Alle News ansehen</a></p></noscript>
     </section>
 
     <section class="section" id="plattformen">
@@ -95,16 +111,6 @@
       <p><a href="bekannt.html">→ Alle Regionen, Counties und Leak-Infos</a></p>
     </section>
 
-    <section class="section" id="news-teaser">
-      <h2>Aktuelles</h2>
-      <article class="card">
-        <h3>„An Extended Look" kommt am 27. August <span class="badge badge-official">Offiziell</span></h3>
-        <p><time datetime="2026-08-06">6. August 2026</time> – Netflix-Premiere um 21:00 Uhr, sechs Stunden
-        später kostenlos auf YouTube. Erwartet wird deutlich mehr als ein normaler Trailer.</p>
-      </article>
-      <p><a href="news.html">→ Alle News</a> · <a href="aktie.html">→ Take-Two-Aktie live (TTWO)</a></p>
-    </section>
-
   </main>
 
   <footer class="footer">
@@ -114,6 +120,7 @@
     <p>&copy; 2026 GTA6Guide · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
   </footer>
 
+  <script src="js/news-data.js"></script>
   <script src="js/main.js"></script>
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0a25a08f150b463aa3b600b8544544e8"}'></script>

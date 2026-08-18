@@ -46,6 +46,51 @@
     timer = setInterval(tick, 1000);
   }
 
+  /* News rendern (zentrale Datenquelle: js/news-data.js) */
+  function newsCard(item) {
+    var badge = item.badge === "official"
+      ? '<span class="badge badge-official">Offiziell</span>'
+      : '<span class="badge badge-rumor">Gerücht</span>';
+    var link = item.url
+      ? ' <a href="' + item.url + '" rel="noopener">Quelle: ' + item.source + '</a>'
+      : "";
+    return (
+      '<article class="card news-item">' +
+      "<h3>" + item.title + " " + badge + "</h3>" +
+      '<p><time datetime="' + item.date + '">' + item.dateLabel + "</time> – " +
+      item.text + link + "</p></article>"
+    );
+  }
+
+  var news = window.GTA6_NEWS || [];
+
+  var latest = document.getElementById("news-latest");
+  if (latest && news.length) {
+    var first = news.slice(0, 4);
+    var rest = news.slice(4, 14);
+    latest.innerHTML = first.map(newsCard).join("");
+    if (rest.length) {
+      var hidden = document.createElement("div");
+      hidden.innerHTML = rest.map(newsCard).join("");
+      hidden.hidden = true;
+      var btn = document.createElement("button");
+      btn.className = "btn";
+      btn.type = "button";
+      btn.textContent = "Weitere News anzeigen (" + rest.length + ")";
+      btn.addEventListener("click", function () {
+        hidden.hidden = false;
+        btn.remove();
+      });
+      latest.appendChild(btn);
+      latest.appendChild(hidden);
+    }
+  }
+
+  var all = document.getElementById("news-all");
+  if (all && news.length) {
+    all.innerHTML = news.map(newsCard).join("");
+  }
+
   /* Aktiven Nav-Link markieren */
   const page = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".nav-links a").forEach(function (a) {
