@@ -106,6 +106,17 @@
     renderNews("top");
   }
 
+  /* Timeline aufklappen */
+  var tlBtn = document.getElementById("timeline-btn");
+  var tlExtra = document.getElementById("timeline-extra");
+  if (tlBtn && tlExtra) {
+    tlBtn.addEventListener("click", function () {
+      tlExtra.hidden = false;
+      tlBtn.remove();
+      externalLinksNewTab();
+    });
+  }
+
   /* Eigenwerbung: Teilen & Favorit */
   var shareBtn = document.getElementById("share-btn");
   if (shareBtn) {
