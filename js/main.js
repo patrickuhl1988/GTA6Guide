@@ -103,6 +103,25 @@
     return window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   }
 
+  /* Hinweis unter Push-Button wenn Berechtigung verweigert */
+  function showPushHint(btn) {
+    var scope = btn.closest(".nc-expand, .card, .notify-actions");
+    if (!scope) return;
+    var existing = scope.querySelector(".push-hint");
+    if (existing) return;
+    var hint = document.createElement("p");
+    hint.className = "push-hint fineprint";
+    hint.style.cssText = "color:#ff8866;margin:.5rem 0 0;font-size:.8rem;";
+    var msgs = {
+      de: "Push blockiert. Chrome-Adressleiste → Schloss → Benachrichtigungen → Zulassen, dann Seite neu laden.",
+      en: "Push blocked. Tap the lock icon in Chrome → Notifications → Allow, then reload.",
+      zh: "推送被阻止。点击 Chrome 地址栏的锁→通知→允许，然后重新加载页面。",
+      hi: "पुश ब्लॉक है। Chrome में ताला आइकन → नोटिफ़िकेशन → अनुमति दें, फिर पेज रीलोड करें।"
+    };
+    hint.textContent = msgs[LANG] || msgs.en;
+    scope.appendChild(hint);
+  }
+
   document.querySelectorAll("[data-push]").forEach(function(btn) {
     btn.addEventListener("click", function() {
       if (btn.disabled) return;
@@ -126,17 +145,24 @@
 
       /* Kein Notification-API (ältere Browser) */
       if (!("Notification" in window)) {
-        btn.textContent = T.pushErr; btn.disabled = false; return;
-      }
-      /* Bereits dauerhaft blockiert */
-      if (Notification.permission === "denied") {
-        btn.textContent = T.pushErr; btn.disabled = false; return;
+        btn.innerHTML = orig; btn.disabled = false;
+        showPushHint(btn); return;
       }
 
-      /* Nativen Browser-Dialog SOFORT öffnen (User-Gesten-Kontext muss hier aktiv sein) */
-      Notification.requestPermission().then(function(perm) {
+      /* requestPermission() IMMER aufrufen – auch bei "denied".
+         Chrome Android erlaubt Re-Permissioning nach Site-Einstellungs-Änderung.
+         Nur wenn die API selbst den Dialog verweigert, zeigen wir eine Hilfe.       */
+      var permCall = Notification.requestPermission();
+      /* Alte Browser: callback-basiert statt Promise */
+      if (!permCall || typeof permCall.then !== "function") {
+        permCall = new Promise(function(res) {
+          Notification.requestPermission(res);
+        });
+      }
+      permCall.then(function(perm) {
         if (perm !== "granted") {
-          btn.innerHTML = orig; btn.disabled = false; return;
+          btn.innerHTML = orig; btn.disabled = false;
+          showPushHint(btn); return;
         }
         /* Browser hat Erlaubnis erteilt → OneSignal im Hintergrund Tags + Subscription */
         var deadline = Date.now() + 10000;
