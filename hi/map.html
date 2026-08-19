@@ -68,17 +68,22 @@
       </div>
       <div class="card">
         <h3>बीटा साइन-अप फ़िलहाल बंद</h3>
-        <p>पहले राउंड की जगहें भर चुकी हैं। साइन-अप दोबारा खुलते ही सबसे पहले जानिए — पुश नोटिफ़िकेशन
-        या न्यूज़लेटर से:</p>
-        <div class="notify-actions">
-          <button class="btn btn-cta" type="button" data-push data-tags="map_beta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-            पुश चालू करें: बीटा खुलने पर</button>
-          <span class="or-sep">या</span>
-          <form class="nl-form" data-tags="map_beta">
-            <input type="email" required placeholder="ईमेल पता" aria-label="ईमेल पता">
-            <button class="btn" type="submit">ईमेल से सूचित करें</button>
-          </form>
+        <p>बीटा खुलते ही सबसे पहले जानिए:</p>
+        <div class="notify-cards notify-cards--map">
+          <div class="notify-card">
+            <div class="notify-card-art art-push"><img src="../assets/notify-push.webp" alt="" loading="lazy" width="1260" height="420"></div>
+            <div class="nc-front"><strong>Push</strong>
+              <button class="btn btn-cta nc-open-btn" type="button" data-nc-open="mhip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> पुश चालू करें</button></div>
+            <div class="nc-expand" hidden>
+              <button class="btn btn-cta" type="button" data-push data-tags="map_beta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> सब्सक्राइब</button>
+              <p class="nc-success" hidden>✓ चालू!</p></div></div>
+          <div class="notify-card">
+            <div class="notify-card-art art-mail"><img src="../assets/notify-newsletter.webp" alt="" loading="lazy" width="1260" height="420"></div>
+            <div class="nc-front"><strong>Newsletter</strong>
+              <button class="btn btn-cta btn-cta-alt nc-open-btn" type="button" data-nc-open="mhin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> सब्सक्राइब</button></div>
+            <div class="nc-expand" hidden>
+              <form class="nl-form" data-tags="map_beta"><input type="email" required placeholder="ईमेल पता"><button class="btn btn-cta btn-cta-alt" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> सब्सक्राइब</button></form>
+              <p class="nc-success" hidden>✓ हो गया!</p></div></div>
         </div>
         
       </div>

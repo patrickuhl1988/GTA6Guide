@@ -704,3 +704,68 @@ a:focus-visible, button:focus-visible {
   .teaser-body strong { font-size: 0.95rem; }
   .teaser-arrow { width: 34px; height: 34px; margin-right: 1rem; }
 }
+
+
+/* ---------- Platform-Chips ---------- */
+
+.platform-chips {
+  display: grid; gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 1rem;
+}
+.platform-chip {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid rgba(123, 47, 247, 0.3);
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-raised) 100%);
+}
+.platform-chip svg { width: 26px; height: 26px; flex: none; }
+.platform-chip strong { display: block; font-size: 0.95rem; }
+.platform-chip span { font-size: 0.78rem; color: var(--text-dim); }
+.chip-official svg { color: #2de2e6; }
+.chip-official { border-left: 3px solid #2de2e6; }
+.chip-rumor svg { color: #f5a623; }
+.chip-rumor { border-left: 3px solid #f5a623; }
+.chip-unknown svg { color: var(--text-dim); }
+.chip-unknown { border-left: 3px solid rgba(123, 47, 247, 0.5); opacity: 0.75; }
+
+/* ---------- Scam-Alert ---------- */
+
+.scam-alert {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 46, 0, 0.07);
+  border: 1px solid rgba(255, 60, 0, 0.35);
+  border-left: 3px solid #ff3c00;
+  margin-top: 1rem;
+}
+.scam-alert svg { width: 24px; height: 24px; flex: none; color: #ff6633; margin-top: 0.1rem; }
+.scam-alert strong { display: block; margin-bottom: 0.2rem; color: #ff8866; }
+.scam-alert p { margin: 0; font-size: 0.85rem; color: var(--text-dim); }
+
+/* ---------- Edition-Row (kompakt) ---------- */
+
+.edition-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  flex-wrap: wrap; margin-bottom: 1rem;
+}
+.edition-pill {
+  flex: 1; min-width: 160px;
+  display: flex; flex-direction: column; gap: 0.2rem;
+  padding: 1rem 1.3rem;
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-raised) 100%);
+  border: 1px solid rgba(123, 47, 247, 0.3);
+  border-top: 2px solid rgba(123, 47, 247, 0.5);
+}
+.edition-pill--premium { border-top-color: var(--cyan); }
+.edition-name { font: 600 0.78rem "Inter", sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); }
+.edition-price { font-family: "Righteous", sans-serif; font-size: 1.7rem; color: var(--text); line-height: 1.2; }
+.edition-pill--premium .edition-price { color: var(--cyan); }
+.edition-sub { font-size: 0.75rem; color: var(--text-dim); }
+.edition-divider {
+  font-family: "Righteous", sans-serif; color: var(--text-dim);
+  font-size: 0.85rem; padding: 0.5rem; text-align: center; flex: none;
+}
+
+/* ---------- Notify-Karten auf Map (schmaler) ---------- */
+.notify-cards--map { max-width: 720px; }
