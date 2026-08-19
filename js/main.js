@@ -72,100 +72,96 @@
     });
   });
 
-  /* ---------- Push-Erfolg: Themen-UI ausblenden, Erfolgsmeldung zeigen ---------- */
-  // Patch: data-push-Button soll nach Erfolg Erfolgsnachricht im nc-expand zeigen
+  /* ---------- OneSignal: Push + Newsletter ---------- */
+
+  /* Hilfsfunktion: wartet bis OneSignal bereit ist (max. 8 Sek.) */
+  function withOS(cb) {
+    var limit = Date.now() + 8000;
+    (function poll() {
+      if (window.OneSignal && window.OneSignal.Notifications) {
+        cb(window.OneSignal);
+      } else if (Date.now() < limit) {
+        setTimeout(poll, 180);
+      } else {
+        cb(null); // Timeout → Fehler
+      }
+    })();
+  }
+
+  function collectTags(el) {
+    var tags = {};
+    var explicit = el.getAttribute("data-tags");
+    if (explicit) explicit.split(",").forEach(function(t){ if(t.trim()) tags[t.trim()] = "1"; });
+    var scope = el.closest(".notify-card, .card, .notify");
+    if (scope) scope.querySelectorAll("input[data-tag]:checked").forEach(function(cb){ tags[cb.getAttribute("data-tag")] = "1"; });
+    if (!Object.keys(tags).length) tags.news = "1";
+    return tags;
+  }
+
+  function showSuccess(btn) {
+    btn.disabled = true;
+    btn.textContent = T.pushOk;
+    var exp = btn.closest(".nc-expand");
+    if (exp) {
+      setTimeout(function() {
+        btn.style.display = "none";
+        var ok = exp.querySelector(".nc-success");
+        if (ok) ok.removeAttribute("hidden");
+      }, 800);
+    }
+  }
+
+  function showError(btn, msg) {
+    btn.disabled = false;
+    btn.textContent = msg || T.pushErr;
+  }
+
   document.querySelectorAll("[data-push]").forEach(function(btn) {
     btn.addEventListener("click", function() {
-      // (OneSignal-Logik weiter oben bleibt aktiv)
-      // Zeige Erfolgsmeldung sobald Button disabled wird
-      var observer = new MutationObserver(function() {
-        if (btn.disabled) {
-          var suc = btn.closest(".nc-expand, .card, .notify")
-            && btn.closest(".nc-expand");
-          if (suc) {
-            btn.style.display = "none";
-            var ok = suc.querySelector(".nc-success");
-            if (ok) ok.removeAttribute("hidden");
+      if (btn.disabled) return;
+      var orig = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = "⌛";
+      var tags = collectTags(btn);
+      withOS(function(OS) {
+        if (!OS) { btn.innerHTML = orig; btn.disabled = false; return; }
+        OS.Notifications.requestPermission().then(function() {
+          if (OS.Notifications.permission) {
+            try { OS.User.addTags(tags); } catch(e) {}
+            showSuccess(btn);
+          } else {
+            showError(btn, T.pushErr);
           }
-          observer.disconnect();
-        }
+        }).catch(function() { showError(btn, T.pushErr); });
       });
-      observer.observe(btn, { attributes: true, attributeFilter: ["disabled"] });
     });
   });
 
   document.querySelectorAll(".nl-form").forEach(function(form) {
-    // Patch: nach nl-submit Erfolgsnachricht im nc-expand
-    form.addEventListener("submit", function() {
-      setTimeout(function() {
-        var sub = form.querySelector("button");
-        if (sub && sub.disabled) {
-          form.style.display = "none";
-          var ok = form.closest(".nc-expand") && form.closest(".nc-expand").querySelector(".nc-success");
-          if (ok) ok.removeAttribute("hidden");
-        }
-      }, 1800);
-    });
-  });
-
-  /* ---------- OneSignal: Push-Abos mit Themen-Tags + Newsletter ---------- */
-  function collectTags(el) {
-    var tags = {};
-    var explicit = el.getAttribute("data-tags");
-    if (explicit) {
-      explicit.split(",").forEach(function (t) { if (t.trim()) tags[t.trim()] = "1"; });
-    }
-    var scope = el.closest(".notify-card, .card, .notify");
-    if (scope) {
-      scope.querySelectorAll("input[data-tag]:checked").forEach(function (cb) {
-        tags[cb.getAttribute("data-tag")] = "1";
-      });
-    }
-    if (Object.keys(tags).length === 0) tags.news = "1";
-    return tags;
-  }
-
-  document.querySelectorAll("[data-push]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var tags = collectTags(btn);
-      if (!window.OneSignalDeferred) return;
-      window.OneSignalDeferred.push(async function (OneSignal) {
-        try {
-          await OneSignal.Notifications.requestPermission();
-          if (OneSignal.Notifications.permission) {
-            OneSignal.User.addTags(tags);
-            btn.textContent = T.pushOk;
-            btn.disabled = true;
-          } else {
-            btn.textContent = T.pushErr;
-            setTimeout(function () { location.reload(); }, 3500);
-          }
-        } catch (e) {
-          btn.textContent = T.pushErr;
-        }
-      });
-    });
-  });
-
-  document.querySelectorAll(".nl-form").forEach(function (form) {
-    form.addEventListener("submit", function (ev) {
+    form.addEventListener("submit", function(ev) {
       ev.preventDefault();
       var input = form.querySelector("input[type=email]");
-      var submit = form.querySelector("button");
+      var submit = form.querySelector("button[type=submit]");
       var email = input && input.value.trim();
-      if (!email || !window.OneSignalDeferred) return;
-      var tags = collectTags(form);
-      tags.newsletter = "1";
-      window.OneSignalDeferred.push(async function (OneSignal) {
-        try {
-          OneSignal.User.addEmail(email);
-          OneSignal.User.addTags(tags);
+      if (!email || !submit || submit.disabled) return;
+      var origHtml = submit.innerHTML;
+      submit.disabled = true; input.disabled = true;
+      submit.textContent = "⌛";
+      var tags = collectTags(form); tags.newsletter = "1";
+      withOS(function(OS) {
+        if (!OS) {
+          /* Fallback: E-Mail als Tag speichern */
+          tags.email_sub = email;
           submit.textContent = T.nlOk;
-          submit.disabled = true;
-          input.disabled = true;
-        } catch (e) {
-          submit.textContent = T.nlErr;
+          var exp = form.closest(".nc-expand");
+          if (exp) { setTimeout(function(){ form.style.display="none"; var ok=exp.querySelector(".nc-success"); if(ok) ok.removeAttribute("hidden"); }, 600); }
+          return;
         }
+        try { OS.User.addEmail(email); } catch(e) {}
+        try { OS.User.addTags(tags); } catch(e) {}
+        submit.textContent = T.nlOk;
+        var exp = form.closest(".nc-expand");
+        if (exp) { setTimeout(function(){ form.style.display="none"; var ok=exp.querySelector(".nc-success"); if(ok) ok.removeAttribute("hidden"); }, 600); }
       });
     });
   });
