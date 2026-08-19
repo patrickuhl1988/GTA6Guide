@@ -460,7 +460,7 @@
 // ---------- Widget-Promo: auf Mobile in den Alarm-Bereich ----------
 (function () {
   var promo = document.getElementById("widget-promo");
-  var heroRow = document.querySelector(".hero-row");
+  var heroRow = document.querySelector(".hero");
   var cards = document.querySelector(".notify-cards");
   if (!promo || !heroRow || !cards) return;
   var mq = window.matchMedia("(max-width: 760px)");

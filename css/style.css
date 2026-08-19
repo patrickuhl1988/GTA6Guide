@@ -1000,73 +1000,6 @@ a:focus-visible, button:focus-visible {
 }
 
 
-/* ---------- Widget-Promo im Hero (Phone-Mockup) ---------- */
-
-.hero-row {
-  display: flex; flex-wrap: wrap;
-  align-items: center; justify-content: center;
-  gap: 2.5rem 3rem;
-}
-.widget-promo {
-  display: flex; align-items: center; gap: 1.15rem;
-  max-width: 430px; text-align: left;
-  padding: 1rem 1.25rem 1rem 1rem;
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(27, 13, 61, 0.72) 0%, rgba(22, 9, 52, 0.72) 100%);
-  backdrop-filter: blur(4px);
-  position: relative; overflow: hidden;
-}
-.widget-promo::before {
-  content: "";
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--orange) 0%, var(--pink) 45%, transparent 85%);
-}
-.phone-mock {
-  position: relative; flex: none;
-  width: 116px; aspect-ratio: 9 / 19.5;
-  padding: 5px;
-  border-radius: 16px;
-  background: linear-gradient(160deg, #2a2140 0%, #100a22 55%, #241a3d 100%);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55),
-              0 0 22px rgba(255, 140, 66, 0.22),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
-}
-.phone-mock img {
-  display: block; width: 100%; height: 100%;
-  object-fit: cover; object-position: top;
-  border-radius: 11px;
-}
-.phone-notch {
-  position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
-  width: 34px; height: 5px; border-radius: 99px;
-  background: #0b0618; z-index: 2;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-.wp-eyebrow {
-  display: block;
-  font: 600 0.6rem "Inter", sans-serif;
-  text-transform: uppercase; letter-spacing: 0.2em;
-  color: var(--orange); margin-bottom: 0.4rem;
-}
-.wp-text p {
-  font-size: 0.85rem; line-height: 1.5;
-  color: var(--text-dim); margin: 0 0 0.75rem;
-}
-.wp-text strong { color: var(--text); }
-.wp-text .btn { width: 100%; justify-content: center; }
-
-/* Mobil sitzt der Block als erste Karte im Alarm-Bereich (per JS umgehängt) */
-.notify-cards > .widget-promo { max-width: none; grid-column: 1 / -1; }
-@media (max-width: 760px) {
-  .hero-row { gap: 1.75rem; }
-  .widget-promo { max-width: none; width: 100%; }
-}
-@media (max-width: 420px) {
-  .widget-promo { gap: 0.9rem; padding: 0.9rem 1rem 0.9rem 0.85rem; }
-  .phone-mock { width: 98px; }
-}
-
-
 /* ---------- Widget-Seite: PC-Bereich ---------- */
 
 .hero-btns { display: flex; flex-wrap: wrap; gap: 0.6rem; }
@@ -1154,4 +1087,147 @@ a:focus-visible, button:focus-visible {
   border: 1px solid var(--orange);
   background: rgba(13, 2, 33, 0.85);
   padding: 0.24rem 0.55rem 0.2rem;
+}
+
+
+/* ---------- Widget-Promo im Hero (Device-Stack) ---------- */
+
+.widget-promo {
+  display: flex; align-items: center; gap: 2.25rem;
+  width: min(740px, 100%);
+  margin: 2.75rem auto 0;
+  padding: 1.5rem 2rem 1.5rem 1.5rem;
+  text-align: left; text-decoration: none; color: inherit;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background:
+    radial-gradient(ellipse 65% 115% at 20% 50%, rgba(255, 140, 66, 0.15), transparent 60%) padding-box,
+    linear-gradient(160deg, #1c0d3c 0%, #10062b 100%) padding-box,
+    linear-gradient(120deg, var(--orange) 0%, var(--pink) 48%, rgba(123, 47, 247, 0.85) 100%) border-box;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.widget-promo::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.022) 0 1px, transparent 1px 3px);
+  opacity: 0.6;
+}
+.widget-promo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 140, 66, 0.22);
+}
+.widget-promo:hover .wp-phone { transform: rotate(-4deg) translateY(-5px); }
+.widget-promo:hover .btn-cta-widget {
+  background: linear-gradient(120deg, #ffa25e 0%, #ff4a99 100%);
+  box-shadow: 0 6px 26px rgba(255, 140, 66, 0.45);
+}
+
+/* --- Geräte --- */
+.wp-devices {
+  position: relative; flex: none;
+  width: 272px; height: 208px;
+  display: block;
+}
+.wp-monitor {
+  position: absolute; top: 6px; right: 0;
+  width: 232px;
+  display: block;
+}
+.wp-screen {
+  display: block;
+  padding: 5px 5px 4px;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(165deg, #3b3054 0%, #17102e 60%, #2a2145 100%);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+              0 0 26px rgba(45, 226, 230, 0.18);
+}
+.wp-screen img {
+  display: block; width: 100%; height: auto;
+  border-radius: 3px;
+}
+.wp-stand {
+  display: block;
+  width: 54px; height: 16px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #2a2145 0%, #17102e 100%);
+  clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
+}
+.wp-stand::after {
+  content: "";
+  display: block; position: relative; top: 15px;
+  width: 84px; height: 5px; margin: 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #302548 0%, #150e2a 100%);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.6);
+}
+.wp-phone {
+  position: absolute; left: 0; bottom: 0; z-index: 2;
+  width: 108px; aspect-ratio: 9 / 19.5;
+  display: block;
+  padding: 4px;
+  border-radius: 13px;
+  background: linear-gradient(160deg, #40355e 0%, #100a22 55%, #2c2148 100%);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65),
+              0 0 24px rgba(255, 140, 66, 0.28),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transform: rotate(-6deg);
+  transition: transform 0.25s ease;
+}
+.wp-phone img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  border-radius: 9px;
+}
+.wp-notch {
+  position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 4px; border-radius: 99px;
+  background: #0b0618; z-index: 2;
+}
+
+/* --- Text --- */
+.wp-body { display: block; min-width: 0; }
+.wp-eyebrow {
+  display: block;
+  font: 600 0.62rem "Inter", sans-serif;
+  text-transform: uppercase; letter-spacing: 0.22em;
+  color: var(--orange); margin-bottom: 0.5rem;
+}
+.wp-head {
+  display: block;
+  font-family: "Righteous", sans-serif; font-weight: 400;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  color: #fff; line-height: 1.15; margin-bottom: 0.35rem;
+}
+.wp-sub {
+  display: block;
+  font-size: 0.9rem; color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+.widget-promo .btn-cta-widget {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* --- Mobil (Block sitzt dann im Alarm-Bereich) --- */
+.notify-cards > .widget-promo { grid-column: 1 / -1; margin: 0; width: 100%; }
+@media (max-width: 620px) {
+  .widget-promo {
+    flex-direction: column; align-items: center;
+    text-align: center; gap: 1.4rem;
+    padding: 1.6rem 1.25rem;
+  }
+  .wp-devices { width: 234px; height: 180px; }
+  .wp-monitor { width: 198px; }
+  .wp-phone { width: 94px; }
+  .wp-sub { margin-bottom: 1.1rem; }
+  .widget-promo .btn-cta-widget { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .widget-promo, .wp-phone { transition: none; }
+  .widget-promo:hover { transform: none; }
+  .widget-promo:hover .wp-phone { transform: rotate(-6deg); }
 }
