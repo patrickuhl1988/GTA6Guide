@@ -454,3 +454,20 @@
     if (a.getAttribute("href") === page) a.classList.add("active");
   });
 })();
+
+
+// ---------- Bild-Cycle (Widget-Promo) ----------
+document.querySelectorAll("[data-cycle]").forEach(function (el) {
+  var imgs;
+  try { imgs = JSON.parse(el.dataset.cycle); } catch (e) { return; }
+  if (!imgs || imgs.length < 2) return;
+  var i = 0;
+  var img = el.querySelector("img");
+  var count = el.querySelector(".shot-count");
+  imgs.slice(1).forEach(function (src) { new Image().src = src; });
+  el.addEventListener("click", function () {
+    i = (i + 1) % imgs.length;
+    img.src = imgs[i];
+    if (count) count.textContent = (i + 1) + "/" + imgs.length;
+  });
+});

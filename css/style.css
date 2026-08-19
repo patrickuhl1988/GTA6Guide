@@ -546,7 +546,7 @@ a:focus-visible, button:focus-visible {
 .notify h2 { margin-bottom: 1rem; font-size: clamp(1.2rem, 3vw, 1.6rem); }
 .notify-cards {
   display: grid; gap: 1rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin-bottom: 0.65rem;
 }
 @media (max-width: 680px) { .notify-cards { grid-template-columns: 1fr; } }
@@ -892,4 +892,141 @@ a:focus-visible, button:focus-visible {
   border: 1px solid rgba(245, 166, 35, 0.35);
   border-left: 3px solid #f5a623;
   margin: 0;
+}
+
+
+/* ---------- Widget-Promo-Karte (GTA-6-Alarm) ---------- */
+
+.notify-card--widget { --accent: var(--orange); --accent-soft: rgba(255, 140, 66, 0.12); }
+.nc-widget {
+  display: flex; gap: 1rem; align-items: stretch;
+  padding: 1rem 1.1rem 1rem;
+  height: 100%;
+}
+.nc-widget .nc-front { padding: 0; flex: 1; }
+.nc-shot {
+  position: relative; flex: none;
+  width: 108px;
+  aspect-ratio: 9 / 17;
+  align-self: center;
+  border: 1px solid var(--accent);
+  background: var(--bg-raised);
+  padding: 0; cursor: pointer;
+  box-shadow: 0 0 16px var(--accent-soft);
+  overflow: hidden;
+}
+.nc-shot img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  display: block; transition: transform 0.35s ease;
+}
+.nc-shot:hover img { transform: scale(1.05); }
+.shot-count {
+  position: absolute; bottom: 5px; right: 5px;
+  font: 600 0.58rem "Inter", sans-serif; letter-spacing: 0.08em;
+  color: var(--text); background: rgba(13, 2, 33, 0.8);
+  padding: 0.12rem 0.35rem;
+  pointer-events: none;
+}
+.btn-cta-widget {
+  background: linear-gradient(120deg, var(--orange) 0%, var(--pink) 100%);
+  box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3);
+}
+.btn-cta-widget:hover {
+  background: linear-gradient(120deg, #ffa25e 0%, #ff4a99 100%);
+  box-shadow: 0 6px 26px rgba(255, 140, 66, 0.45);
+}
+
+/* ---------- Widget-Seite ---------- */
+
+.apk-hint { font-size: 0.8rem; color: var(--text-dim); margin-top: -0.4rem; }
+
+.shot-grid {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  margin-top: 1.25rem;
+}
+.shot {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-raised) 100%);
+  padding: 0.6rem 0.6rem 0.7rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.shot:hover {
+  transform: translateY(-3px);
+  border-color: var(--violet);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), 0 0 22px rgba(123, 47, 247, 0.18);
+}
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.shot figcaption {
+  font-size: 0.78rem; color: var(--text-dim);
+  text-align: center; padding-top: 0.55rem;
+}
+
+.feature-grid {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin-top: 1.25rem;
+}
+.feature h3 { margin-bottom: 0.35rem; }
+.feature p { font-size: 0.88rem; color: var(--text-dim); margin: 0; }
+
+.seg-toggle {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  margin: 0.5rem 0 1.25rem;
+}
+.seg-btn {
+  font: 600 0.82rem "Inter", sans-serif;
+  color: var(--text-dim);
+  background: transparent; border: none; cursor: pointer;
+  padding: 0.6rem 1.1rem;
+}
+.seg-btn + .seg-btn { border-left: 1px solid var(--line); }
+.seg-btn.active {
+  color: #fff;
+  background: linear-gradient(120deg, var(--pink) 0%, var(--violet) 100%);
+}
+
+.install-steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 0 0 1.25rem; padding: 0;
+  max-width: 760px;
+}
+.install-steps li {
+  position: relative;
+  padding: 0 0 1.1rem 3rem;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+.install-steps li strong { color: var(--text); }
+.install-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute; left: 0; top: -0.1rem;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Righteous", sans-serif; font-size: 0.9rem;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  background: rgba(45, 226, 230, 0.08);
+}
+.install-steps li:not(:last-child)::after {
+  content: "";
+  position: absolute; left: 15px; top: 32px; bottom: 2px;
+  width: 1px; background: var(--line);
+}
+
+.apk-trust { border-left: 3px solid var(--orange); }
+.apk-trust h3 { margin-bottom: 0.4rem; }
+.apk-trust p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+
+@media (max-width: 680px) {
+  .nc-widget { gap: 0.9rem; }
+  .nc-shot { width: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shot { transition: none; }
+  .shot:hover { transform: none; }
 }
