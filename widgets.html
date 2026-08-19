@@ -21,7 +21,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -53,9 +53,6 @@
     <section class="section">
       <span class="eyebrow">Für dein Handy</span>
       <h1>Der Countdown, der dich überall findet</h1>
-      <p class="lead">Sperrbildschirm entsperren, Countdown sehen, kurz durchatmen – unsere kostenlose
-      Android-App bringt den GTA-VI-Countdown als Widget auf Sperr- und Homescreen, dazu
-      Vice-City-Wallpapers im Neon-Look. Direkt von uns, ohne Umwege.</p>
       <p class="hero-btns">
         <a class="btn btn-cta" href="downloads/GTA6Wallpapers-v1.1.4.apk" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg> APK herunterladen (v1.1.4 · 6,2 MB)</a>
         <a class="btn" href="#pc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><path d="M9 21h6M12 17v4"/></svg> Countdown für den PC</a>
@@ -66,23 +63,24 @@
     <section class="section">
       <span class="eyebrow">Für Android</span>
       <h2>So sieht's auf dem Handy aus</h2>
-      <div class="shot-grid">
-        <figure class="shot">
-          <img src="assets/widget-lockscreen.webp" alt="Android-Sperrbildschirm mit GTA-VI-Countdown-Widget im Neon-Rahmen vor Vice-City-Wallpaper" loading="lazy" width="720" height="1279">
-          <figcaption>Countdown auf dem Sperrbildschirm</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/widget-homescreen.webp" alt="Android-Homescreen mit GTA-VI-Countdown-Widget über einer Vice-City-Uferpromenade bei Sonnenuntergang" loading="lazy" width="720" height="1600">
-          <figcaption>…oder auf dem Homescreen</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/wallpaper-skyline.webp" alt="Vice-City-Skyline-Wallpaper mit Sonnenuntergang, Brücke und Speedboat" loading="lazy" width="720" height="1601">
-          <figcaption>Wallpaper: Skyline</figcaption>
-        </figure>
-        <figure class="shot">
-          <img src="assets/wallpaper-beach.webp" alt="Strand-Wallpaper mit Rettungsschwimmerturm, Palmen und Pier im Sonnenuntergang" loading="lazy" width="720" height="1601">
-          <figcaption>Wallpaper: Beach</figcaption>
-        </figure>
+      <div class="phone-gallery" id="phone-gallery">
+        <button class="phone-mock phone-mock--lg" type="button" id="pg-shot" aria-label="Nächstes Bild anzeigen">
+          <span class="phone-notch" aria-hidden="true"></span>
+          <img id="pg-img" src="assets/widget-lockscreen.webp" alt="Android-Sperrbildschirm mit GTA-VI-Countdown-Widget im Neon-Rahmen vor Vice-City-Wallpaper" width="720" height="1279">
+          <span class="pg-next" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg>
+          </span>
+        </button>
+
+        <div class="pg-text">
+          <span class="pg-count" id="pg-count">1 / 4</span>
+          <h3 id="pg-title">Countdown auf dem Sperrbildschirm</h3>
+          <p id="pg-desc">Der Klassiker: Handy hochnehmen, Countdown sehen. Das Widget sitzt direkt
+          über der Uhr und zeigt Tage, Stunden und Minuten bis zum 19. November – ohne dass du
+          entsperren musst.</p>
+          <div class="pg-dots" id="pg-dots" role="tablist" aria-label="Bildauswahl"></div>
+          <p class="pg-hint">Tipp aufs Bild fürs nächste Motiv</p>
+        </div>
       </div>
     </section>
 
@@ -150,19 +148,20 @@
 
       <div class="shot-grid pc-grid">
         <figure class="shot">
-          <img src="assets/pcwp-night.webp" alt="Animiertes Wallpaper: nächtliche Neon-Skyline von Vice City im Regen mit Countdown" loading="lazy" width="960" height="540">
-          <figcaption><strong>Vice City Neon Night</strong><br>Regen, Verkehr, Polizeihelikopter</figcaption>
-          <p class="shot-actions">
-            <a class="btn" href="downloads/wallpaper-vice-city-night.html" target="_blank" rel="noopener">Vorschau</a>
-            <a class="btn btn-cta" href="downloads/wallpaper-vice-city-night.html" download>Herunterladen</a>
-          </p>
-        </figure>
-        <figure class="shot">
           <img src="assets/pcwp-beach.webp" alt="Animiertes Wallpaper: Sonnenuntergang am Vice Beach mit Palmen, Skyline und Countdown" loading="lazy" width="960" height="540">
           <figcaption><strong>Vice Beach Sunset</strong><br>Cinematic, ruhiger Look</figcaption>
           <p class="shot-actions">
             <a class="btn" href="downloads/wallpaper-vice-beach-pro.html" target="_blank" rel="noopener">Vorschau</a>
             <a class="btn btn-cta" href="downloads/wallpaper-vice-beach-pro.html" download>Herunterladen</a>
+          </p>
+        </figure>
+        <figure class="shot">
+          <span class="shot-badge">Beta</span>
+          <img src="assets/pcwp-night.webp" alt="Animiertes Wallpaper: nächtliche Neon-Skyline von Vice City im Regen mit Countdown" loading="lazy" width="960" height="540">
+          <figcaption><strong>Vice City Neon Night</strong><br>Regen, Verkehr, Polizeihelikopter</figcaption>
+          <p class="shot-actions">
+            <a class="btn" href="downloads/wallpaper-vice-city-night.html" target="_blank" rel="noopener">Vorschau</a>
+            <a class="btn btn-cta" href="downloads/wallpaper-vice-city-night.html" download>Herunterladen</a>
           </p>
         </figure>
       </div>
@@ -241,6 +240,63 @@
     }
     wireToggle("guide", "[data-guide-panel]", "guidePanel");
     wireToggle("pc", "[data-pc-panel]", "pcPanel");
+  </script>
+  <script>
+    (function () {
+      var shots = [
+        { src: "assets/widget-lockscreen.webp",
+          alt: "Android-Sperrbildschirm mit GTA-VI-Countdown-Widget im Neon-Rahmen vor Vice-City-Wallpaper",
+          title: "Countdown auf dem Sperrbildschirm",
+          desc: "Der Klassiker: Handy hochnehmen, Countdown sehen. Das Widget sitzt direkt über der Uhr und zeigt Tage, Stunden und Minuten bis zum 19. November \u2013 ohne dass du entsperren musst." },
+        { src: "assets/widget-homescreen.webp",
+          alt: "Android-Homescreen mit GTA-VI-Countdown-Widget über einer Vice-City-Uferpromenade bei Sonnenuntergang",
+          title: "\u2026 oder auf dem Homescreen",
+          desc: "Dasselbe Widget l\u00e4uft auch auf dem Startbildschirm \u2013 in verschiedenen Gr\u00f6\u00dfen, damit es zwischen deine Apps passt. Platzieren wie jedes andere Android-Widget." },
+        { src: "assets/wallpaper-skyline.webp",
+          alt: "Vice-City-Skyline-Wallpaper mit Sonnenuntergang, Brücke und Speedboat",
+          title: "Wallpaper: Skyline",
+          desc: "Mitgeliefert: Vice-City-Motive im Neon-Look, passend zugeschnitten f\u00fcr Handy-Displays. Nutzbar als Sperrbildschirm, Hintergrund oder beides." },
+        { src: "assets/wallpaper-beach.webp",
+          alt: "Strand-Wallpaper mit Rettungsschwimmerturm, Palmen und Pier im Sonnenuntergang",
+          title: "Wallpaper: Beach",
+          desc: "Ruhiger, warmer Sonnenuntergang am Strand. Und falls dir unsere Motive nicht reichen: Die Widgets funktionieren genauso gut mit deinem eigenen Hintergrund." }
+      ];
+
+      var img = document.getElementById("pg-img");
+      var title = document.getElementById("pg-title");
+      var desc = document.getElementById("pg-desc");
+      var count = document.getElementById("pg-count");
+      var dots = document.getElementById("pg-dots");
+      var shot = document.getElementById("pg-shot");
+      if (!img || !shot) return;
+
+      var i = 0;
+      shots.slice(1).forEach(function (s) { new Image().src = s.src; });
+
+      shots.forEach(function (s, n) {
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "pg-dot" + (n === 0 ? " active" : "");
+        d.setAttribute("aria-label", "Bild " + (n + 1) + ": " + s.title);
+        d.addEventListener("click", function (e) { e.stopPropagation(); show(n); });
+        dots.appendChild(d);
+      });
+
+      function show(n) {
+        i = (n + shots.length) % shots.length;
+        var s = shots[i];
+        img.src = s.src;
+        img.alt = s.alt;
+        title.textContent = s.title;
+        desc.textContent = s.desc;
+        count.textContent = (i + 1) + " / " + shots.length;
+        dots.querySelectorAll(".pg-dot").forEach(function (d, n2) {
+          d.classList.toggle("active", n2 === i);
+        });
+      }
+
+      shot.addEventListener("click", function () { show(i + 1); });
+    })();
   </script>
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0a25a08f150b463aa3b600b8544544e8"}'></script>
