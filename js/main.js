@@ -94,7 +94,7 @@
     }, 900);
   }
 
-  /* Push: iOS-Detection + korrekte Reihenfolge (OneSignal abwarten, dann permission) */
+  /* Push: iOS-Detection + native requestPermission SOFORT im User-Gesten-Kontext */
   function isIOSSafari() {
     var ua = navigator.userAgent;
     return /iP(hone|ad|od)/i.test(ua) && /WebKit/i.test(ua) && !/CriOS|FxiOS|OPiOS|EdgiOS/i.test(ua);
@@ -110,13 +110,13 @@
       btn.disabled = true; btn.textContent = "⌛";
       var tags = collectTags(btn);
 
-      /* iOS Safari ohne Homescreen-PWA: Web Push nicht möglich */
+      /* iOS Safari ohne PWA-Homescreen: Web Push nicht möglich */
       if (isIOSSafari() && !isPWA()) {
         var msg = {
-          de: "Safari: Seite erst zum Homescreen hinzufügen, dann funktioniert Push.",
-          en: "Safari: Add this page to your homescreen first to enable push.",
-          zh: "Safari：请先将此页添加到主屏幕，然后即可使用推送。",
-          hi: "Safari: पहले पेज को होमस्क्रीन पर जोड़ें, फिर पुश काम करेगा।"
+          de: "Safari: Seite zum Homescreen hinzufügen, dann Push nutzen.",
+          en: "Safari: Add to homescreen first, then push works.",
+          zh: "Safari：请先添加到主屏幕，然后即可使用推送。",
+          hi: "Safari: पहले होमस्क्रीन पर जोड़ें, फिर पुश काम करेगा।"
         };
         btn.textContent = msg[LANG] || msg.en;
         btn.disabled = false;
@@ -124,32 +124,40 @@
         return;
       }
 
-      /* Alle anderen Browser/Plattformen: OneSignal verwenden */
-      var deadline = Date.now() + 10000;
-      (function tryOS() {
-        var OS = window.OneSignal;
-        if (OS && OS.Notifications && typeof OS.Notifications.requestPermission === "function") {
-          OS.Notifications.requestPermission().then(function() {
-            if (OS.Notifications.permission) {
-              try { OS.User.addTags(tags); } catch(e) {}
-              ncSuccess(btn);
-            } else {
-              btn.innerHTML = orig; btn.disabled = false;
-            }
-          }).catch(function() { btn.innerHTML = orig; btn.disabled = false; });
-        } else if (Date.now() < deadline) {
-          setTimeout(tryOS, 300);
-        } else {
-          /* Timeout – direkter Browser-Fallback ohne OneSignal */
-          if (!("Notification" in window)) {
-            btn.textContent = T.pushErr; btn.disabled = false; return;
-          }
-          Notification.requestPermission().then(function(perm) {
-            if (perm === "granted") { ncSuccess(btn); }
-            else { btn.innerHTML = orig; btn.disabled = false; }
-          }).catch(function() { btn.innerHTML = orig; btn.disabled = false; });
+      /* Kein Notification-API (ältere Browser) */
+      if (!("Notification" in window)) {
+        btn.textContent = T.pushErr; btn.disabled = false; return;
+      }
+      /* Bereits dauerhaft blockiert */
+      if (Notification.permission === "denied") {
+        btn.textContent = T.pushErr; btn.disabled = false; return;
+      }
+
+      /* Nativen Browser-Dialog SOFORT öffnen (User-Gesten-Kontext muss hier aktiv sein) */
+      Notification.requestPermission().then(function(perm) {
+        if (perm !== "granted") {
+          btn.innerHTML = orig; btn.disabled = false; return;
         }
-      })();
+        /* Browser hat Erlaubnis erteilt → OneSignal im Hintergrund Tags + Subscription */
+        var deadline = Date.now() + 10000;
+        (function tryOS() {
+          var OS = window.OneSignal;
+          if (OS && OS.User) {
+            try { OS.User.addTags(tags); } catch(e) {}
+            try {
+              if (OS.Notifications && typeof OS.Notifications.requestPermission === "function") {
+                OS.Notifications.requestPermission().catch(function(){});
+              }
+            } catch(e) {}
+            ncSuccess(btn);
+          } else if (Date.now() < deadline) {
+            setTimeout(tryOS, 300);
+          } else {
+            /* OneSignal nicht geladen, aber native Permission ok → Erfolg anzeigen */
+            ncSuccess(btn);
+          }
+        })();
+      }).catch(function() { btn.innerHTML = orig; btn.disabled = false; });
     });
   });
 
