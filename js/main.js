@@ -58,17 +58,81 @@
   } catch (e) {}
 
 
-  /* ---------- Notify-Karten: Expand-on-Click ---------- */
+  /* ---------- Notify-Karten: Smart-Expand ---------- */
+  function makeDeniedHelp() {
+    var steps = {
+      de: ["Chrome: Schloss-Symbol in der Adressleiste tippen", "→ Benachrichtigungen → Zulassen", "→ Seite neu laden → Push nochmal aktivieren"],
+      en: ["Chrome: tap the lock icon in the address bar", "→ Notifications → Allow", "→ Reload the page → try push again"],
+      zh: ["Chrome：点击地址栏的锁图标", "→ 通知 → 允许", "→ 重新加载页面 → 重试推送"],
+      hi: ["Chrome: एड्रेस बार में ताला आइकन पर टैप करें", "→ नोटिफ़िकेशन → अनुमति दें", "→ पेज रीलोड करें → फिर से प्रयास करें"]
+    };
+    var lang = LANG in steps ? LANG : "de";
+    var s = steps[lang];
+    return ('<div class="push-denied-box">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:28px;height:28px;color:#f5a623;flex:none"><path d="M10.3 3.3L2 21h20L13.7 3.3a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg>' +
+      '<div><strong style="color:#f5a623;display:block;margin-bottom:.5rem">' +
+        { de: "Push deaktiviert – so aktivieren:", en: "Push blocked – how to enable:", zh: "推送被阻止——如何开启：", hi: "पुश ब्लॉक है – कैसे चालू करें:" }[lang] +
+      '</strong><ol style="margin:0;padding-left:1.2rem;font-size:.82rem;color:var(--text-dim);line-height:1.7">' +
+        s.map(function(t){ return "<li>" + t + "</li>"; }).join("") +
+      '</ol></div></div>');
+  }
+
   document.querySelectorAll(".nc-open-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
       var target = btn.getAttribute("data-nc-open");
-      var card = btn.closest(".notify-card[data-nc='" + target + "']");
-      if (!card) return;
-      btn.closest(".nc-front").style.display = "none";
-      var exp = card.querySelector(".nc-expand");
-      if (exp) exp.removeAttribute("hidden");
-      var first = exp && (exp.querySelector("input") || exp.querySelector("button"));
-      if (first) first.focus();
+      var isPushCard = target && (target.indexOf("push") > -1 || target.endsWith("p"));
+      var card = btn.closest(".notify-card") || btn.closest(".card");
+      var front = btn.closest(".nc-front");
+      var exp = card && card.querySelector(".nc-expand");
+
+      /* ---- Push-Karte: Status sofort prüfen ---- */
+      if (isPushCard) {
+        /* iOS Safari ohne Homescreen */
+        if (isIOSSafari() && !isPWA()) {
+          var m2 = {de:"Safari: Seite erst zum Homescreen hinzufügen.",en:"Safari: Add to homescreen first.",zh:"Safari：请先添加到主屏幕。",hi:"Safari: पहले होमस्क्रीन पर जोड़ें।"};
+          if (front) front.style.display = "none";
+          if (exp) { exp.removeAttribute("hidden"); exp.innerHTML = '<p style="padding:1rem;color:#f5a623;font-size:.85rem">' + (m2[LANG]||m2.en) + '</p>'; }
+          return;
+        }
+
+        /* Bereits blockiert → Anleitung direkt zeigen */
+        if ("Notification" in window && Notification.permission === "denied") {
+          if (front) front.style.display = "none";
+          if (exp) { exp.removeAttribute("hidden"); exp.innerHTML = makeDeniedHelp(); }
+          return;
+        }
+
+        /* Bereits erlaubt → sofort subscriben, kein 2. Klick nötig */
+        if ("Notification" in window && Notification.permission === "granted") {
+          if (front) front.style.display = "none";
+          if (exp) {
+            exp.removeAttribute("hidden");
+            var pb = exp.querySelector("[data-push]");
+            if (pb) { pb.textContent = "⌛"; pb.disabled = true; }
+          }
+          var tags = {};
+          if (card) card.querySelectorAll("input[data-tag]:checked").forEach(function(cb){ tags[cb.getAttribute("data-tag")] = "1"; });
+          if (!Object.keys(tags).length) tags.news = "1";
+          var deadline = Date.now() + 10000;
+          (function tryOS2() {
+            var OS = window.OneSignal;
+            if (OS && OS.User) {
+              try { OS.User.addTags(tags); } catch(e) {}
+              ncSuccess(exp ? exp.querySelector("[data-push]") : btn);
+            } else if (Date.now() < deadline) { setTimeout(tryOS2, 300); }
+            else { ncSuccess(exp ? exp.querySelector("[data-push]") : btn); }
+          })();
+          return;
+        }
+      }
+
+      /* Standard-Expand */
+      if (front) front.style.display = "none";
+      if (exp) {
+        exp.removeAttribute("hidden");
+        var first = exp.querySelector("input") || exp.querySelector("button");
+        if (first) first.focus();
+      }
     });
   });
 

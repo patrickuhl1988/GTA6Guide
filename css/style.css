@@ -770,3 +770,14 @@ a:focus-visible, button:focus-visible {
 
 /* ---------- Notify-Karten auf Map (schmaler) ---------- */
 .notify-cards--map { max-width: 720px; }
+
+
+/* ---------- Push-blockiert-Box ---------- */
+.push-denied-box {
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  padding: 1rem 1.1rem;
+  background: rgba(245, 166, 35, 0.07);
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  border-left: 3px solid #f5a623;
+  margin: 0;
+}
