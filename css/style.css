@@ -95,6 +95,9 @@ a:hover { color: var(--pink); text-decoration-color: rgba(255, 46, 136, 0.5); }
 }
 .nav-links a:hover { color: var(--text); background: rgba(123, 47, 247, 0.2); }
 .nav-links a.active { color: var(--cyan); }
+@media (max-width: 640px) {
+  .nav-links a.nav-sec { display: none; }
+}
 
 .footer-langs { margin-top: 0.5rem; font-size: 0.72rem; opacity: 0.75; }
 .footer-langs a { text-decoration: none; }
