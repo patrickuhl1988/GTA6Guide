@@ -21,7 +21,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -56,14 +56,16 @@
       <p class="lead">Sperrbildschirm entsperren, Countdown sehen, kurz durchatmen – unsere kostenlose
       Android-App bringt den GTA-VI-Countdown als Widget auf Sperr- und Homescreen, dazu
       Vice-City-Wallpapers im Neon-Look. Direkt von uns, ohne Umwege.</p>
-      <p>
+      <p class="hero-btns">
         <a class="btn btn-cta" href="downloads/GTA6Wallpapers-v1.1.4.apk" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg> APK herunterladen (v1.1.4 · 6,2 MB)</a>
+        <a class="btn" href="#pc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><rect x="2.5" y="4" width="19" height="13" rx="1.5"/><path d="M9 21h6M12 17v4"/></svg> Countdown für den PC</a>
       </p>
       <p class="apk-hint">Nur für Android · kostenlos · kein Play-Store-Konto nötig</p>
     </section>
 
     <section class="section">
-      <h2>So sieht's aus</h2>
+      <span class="eyebrow">Für Android</span>
+      <h2>So sieht's auf dem Handy aus</h2>
       <div class="shot-grid">
         <figure class="shot">
           <img src="assets/widget-lockscreen.webp" alt="Android-Sperrbildschirm mit GTA-VI-Countdown-Widget im Neon-Rahmen vor Vice-City-Wallpaper" loading="lazy" width="720" height="1279">
@@ -139,11 +141,76 @@
       </div>
     </section>
 
+    <section class="section" id="pc">
+      <span class="eyebrow">Für den PC</span>
+      <h2>Der dynamische Hintergrund-Countdown</h2>
+      <p class="lead">Zwei animierte Live-Wallpapers mit laufendem Countdown – Regen, Verkehr und
+      Neonlicht in Vice City oder Sonnenuntergang am Vice Beach. Beide laufen als einzelne
+      HTML-Datei in jedem modernen Browser und lassen sich als echter Desktop-Hintergrund einbinden.</p>
+
+      <div class="shot-grid pc-grid">
+        <figure class="shot">
+          <img src="assets/pcwp-night.webp" alt="Animiertes Wallpaper: nächtliche Neon-Skyline von Vice City im Regen mit Countdown" loading="lazy" width="960" height="540">
+          <figcaption><strong>Vice City Neon Night</strong><br>Regen, Verkehr, Polizeihelikopter</figcaption>
+          <p class="shot-actions">
+            <a class="btn" href="downloads/wallpaper-vice-city-night.html" target="_blank" rel="noopener">Vorschau</a>
+            <a class="btn btn-cta" href="downloads/wallpaper-vice-city-night.html" download>Herunterladen</a>
+          </p>
+        </figure>
+        <figure class="shot">
+          <img src="assets/pcwp-beach.webp" alt="Animiertes Wallpaper: Sonnenuntergang am Vice Beach mit Palmen, Skyline und Countdown" loading="lazy" width="960" height="540">
+          <figcaption><strong>Vice Beach Sunset</strong><br>Cinematic, ruhiger Look</figcaption>
+          <p class="shot-actions">
+            <a class="btn" href="downloads/wallpaper-vice-beach-pro.html" target="_blank" rel="noopener">Vorschau</a>
+            <a class="btn btn-cta" href="downloads/wallpaper-vice-beach-pro.html" download>Herunterladen</a>
+          </p>
+        </figure>
+      </div>
+
+      <h3 class="sub-head">So wird daraus dein Desktop-Hintergrund</h3>
+
+      <div class="seg-toggle" role="tablist" aria-label="PC-Anleitung">
+        <button class="seg-btn active" type="button" role="tab" aria-selected="true" data-pc="lively">Windows (Lively, gratis)</button>
+        <button class="seg-btn" type="button" role="tab" aria-selected="false" data-pc="engine">Wallpaper Engine</button>
+        <button class="seg-btn" type="button" role="tab" aria-selected="false" data-pc="browser">Ohne Zusatz-Tool</button>
+      </div>
+
+      <ol class="install-steps" data-pc-panel="lively">
+        <li><strong>Lively Wallpaper installieren.</strong> Kostenlos und quelloffen – über den Microsoft Store (Suche nach „Lively Wallpaper“) oder von rocksdanister.github.io/lively.</li>
+        <li><strong>Wallpaper-Datei herunterladen.</strong> Oben auf „Herunterladen“ tippen und die HTML-Datei an einem festen Ort speichern (z. B. <em>Dokumente\Wallpapers</em>) – Lively greift später darauf zu.</li>
+        <li><strong>In Lively hinzufügen.</strong> Auf das große <em>+</em> klicken, dann <em>Browse</em> → die heruntergeladene HTML-Datei auswählen. Alternativ die Datei einfach ins Lively-Fenster ziehen.</li>
+        <li><strong>Als Hintergrund setzen.</strong> Auf die neue Kachel doppelklicken. Bei mehreren Monitoren wählst du oben aus, für welchen Bildschirm es gelten soll.</li>
+        <li><strong>Feinschliff.</strong> In den Lively-Einstellungen unter <em>Performance</em> festlegen, dass das Wallpaper pausiert, wenn ein Vollbild-Spiel läuft – so kostet es im Spiel keine Leistung.</li>
+      </ol>
+
+      <ol class="install-steps" data-pc-panel="engine" hidden>
+        <li><strong>Datei herunterladen</strong> und an einem festen Ort speichern.</li>
+        <li><strong>Wallpaper Engine öffnen</strong> → <em>Wallpaper erstellen</em> → <em>Web/HTML</em> als Typ wählen.</li>
+        <li><strong>HTML-Datei auswählen</strong> und dem Wallpaper einen Namen geben.</li>
+        <li><strong>Übernehmen</strong> – das Wallpaper erscheint in deiner Bibliothek und lässt sich wie jedes andere aktivieren.</li>
+      </ol>
+
+      <ol class="install-steps" data-pc-panel="browser" hidden>
+        <li><strong>Datei herunterladen</strong> und per Doppelklick im Browser öffnen.</li>
+        <li><strong>Vollbild aktivieren</strong> mit <em>F11</em> – fertig ist der Countdown-Screen, ideal für einen Zweitmonitor oder als Bildschirmschoner-Ersatz.</li>
+        <li><strong>Standbild als Hintergrund:</strong> Die Vice-City-Night-Variante hat einen versteckten Speichern-Button. Ruf die Datei mit <em>?ui=1</em> am Ende der Adresse auf, klick auf „Als PNG speichern (4K)“ und setze das Bild klassisch über <em>Rechtsklick auf den Desktop → Anpassen → Hintergrund</em>.</li>
+      </ol>
+
+      <div class="card apk-trust">
+        <h3>Gut zu wissen</h3>
+        <p>Beide Wallpapers rechnen den Countdown live aus dem Systemdatum aus – sie brauchen keine
+        Internetverbindung und senden nichts nach außen. Alles ist selbst gezeichnet, es kommt kein
+        Rockstar-Material zum Einsatz. Der Countdown lässt sich übrigens umstellen: Häng
+        <em>?date=2026-12-24T00:00:00</em> an die Adresse an, und die Datei zählt auf ein beliebiges
+        Datum herunter.</p>
+      </div>
+    </section>
+
     <section class="section">
       <h2>Kurz &amp; knapp</h2>
-      <div class="card"><h3>Gibt's das auch für iPhone?</h3><p>Aktuell nicht – die App ist Android-only. Wenn sich das ändert, erfährst du es zuerst per Push oder Newsletter.</p></div>
+      <div class="card"><h3>Gibt's das auch für iPhone?</h3><p>Die App ist aktuell Android-only. Der PC-Countdown läuft dagegen auf jedem Gerät mit Browser – auch auf dem Mac.</p></div>
       <div class="card"><h3>Was passiert nach dem Release?</h3><p>Der Countdown hat seinen großen Moment am 19. November – die Wallpapers bleiben natürlich auch danach schick.</p></div>
-      <div class="card"><h3>Kostet das was?</h3><p>Nein. Die App ist ein kostenloses Extra von GTA6Guide – genau wie die Seite selbst.</p></div>
+      <div class="card"><h3>Kostet das was?</h3><p>Nein. App und Wallpapers sind kostenlose Extras von GTA6Guide – genau wie die Seite selbst.</p></div>
     </section>
 
   </main>
@@ -157,18 +224,23 @@
   <script src="js/news-data.js"></script>
   <script src="js/main.js"></script>
   <script>
-    document.querySelectorAll(".seg-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        document.querySelectorAll(".seg-btn").forEach(function (b) {
-          var on = b === btn;
-          b.classList.toggle("active", on);
-          b.setAttribute("aria-selected", on ? "true" : "false");
-        });
-        document.querySelectorAll("[data-guide-panel]").forEach(function (p) {
-          p.hidden = p.dataset.guidePanel !== btn.dataset.guide;
+    function wireToggle(btnAttr, panelSel, panelKey) {
+      var btns = document.querySelectorAll("[data-" + btnAttr + "]");
+      btns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          btns.forEach(function (b) {
+            var on = b === btn;
+            b.classList.toggle("active", on);
+            b.setAttribute("aria-selected", on ? "true" : "false");
+          });
+          document.querySelectorAll(panelSel).forEach(function (p) {
+            p.hidden = p.dataset[panelKey] !== btn.dataset[btnAttr];
+          });
         });
       });
-    });
+    }
+    wireToggle("guide", "[data-guide-panel]", "guidePanel");
+    wireToggle("pc", "[data-pc-panel]", "pcPanel");
   </script>
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0a25a08f150b463aa3b600b8544544e8"}'></script>

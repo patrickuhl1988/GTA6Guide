@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vice City Neon Night – Countdown Wallpaper | gta6guide.de</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#0a0418;overflow:hidden}
+  canvas{display:block;width:100vw;height:100vh}
+  #bar{position:fixed;right:14px;bottom:14px;display:none;gap:8px;font:600 12px/1 system-ui,sans-serif;z-index:5}
+  #bar.on{display:flex}
+  #bar button{background:rgba(10,4,24,.75);color:#cfe9ff;border:1px solid rgba(77,227,255,.45);
+    border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(6px)}
+  #bar button:hover{background:rgba(77,227,255,.18)}
+  #bar button:focus-visible{outline:2px solid #ff5aa8;outline-offset:2px}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="bar"><button id="png">Als PNG speichern (4K)</button></div>
+
+<script>
+/* =====================================================================
+   GTA6GUIDE.DE – LIVE WALLPAPER 03 "VICE CITY NEON NIGHT"
+   Neon-Skyline, Regen, Verkehr, Polizeihelikopter. Kein Rockstar-Material.
+   ===================================================================== */
+const CONFIG = {
+  release   : "2026-11-19T00:00:00",
+  bgImage   : "",           // optional: "bg/city.jpg"
+  bgDim     : 0.20,
+  countdown : true,
+  cdX       : 0.5, cdY : 0.20,
+  eyebrow   : "VICE CITY · STATE OF LEONIDA",
+  brand     : "gta6guide.de",
+  rain      : true,
+  props     : true,         // Neonschild, Palmen, Pfützen
+  ui        : false
+};
+const Q = new URLSearchParams(location.search);
+if (Q.get("date")) CONFIG.release = Q.get("date");
+if (Q.get("bg"))   CONFIG.bgImage = Q.get("bg");
+if (Q.get("nocd")) CONFIG.countdown = false;
+if (Q.get("noprops")) CONFIG.props = false;
+if (Q.get("norain")) CONFIG.rain = false;
+if (Q.get("ui"))   CONFIG.ui = Q.get("ui") !== "0";
+if (Q.get("cdy"))  CONFIG.cdY = parseFloat(Q.get("cdy"));
+
+const cv = document.getElementById("c"), ctx = cv.getContext("2d", {alpha:false});
+let W=0,H=0,S=1,DPR=1;
+const TARGET = new Date(CONFIG.release).getTime();
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let bg = null;
+if (CONFIG.bgImage){ bg = new Image(); bg.onerror = () => bg = null; bg.src = CONFIG.bgImage; }
+
+function resize(w,h,dpr){
+  DPR = dpr || Math.min(devicePixelRatio || 1, 2);
+  cv.width = Math.round((w||innerWidth)*DPR); cv.height = Math.round((h||innerHeight)*DPR);
+  W = cv.width; H = cv.height; S = H/1080;
+  buildRain();
+}
+addEventListener("resize", () => resize());
+if (CONFIG.ui) document.getElementById("bar").classList.add("on");
+
+const TAU = Math.PI*2;
+const rnd = (s => () => (s = s*16807 % 2147483647)/2147483647)(19112026);
+const lerp = (a,b,t) => a+(b-a)*t;
+function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.roundRect(x,y,w,h,r); }
+function coverDraw(img){
+  const r = Math.max(W/img.width,H/img.height), w = img.width*r, h = img.height*r;
+  ctx.drawImage(img,(W-w)/2,(H-h)/2,w,h);
+  ctx.fillStyle = `rgba(8,3,20,${CONFIG.bgDim})`; ctx.fillRect(0,0,W,H);
+}
+
+const BAY = 0.585, ROAD = 0.775;
+const NEON = ["#ff2e88","#4de3ff","#ffcc4d","#a86bff","#3dffb0"];
+
+/* Skyline: zwei Tiefenebenen */
+function makeBlocks(n, minH, maxH, jitter){
+  const arr = []; let x = -0.03;
+  while (x < 1.05){
+    const w = 0.018 + rnd()*0.045;
+    arr.push({
+      x, w, h: minH + rnd()*(maxH-minH),
+      crown: rnd(), hue: NEON[(rnd()*NEON.length)|0], seed: rnd()*1000,
+      antenna: rnd() > 0.75
+    });
+    x += w + rnd()*jitter;
+  }
+  return arr;
+}
+const far = makeBlocks(0, 0.10, 0.26, 0.010);
+const near = makeBlocks(0, 0.14, 0.36, 0.006);
+const cars = Array.from({length:26}, () => ({
+  x: rnd(), lane: rnd() > 0.5 ? 1 : -1, sp: 0.07 + rnd()*0.22, o: rnd(), j: rnd()
+}));
+const palmsFg = [
+  {x:0.055, y:1.02, sc:1.9, ph:0.0, lean:-0.12},
+  {x:0.955, y:1.00, sc:1.6, ph:2.1, lean: 0.15}
+];
+let drops = [];
+function buildRain(){
+  const n = CONFIG.rain ? Math.round(340 * Math.max(0.6, Math.min(1.6, (W*H)/(1920*1080)))) : 0;
+  drops = Array.from({length:n}, () => ({
+    x: Math.random(), y: Math.random(), len: 0.012+Math.random()*0.045,
+    sp: 0.55+Math.random()*0.9, a: 0.06+Math.random()*0.22
+  }));
+}
+resize();
+const splashes = [];
+let bolt = {t:-99, x:0.5, pow:0};
+
+/* ---------- Himmel ---------- */
+function drawSky(t){
+  const g = ctx.createLinearGradient(0,0,0,H*BAY);
+  g.addColorStop(0.00,"#10062a"); g.addColorStop(0.42,"#2a0b47");
+  g.addColorStop(0.74,"#5c1057"); g.addColorStop(1.00,"#a3245f");
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H*BAY);
+
+  // Wolken, von der Stadt angeleuchtet
+  for (let i=0;i<8;i++){
+    const x = ((i*0.17 + t*0.003) % 1.35 - 0.18)*W;
+    const y = H*(0.06 + (i%4)*0.052);
+    for (let k=0;k<3;k++){
+      const ox = x + (k-1)*W*0.10, oy = y + (k===1 ? H*0.012 : 0);
+      const rw = W*(0.16 - k*0.02), rh = H*(0.036 - k*0.004);
+      const cg = ctx.createRadialGradient(ox, oy, 0, ox, oy, rw);
+      cg.addColorStop(0,"rgba(255,120,175,0.16)");
+      cg.addColorStop(0.55,"rgba(150,70,160,0.09)");
+      cg.addColorStop(1,"rgba(120,60,150,0)");
+      ctx.fillStyle = cg; ctx.save(); ctx.translate(ox,oy); ctx.scale(1, rh/rw);
+      ctx.beginPath(); ctx.arc(0,0,rw,0,TAU); ctx.fill(); ctx.restore();
+    }
+  }
+  // Blitz
+  if (t - bolt.t > 12 && Math.random() < 0.0035){ bolt = {t, x:0.15+Math.random()*0.7, pow:0.5+Math.random()*0.5}; }
+  const since = t - bolt.t;
+  if (since < 0.45){
+    const f = Math.max(0,(Math.sin(since*26)*0.5+0.5)*(1-since/0.45)*bolt.pow);
+    ctx.fillStyle = `rgba(190,180,255,${f*0.20})`; ctx.fillRect(0,0,W,H);
+    if (since < 0.16){
+      ctx.strokeStyle = `rgba(230,225,255,${f})`; ctx.lineWidth = 2.4*S;
+      ctx.beginPath(); let x = bolt.x*W, y = 0;
+      while (y < H*0.34){ const nx = x + (Math.random()-0.5)*40*S, ny = y + 26*S; ctx.lineTo(nx,ny); x=nx; y=ny; }
+      ctx.stroke();
+    }
+  }
+}
+
+/* ---------- Gebäude ---------- */
+function drawBlock(b, base, scale, alpha, t, lit){
+  const x = b.x*W, w = b.w*W, h = b.h*H*scale, y = base - h;
+  ctx.fillStyle = `rgba(16,6,32,${alpha})`;
+  ctx.fillRect(x, y, w, h);
+
+  // Fenster
+  const cw = 8*S, ch = 12*S;
+  for (let yy = y+7*S; yy < base-6*S; yy += ch+5*S){
+    for (let xx = x+5*S; xx < x+w-6*S; xx += cw+5*S){
+      const k = ((xx*7.3 + yy*3.1 + b.seed)|0);
+      const on = (k % 7) < 3;
+      const flick = ((k % 53) === 0) && (Math.sin(t*3 + k) > 0.4);
+      if (!on || flick) continue;
+      ctx.fillStyle = (k % 11 === 0) ? `rgba(120,225,255,${0.55*lit})`
+                    : (k % 5  === 0) ? `rgba(255,150,200,${0.45*lit})`
+                                     : `rgba(255,205,140,${0.42*lit})`;
+      ctx.fillRect(xx, yy, cw*0.7, ch*0.65);
+    }
+  }
+  // Neon-Krone
+  if (b.crown > 0.45){
+    ctx.save(); ctx.shadowColor = b.hue; ctx.shadowBlur = 14*S*lit;
+    ctx.fillStyle = b.hue; ctx.globalAlpha = 0.55 + 0.45*Math.abs(Math.sin(t*1.3 + b.seed));
+    ctx.fillRect(x+2*S, y+3*S, w-4*S, 3*S);
+    if (b.crown > 0.78) ctx.fillRect(x+2*S, y+11*S, w-4*S, 2*S);
+    ctx.restore();
+  }
+  if (b.antenna){
+    const ax = x + w/2, ah = 26*S*scale;
+    ctx.strokeStyle = `rgba(20,8,36,${alpha})`; ctx.lineWidth = 2*S;
+    ctx.beginPath(); ctx.moveTo(ax,y); ctx.lineTo(ax,y-ah); ctx.stroke();
+    const on = Math.sin(t*2.2 + b.seed) > 0;
+    ctx.fillStyle = on ? "rgba(255,60,60,0.95)" : "rgba(255,60,60,0.15)";
+    ctx.beginPath(); ctx.arc(ax, y-ah, 2.6*S, 0, TAU); ctx.fill();
+  }
+}
+function drawSkyline(t){
+  const base = H*BAY;
+  far.forEach(b => drawBlock(b, base - H*0.012, 0.75, 0.72, t, 0.55));
+  near.forEach(b => drawBlock(b, base, 1.0, 0.95, t, 1.0));
+  const hz = ctx.createLinearGradient(0, base-H*0.13, 0, base);
+  hz.addColorStop(0,"rgba(255,80,150,0)"); hz.addColorStop(1,"rgba(255,80,150,0.20)");
+  ctx.fillStyle = hz; ctx.fillRect(0, base-H*0.13, W, H*0.13);
+}
+
+/* ---------- Bucht mit Spiegelung ---------- */
+function drawBay(t){
+  const y0 = H*BAY, y1 = H*ROAD;
+  const g = ctx.createLinearGradient(0,y0,0,y1);
+  g.addColorStop(0,"#2a0b3e"); g.addColorStop(0.5,"#160a35"); g.addColorStop(1,"#0d0726");
+  ctx.fillStyle = g; ctx.fillRect(0,y0,W,y1-y0);
+
+  ctx.save(); ctx.beginPath(); ctx.rect(0,y0,W,y1-y0); ctx.clip();
+  near.forEach(b => {
+    const x = b.x*W, w = b.w*W, h = Math.min(b.h*H, (y1-y0)*0.95);
+    for (let i=0;i<12;i++){
+      const p = i/12, yy = y0 + p*h;
+      const wob = Math.sin(t*2.2 + i*0.9 + b.seed)*(2+8*p)*S;
+      ctx.fillStyle = `rgba(255,150,190,${0.10*(1-p)})`;
+      ctx.fillRect(x+wob, yy, w, h/12);
+      if (b.crown > 0.45 && i < 3){
+        ctx.fillStyle = b.hue; ctx.globalAlpha = 0.16*(1-p);
+        ctx.fillRect(x+wob, yy, w, 3*S); ctx.globalAlpha = 1;
+      }
+    }
+  });
+  ctx.restore();
+
+  ctx.lineWidth = 1.4*S;
+  for (let i=0;i<14;i++){
+    const p = i/14, y = y0 + p*(y1-y0);
+    ctx.strokeStyle = `rgba(190,140,255,${0.04+0.05*p})`;
+    ctx.beginPath();
+    for (let x=0;x<=W;x+=18*S){
+      const yy = y + Math.sin(x*0.005+t*1.3+i)*(1.5+6*p)*S;
+      x ? ctx.lineTo(x,yy) : ctx.moveTo(x,yy);
+    }
+    ctx.stroke();
+  }
+}
+
+/* ---------- Causeway / Verkehr ---------- */
+function drawRoad(t){
+  const y = H*ROAD;
+  ctx.fillStyle = "#0b0620"; ctx.fillRect(0,y,W,H-y);
+  // Brückenkante
+  ctx.fillStyle = "#150a2c"; ctx.fillRect(0, y-10*S, W, 10*S);
+  ctx.fillStyle = "rgba(255,120,190,0.35)"; ctx.fillRect(0, y-11*S, W, 2*S);
+
+  // Lichtspuren
+  cars.forEach(c => {
+    const p = ((c.x + c.lane*t*c.sp) % 1.25 + 1.25) % 1.25;
+    const x = p*W - W*0.12;
+    const yy = y + (c.lane > 0 ? 24*S : 50*S) + c.j*16*S;
+    const col = c.lane > 0 ? [255,235,200] : [255,60,80];
+    const len = (45 + c.o*150)*S;
+    const grad = ctx.createLinearGradient(x - c.lane*len, yy, x, yy);
+    grad.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},0)`);
+    grad.addColorStop(1, `rgba(${col[0]},${col[1]},${col[2]},0.85)`);
+    ctx.fillStyle = grad;
+    roundRect(Math.min(x, x - c.lane*len), yy, len, 3.2*S, 2*S); ctx.fill();
+    ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},0.75)`;
+    roundRect(x - (c.lane>0?4*S:0), yy-0.2*S, 3.6*S, 3.6*S, 1.8*S); ctx.fill();
+    // Reflex auf nassem Asphalt
+    const rg = ctx.createLinearGradient(x, yy+6*S, x, yy+58*S);
+    rg.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},0.16)`);
+    rg.addColorStop(1, `rgba(${col[0]},${col[1]},${col[2]},0)`);
+    ctx.fillStyle = rg;
+    ctx.fillRect(x - 3.5*S + Math.sin(t*3+c.o*9)*3*S, yy+6*S, 7*S, 52*S);
+  });
+
+  // Straßenlaternen
+  for (let i=0;i<7;i++){
+    const x = (i+0.5)/7*W;
+    const g = ctx.createRadialGradient(x, y+18*S, 2*S, x, y+18*S, 120*S);
+    g.addColorStop(0,"rgba(255,200,140,0.20)"); g.addColorStop(1,"rgba(255,200,140,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y+18*S, 120*S, 0, TAU); ctx.fill();
+    ctx.strokeStyle = "#0d0620"; ctx.lineWidth = 3*S;
+    ctx.beginPath(); ctx.moveTo(x, y+18*S); ctx.lineTo(x, y-62*S); ctx.stroke();
+    ctx.fillStyle = "rgba(255,214,160,0.9)";
+    roundRect(x-7*S, y-68*S, 14*S, 6*S, 3*S); ctx.fill();
+  }
+}
+
+/* ---------- Pfützen ---------- */
+const puddles = Array.from({length:9}, () => ({
+  x: rnd(), y: 0.88 + rnd()*0.11, w: 0.05 + rnd()*0.11, hue: NEON[(rnd()*NEON.length)|0], ph: rnd()*TAU
+}));
+function drawPuddles(t){
+  puddles.forEach(p => {
+    const x = p.x*W, y = p.y*H, w = p.w*W, h = w*0.10;
+    ctx.save();
+    ctx.fillStyle = "rgba(6,2,16,0.55)";                 // dunkle, nasse Fläche
+    ctx.beginPath(); ctx.ellipse(x, y, w*0.5, h, 0, 0, TAU); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(x, y, w*0.5, h, 0, 0, TAU); ctx.clip();
+    ctx.globalAlpha = 0.30 + 0.10*Math.sin(t*1.6 + p.ph); // Neon-Spiegelung als Streifen
+    ctx.fillStyle = p.hue;
+    for (let k=0;k<3;k++){
+      const sx = x - w*0.22 + k*w*0.22 + Math.sin(t*1.4 + p.ph + k)*3*S;
+      ctx.fillRect(sx, y-h, 2.6*S, h*2);
+    }
+    ctx.globalAlpha = 0.16; ctx.fillStyle = "rgba(255,255,255,1)";
+    ctx.fillRect(x - w*0.5, y - h*0.15, w, 1.6*S);
+    ctx.restore();
+  });
+}
+
+/* ---------- Neon-Schild ---------- */
+function drawSign(t){
+  const x = W*0.155, y = H*0.50, s = S*1.25;
+  ctx.save(); ctx.translate(x,y);
+  ctx.strokeStyle = "#120726"; ctx.lineWidth = 5*s;
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, H*0.30); ctx.stroke();
+
+  const flick = (Math.sin(t*17) > -0.85 && Math.sin(t*3.1) > -0.95) ? 1 : 0.25;
+  ctx.fillStyle = "rgba(12,5,26,0.92)";
+  roundRect(-58*s, -86*s, 116*s, 96*s, 6*s); ctx.fill();
+
+  ctx.save();
+  ctx.shadowColor = "#ff2e88"; ctx.shadowBlur = 26*s*flick;
+  ctx.fillStyle = `rgba(255,120,190,${flick})`;
+  ctx.font = `700 ${40*s}px Impact,"Arial Narrow",system-ui,sans-serif`;
+  ctx.textAlign = "center"; ctx.fillText("VICE", 0, -44*s);
+  ctx.shadowColor = "#4de3ff"; ctx.shadowBlur = 20*s;
+  ctx.fillStyle = "rgba(150,240,255,0.95)";
+  ctx.font = `700 ${20*s}px "Inter",system-ui,sans-serif`;
+  ctx.fillText("MOTEL", 0, -18*s);
+  ctx.restore();
+
+  // Lauflichter am Rahmen
+  for (let i=0;i<22;i++){
+    const p = i/22, on = (Math.floor(t*7) + i) % 6 < 3;
+    const px = -54*s + p*108*s;
+    ctx.fillStyle = on ? "rgba(255,210,90,0.95)" : "rgba(90,50,30,0.5)";
+    ctx.beginPath(); ctx.arc(px, 2*s, 2.6*s, 0, TAU); ctx.fill();
+  }
+  // Pfeil
+  ctx.fillStyle = `rgba(77,227,255,${0.5+0.5*Math.abs(Math.sin(t*2))})`;
+  ctx.beginPath(); ctx.moveTo(58*s,-60*s); ctx.lineTo(86*s,-42*s); ctx.lineTo(58*s,-24*s); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- Helikopter ---------- */
+function drawHeli(t){
+  const span = 1.6, p = (t*0.030) % span, x = (p - 0.2)*W;
+  const y = H*0.13 + Math.sin(t*0.9)*6*S, s = S*1.25;
+
+  const sweep = Math.sin(t*0.6)*0.4;
+  ctx.save(); ctx.translate(x, y+8*s); ctx.rotate(Math.PI/2 + sweep);
+  const cone = ctx.createLinearGradient(0,0,H*0.62,0);
+  cone.addColorStop(0,"rgba(220,245,255,0.22)"); cone.addColorStop(1,"rgba(200,235,255,0)");
+  ctx.fillStyle = cone;
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(H*0.62,-H*0.10); ctx.lineTo(H*0.62,H*0.10); ctx.closePath(); ctx.fill();
+  ctx.restore();
+
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s);
+  ctx.fillStyle = "#100626";
+  ctx.beginPath(); ctx.ellipse(0,0,20,10,0,0,TAU); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-16,-2); ctx.lineTo(-52,-5); ctx.lineTo(-52,1); ctx.lineTo(-16,4); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-52,-4); ctx.lineTo(-58,-16); ctx.lineTo(-48,-14); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = "#100626"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(-14,10); ctx.lineTo(14,10); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-6,10); ctx.lineTo(-4,4); ctx.moveTo(8,10); ctx.lineTo(6,4); ctx.stroke();
+  const blur = Math.sin(t*30) * 30;
+  ctx.strokeStyle = "rgba(16,6,38,0.55)"; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(-34 + blur*0.2,-12); ctx.lineTo(34 + blur*0.2,-12); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0,-12); ctx.lineTo(0,-8); ctx.stroke();
+  const beacon = Math.sin(t*6) > 0.4;
+  ctx.fillStyle = beacon ? "rgba(255,50,60,1)" : "rgba(255,50,60,0.12)";
+  ctx.beginPath(); ctx.arc(0,10,2.6,0,TAU); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- Palmen im Vordergrund ---------- */
+function leaf(ang, L, droop, w, color){
+  const ex = Math.cos(ang)*L, ey = Math.sin(ang)*L + droop*L;
+  const cx = Math.cos(ang)*L*0.55, cy = Math.sin(ang)*L*0.55 - droop*L*0.10;
+  const nx = -Math.sin(ang), ny = Math.cos(ang);
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.moveTo(0,0);
+  ctx.quadraticCurveTo(cx + nx*w, cy + ny*w, ex, ey);
+  ctx.quadraticCurveTo(cx - nx*w*0.75, cy - ny*w*0.75, 0, 0);
+  ctx.fill();
+}
+function drawPalm(p, t){
+  const x = p.x*W, y = p.y*H, s = p.sc*S;
+  const wind = Math.sin(t*0.8+p.ph)*0.05 + Math.sin(t*2.1+p.ph*1.4)*0.02;
+  ctx.save(); ctx.translate(x,y);
+  ctx.fillStyle = "#0a0418";
+  const segs = 14, hgt = 470*s;
+  ctx.beginPath(); ctx.moveTo(-11*s,0);
+  for (let i=0;i<=segs;i++){ const q=i/segs; ctx.lineTo(-11*s*(1-q*0.65) + (p.lean*q*q*150+wind*q*q*80)*s, -hgt*q); }
+  for (let i=segs;i>=0;i--){ const q=i/segs; ctx.lineTo( 11*s*(1-q*0.65) + (p.lean*q*q*150+wind*q*q*80)*s, -hgt*q); }
+  ctx.closePath(); ctx.fill();
+  ctx.translate((p.lean*150+wind*80)*s, -hgt);
+  const n = 9;
+  for (let i=0;i<n;i++){
+    const q = i/(n-1);
+    const ang = Math.PI*(1.02 + q*0.96) + Math.sin(t*1.2+p.ph+i*1.4)*0.05 + wind*0.7;
+    const L = (128 + 32*Math.sin(i*2.1+p.ph))*s;
+    const droop = 0.30 + 0.30*Math.abs(Math.cos(ang));
+    leaf(ang, L, droop, 30*s, "#0a0418");
+  }
+  ctx.fillStyle = "#0a0418"; ctx.beginPath(); ctx.arc(0,0,10*s,0,TAU); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- Regen ---------- */
+function drawRain(dt, t){
+  if (!CONFIG.rain) return;
+  ctx.lineCap = "round";
+  drops.forEach(d => {
+    d.y += d.sp*dt; d.x += d.sp*dt*0.16;
+    if (d.y > 1.02){
+      if (Math.random() < 0.35) splashes.push({x:d.x, y: 0.86+Math.random()*0.14, r:1, a:0.5});
+      d.y = -0.05; d.x = Math.random();
+    }
+    if (d.x > 1.05) d.x = -0.03;
+    const x = d.x*W, y = d.y*H, l = d.len*H;
+    const g = ctx.createLinearGradient(x, y, x - l*0.16, y - l);
+    g.addColorStop(0, `rgba(215,235,255,${d.a})`);
+    g.addColorStop(1, "rgba(215,235,255,0)");
+    ctx.strokeStyle = g; ctx.lineWidth = 1.5*S;
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - l*0.16, y - l); ctx.stroke();
+  });
+  for (let i=splashes.length-1;i>=0;i--){
+    const s = splashes[i]; s.r += 0.9*S; s.a -= 0.045;
+    if (s.a <= 0){ splashes.splice(i,1); continue; }
+    ctx.strokeStyle = `rgba(220,240,255,${s.a*0.5})`; ctx.lineWidth = 1.2*S;
+    ctx.beginPath(); ctx.ellipse(s.x*W, s.y*H, s.r*2.2, s.r*0.7, 0, 0, TAU); ctx.stroke();
+  }
+}
+
+/* ---------- Countdown ---------- */
+function fmt(n){ return String(n).padStart(2,"0"); }
+function drawCountdown(){
+  if (!CONFIG.countdown) return;
+  const diff = TARGET - Date.now(), out = diff <= 0;
+  const d = Math.max(0,Math.floor(diff/864e5)), h = Math.max(0,Math.floor(diff/36e5)%24);
+  const m = Math.max(0,Math.floor(diff/6e4)%60), s = Math.max(0,Math.floor(diff/1e3)%60);
+  const cx = W*CONFIG.cdX, cy = H*CONFIG.cdY;
+  ctx.save(); ctx.textAlign = "center";
+
+  ctx.font = `600 ${17*S}px "Inter",system-ui,sans-serif`;
+  try{ ctx.letterSpacing = `${6*S}px`; }catch(e){}
+  ctx.fillStyle = "rgba(220,240,255,0.75)";
+  ctx.shadowColor = "rgba(77,227,255,0.85)"; ctx.shadowBlur = 18*S;
+  ctx.fillText(CONFIG.eyebrow, cx, cy - 62*S);
+  try{ ctx.letterSpacing = "0px"; }catch(e){}
+
+  if (out){
+    ctx.font = `700 ${132*S}px Impact,"Arial Narrow",system-ui,sans-serif`;
+    ctx.fillStyle = "#fff"; ctx.shadowColor = "#ff2e88"; ctx.shadowBlur = 44*S;
+    ctx.fillText("OUT NOW", cx, cy + 78*S); ctx.restore(); return;
+  }
+
+  const groups = [[fmt(d),"TAGE"],[fmt(h),"STUNDEN"],[fmt(m),"MINUTEN"],[fmt(s),"SEKUNDEN"]];
+  const size = 118*S, gap = 46*S;
+  ctx.font = `700 ${size}px Impact,"Haettenschweiler","Arial Narrow",system-ui,sans-serif`;
+  const widths = groups.map(g => Math.max(ctx.measureText(g[0]).width, 96*S));
+  let x = cx - (widths.reduce((a,b)=>a+b,0)+gap*3)/2;
+
+  groups.forEach((g,i) => {
+    const w = widths[i], mid = x + w/2;
+    ctx.shadowColor = "rgba(77,227,255,0.95)"; ctx.shadowBlur = 30*S;
+    ctx.fillStyle = "rgba(190,240,255,0.14)"; ctx.fillText(g[0], mid-3.5*S, cy+78*S);
+    ctx.shadowColor = "rgba(255,46,136,0.95)"; ctx.shadowBlur = 36*S;
+    ctx.fillStyle = "#ffffff"; ctx.fillText(g[0], mid, cy+78*S);
+
+    ctx.shadowBlur = 0;
+    ctx.font = `600 ${15*S}px "Inter",system-ui,sans-serif`;
+    try{ ctx.letterSpacing = `${4*S}px`; }catch(e){}
+    ctx.fillStyle = "rgba(210,235,255,0.72)"; ctx.fillText(g[1], mid, cy+108*S);
+    try{ ctx.letterSpacing = "0px"; }catch(e){}
+    ctx.font = `700 ${size}px Impact,"Haettenschweiler","Arial Narrow",system-ui,sans-serif`;
+
+    if (i<3){
+      ctx.fillStyle = "rgba(77,227,255,0.55)";
+      ctx.beginPath(); ctx.arc(x+w+gap/2, cy+30*S, 3.4*S,0,TAU); ctx.fill();
+      ctx.beginPath(); ctx.arc(x+w+gap/2, cy+56*S, 3.4*S,0,TAU); ctx.fill();
+    }
+    x += w + gap;
+  });
+
+  ctx.font = `600 ${16*S}px "Inter",system-ui,sans-serif`;
+  try{ ctx.letterSpacing = `${5*S}px`; }catch(e){}
+  ctx.fillStyle = "rgba(255,255,255,0.5)";
+  ctx.fillText(CONFIG.brand.toUpperCase(), cx, cy+148*S);
+  ctx.restore();
+}
+
+function grade(){
+  const v = ctx.createRadialGradient(W*0.5,H*0.45,H*0.22,W*0.5,H*0.5,H*0.95);
+  v.addColorStop(0,"rgba(0,0,0,0)"); v.addColorStop(1,"rgba(6,2,18,0.60)");
+  ctx.fillStyle = v; ctx.fillRect(0,0,W,H);
+  const tint = ctx.createLinearGradient(0,0,W,H);
+  tint.addColorStop(0,"rgba(77,227,255,0.05)"); tint.addColorStop(1,"rgba(255,46,136,0.07)");
+  ctx.fillStyle = tint; ctx.fillRect(0,0,W,H);
+}
+
+/* ---------- Render ---------- */
+function render(t, dt){
+  if (bg && bg.complete && bg.naturalWidth) coverDraw(bg);
+  else { drawSky(t); drawSkyline(t); drawBay(t); drawRoad(t); }
+  drawHeli(t);
+  if (CONFIG.props){ drawSign(t); drawPuddles(t); }
+  drawRain(dt ?? 0.016, t);
+  if (CONFIG.props) palmsFg.forEach(p => drawPalm(p,t));
+  grade();
+  drawCountdown();
+}
+
+let t0 = performance.now(), t = 0;
+function loop(now){
+  const dt = Math.min(0.05,(now-t0)/1000); t0 = now;
+  t += reduce ? dt*0.25 : dt;
+  render(t, reduce ? dt*0.25 : dt);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+function exportPNG(w=3840,h=2160){
+  const keep=[cv.width,cv.height];
+  resize(w,h,1); render(t,0.016);
+  cv.toBlob(b => {
+    const a=document.createElement("a"); a.href=URL.createObjectURL(b);
+    a.download=`gta6guide-vice-city-night-${w}x${h}.png`; a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    cv.width=keep[0]; cv.height=keep[1]; resize();
+  },"image/png");
+}
+document.getElementById("png").addEventListener("click", () => exportPNG());
+addEventListener("keydown", e => {
+  if (e.key.toLowerCase()==="s") exportPNG();
+  if (e.key.toLowerCase()==="u") document.getElementById("bar").classList.toggle("on");
+});
+</script>
+</body>
+</html>

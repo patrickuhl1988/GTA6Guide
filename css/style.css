@@ -546,7 +546,7 @@ a:focus-visible, button:focus-visible {
 .notify h2 { margin-bottom: 1rem; font-size: clamp(1.2rem, 3vw, 1.6rem); }
 .notify-cards {
   display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr 1fr;
   margin-bottom: 0.65rem;
 }
 @media (max-width: 680px) { .notify-cards { grid-template-columns: 1fr; } }
@@ -895,38 +895,6 @@ a:focus-visible, button:focus-visible {
 }
 
 
-/* ---------- Widget-Promo-Karte (GTA-6-Alarm) ---------- */
-
-.notify-card--widget { --accent: var(--orange); --accent-soft: rgba(255, 140, 66, 0.12); }
-.nc-widget {
-  display: flex; gap: 1rem; align-items: stretch;
-  padding: 1rem 1.1rem 1rem;
-  height: 100%;
-}
-.nc-widget .nc-front { padding: 0; flex: 1; }
-.nc-shot {
-  position: relative; flex: none;
-  width: 108px;
-  aspect-ratio: 9 / 17;
-  align-self: center;
-  border: 1px solid var(--accent);
-  background: var(--bg-raised);
-  padding: 0; cursor: pointer;
-  box-shadow: 0 0 16px var(--accent-soft);
-  overflow: hidden;
-}
-.nc-shot img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  display: block; transition: transform 0.35s ease;
-}
-.nc-shot:hover img { transform: scale(1.05); }
-.shot-count {
-  position: absolute; bottom: 5px; right: 5px;
-  font: 600 0.58rem "Inter", sans-serif; letter-spacing: 0.08em;
-  color: var(--text); background: rgba(13, 2, 33, 0.8);
-  padding: 0.12rem 0.35rem;
-  pointer-events: none;
-}
 .btn-cta-widget {
   background: linear-gradient(120deg, var(--orange) 0%, var(--pink) 100%);
   box-shadow: 0 4px 20px rgba(255, 140, 66, 0.3);
@@ -1030,3 +998,82 @@ a:focus-visible, button:focus-visible {
   .shot { transition: none; }
   .shot:hover { transform: none; }
 }
+
+
+/* ---------- Widget-Promo im Hero (Phone-Mockup) ---------- */
+
+.hero-row {
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: 2.5rem 3rem;
+}
+.widget-promo {
+  display: flex; align-items: center; gap: 1.15rem;
+  max-width: 430px; text-align: left;
+  padding: 1rem 1.25rem 1rem 1rem;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(27, 13, 61, 0.72) 0%, rgba(22, 9, 52, 0.72) 100%);
+  backdrop-filter: blur(4px);
+  position: relative; overflow: hidden;
+}
+.widget-promo::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--pink) 45%, transparent 85%);
+}
+.phone-mock {
+  position: relative; flex: none;
+  width: 116px; aspect-ratio: 9 / 19.5;
+  padding: 5px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, #2a2140 0%, #100a22 55%, #241a3d 100%);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55),
+              0 0 22px rgba(255, 140, 66, 0.22),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+}
+.phone-mock img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  border-radius: 11px;
+}
+.phone-notch {
+  position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+  width: 34px; height: 5px; border-radius: 99px;
+  background: #0b0618; z-index: 2;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.wp-eyebrow {
+  display: block;
+  font: 600 0.6rem "Inter", sans-serif;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--orange); margin-bottom: 0.4rem;
+}
+.wp-text p {
+  font-size: 0.85rem; line-height: 1.5;
+  color: var(--text-dim); margin: 0 0 0.75rem;
+}
+.wp-text strong { color: var(--text); }
+.wp-text .btn { width: 100%; justify-content: center; }
+
+/* Mobil sitzt der Block als erste Karte im Alarm-Bereich (per JS umgehängt) */
+.notify-cards > .widget-promo { max-width: none; grid-column: 1 / -1; }
+@media (max-width: 760px) {
+  .hero-row { gap: 1.75rem; }
+  .widget-promo { max-width: none; width: 100%; }
+}
+@media (max-width: 420px) {
+  .widget-promo { gap: 0.9rem; padding: 0.9rem 1rem 0.9rem 0.85rem; }
+  .phone-mock { width: 98px; }
+}
+
+
+/* ---------- Widget-Seite: PC-Bereich ---------- */
+
+.hero-btns { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.sub-head { margin: 2rem 0 0.5rem; font-size: 1.05rem; }
+.pc-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.shot figcaption strong { color: var(--text); }
+.shot-actions {
+  display: flex; gap: 0.5rem; margin: 0.7rem 0 0;
+}
+.shot-actions .btn { flex: 1; justify-content: center; padding: 0.55rem 0.8rem; font-size: 0.82rem; }
