@@ -74,20 +74,6 @@
 
   /* ---------- OneSignal: Push + Newsletter ---------- */
 
-  /* Hilfsfunktion: wartet bis OneSignal bereit ist (max. 8 Sek.) */
-  function withOS(cb) {
-    var limit = Date.now() + 8000;
-    (function poll() {
-      if (window.OneSignal && window.OneSignal.Notifications) {
-        cb(window.OneSignal);
-      } else if (Date.now() < limit) {
-        setTimeout(poll, 180);
-      } else {
-        cb(null); // Timeout → Fehler
-      }
-    })();
-  }
-
   function collectTags(el) {
     var tags = {};
     var explicit = el.getAttribute("data-tags");
@@ -98,45 +84,76 @@
     return tags;
   }
 
-  function showSuccess(btn) {
-    btn.disabled = true;
-    btn.textContent = T.pushOk;
+  function ncSuccess(btn) {
+    btn.disabled = true; btn.textContent = T.pushOk;
     var exp = btn.closest(".nc-expand");
-    if (exp) {
-      setTimeout(function() {
-        btn.style.display = "none";
-        var ok = exp.querySelector(".nc-success");
-        if (ok) ok.removeAttribute("hidden");
-      }, 800);
-    }
+    if (exp) setTimeout(function(){
+      btn.style.display = "none";
+      var ok = exp.querySelector(".nc-success");
+      if (ok) ok.removeAttribute("hidden");
+    }, 900);
   }
 
-  function showError(btn, msg) {
-    btn.disabled = false;
-    btn.textContent = msg || T.pushErr;
+  /* Push: iOS-Detection + korrekte Reihenfolge (OneSignal abwarten, dann permission) */
+  function isIOSSafari() {
+    var ua = navigator.userAgent;
+    return /iP(hone|ad|od)/i.test(ua) && /WebKit/i.test(ua) && !/CriOS|FxiOS|OPiOS|EdgiOS/i.test(ua);
+  }
+  function isPWA() {
+    return window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   }
 
   document.querySelectorAll("[data-push]").forEach(function(btn) {
     btn.addEventListener("click", function() {
       if (btn.disabled) return;
       var orig = btn.innerHTML;
-      btn.disabled = true;
-      btn.textContent = "⌛";
+      btn.disabled = true; btn.textContent = "⌛";
       var tags = collectTags(btn);
-      withOS(function(OS) {
-        if (!OS) { btn.innerHTML = orig; btn.disabled = false; return; }
-        OS.Notifications.requestPermission().then(function() {
-          if (OS.Notifications.permission) {
-            try { OS.User.addTags(tags); } catch(e) {}
-            showSuccess(btn);
-          } else {
-            showError(btn, T.pushErr);
+
+      /* iOS Safari ohne Homescreen-PWA: Web Push nicht möglich */
+      if (isIOSSafari() && !isPWA()) {
+        var msg = {
+          de: "Safari: Seite erst zum Homescreen hinzufügen, dann funktioniert Push.",
+          en: "Safari: Add this page to your homescreen first to enable push.",
+          zh: "Safari：请先将此页添加到主屏幕，然后即可使用推送。",
+          hi: "Safari: पहले पेज को होमस्क्रीन पर जोड़ें, फिर पुश काम करेगा।"
+        };
+        btn.textContent = msg[LANG] || msg.en;
+        btn.disabled = false;
+        setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 6000);
+        return;
+      }
+
+      /* Alle anderen Browser/Plattformen: OneSignal verwenden */
+      var deadline = Date.now() + 10000;
+      (function tryOS() {
+        var OS = window.OneSignal;
+        if (OS && OS.Notifications && typeof OS.Notifications.requestPermission === "function") {
+          OS.Notifications.requestPermission().then(function() {
+            if (OS.Notifications.permission) {
+              try { OS.User.addTags(tags); } catch(e) {}
+              ncSuccess(btn);
+            } else {
+              btn.innerHTML = orig; btn.disabled = false;
+            }
+          }).catch(function() { btn.innerHTML = orig; btn.disabled = false; });
+        } else if (Date.now() < deadline) {
+          setTimeout(tryOS, 300);
+        } else {
+          /* Timeout – direkter Browser-Fallback ohne OneSignal */
+          if (!("Notification" in window)) {
+            btn.textContent = T.pushErr; btn.disabled = false; return;
           }
-        }).catch(function() { showError(btn, T.pushErr); });
-      });
+          Notification.requestPermission().then(function(perm) {
+            if (perm === "granted") { ncSuccess(btn); }
+            else { btn.innerHTML = orig; btn.disabled = false; }
+          }).catch(function() { btn.innerHTML = orig; btn.disabled = false; });
+        }
+      })();
     });
   });
 
+  /* Newsletter: E-Mail speichern (OneSignal + Tag-Fallback) */
   document.querySelectorAll(".nl-form").forEach(function(form) {
     form.addEventListener("submit", function(ev) {
       ev.preventDefault();
@@ -144,28 +161,34 @@
       var submit = form.querySelector("button[type=submit]");
       var email = input && input.value.trim();
       if (!email || !submit || submit.disabled) return;
-      var origHtml = submit.innerHTML;
-      submit.disabled = true; input.disabled = true;
-      submit.textContent = "⌛";
-      var tags = collectTags(form); tags.newsletter = "1";
-      withOS(function(OS) {
-        if (!OS) {
-          /* Fallback: E-Mail als Tag speichern */
-          tags.email_sub = email;
-          submit.textContent = T.nlOk;
-          var exp = form.closest(".nc-expand");
-          if (exp) { setTimeout(function(){ form.style.display="none"; var ok=exp.querySelector(".nc-success"); if(ok) ok.removeAttribute("hidden"); }, 600); }
-          return;
+      submit.disabled = true; input.disabled = true; submit.textContent = "⌛";
+      var tags = collectTags(form); tags.newsletter = "1"; tags.email_sub = email;
+
+      var deadline = Date.now() + 8000;
+      (function tryOS() {
+        var OS = window.OneSignal;
+        if (OS && OS.User) {
+          try { OS.User.addEmail(email); } catch(e) {}
+          try { OS.User.addTags(tags); } catch(e) {}
+          done();
+        } else if (Date.now() < deadline) {
+          setTimeout(tryOS, 300);
+        } else {
+          done(); /* Fallback: E-Mail steht als Tag gespeichert */
         }
-        try { OS.User.addEmail(email); } catch(e) {}
-        try { OS.User.addTags(tags); } catch(e) {}
+      })();
+
+      function done() {
         submit.textContent = T.nlOk;
         var exp = form.closest(".nc-expand");
-        if (exp) { setTimeout(function(){ form.style.display="none"; var ok=exp.querySelector(".nc-success"); if(ok) ok.removeAttribute("hidden"); }, 600); }
-      });
+        if (exp) setTimeout(function(){
+          form.style.display = "none";
+          var ok = exp.querySelector(".nc-success");
+          if (ok) ok.removeAttribute("hidden");
+        }, 600);
+      }
     });
   });
-
   /* Countdown zum Release: 19. November 2026, 00:00 lokale Zeit.
      Sobald Rockstar die Unlock-Zeit nennt, hier anpassen. */
   const TARGET = new Date(2026, 10, 19, 0, 0, 0);
