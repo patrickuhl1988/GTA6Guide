@@ -67,32 +67,47 @@
   <section class="notify">
     <div class="wrap">
       <span class="eyebrow">Never miss a beat</span>
-      <h2>The GTA 6 alert</h2>
+      <h2>GTA 6 alert</h2>
       <div class="notify-cards">
-        <div class="notify-card">
+
+        <div class="notify-card" data-nc="push">
           <div class="notify-card-art art-push"><img src="../assets/notify-push.webp" alt="" loading="lazy" width="1260" height="420"></div>
-          <h3>Push notifications</h3>
-          <p>Straight to your screen the moment something happens – you pick the topics:</p>
-          <div class="notify-tags">
-            <label><input type="checkbox" data-tag="news" checked> Breaking news &amp; leaks</label>
-            <label><input type="checkbox" data-tag="events" checked> Trailers &amp; events (e.g. Extended Look)</label>
-            <label><input type="checkbox" data-tag="release" checked> Preload &amp; release reminders</label>
-            <label><input type="checkbox" data-tag="map_beta"> Map beta reopening</label>
-            <label><input type="checkbox" data-tag="deals"> Deals &amp; price drops</label>
+          <div class="nc-front">
+            <strong>Push notifications</strong>
+            <p>Get notified instantly – pick your topics after enabling.</p>
+            <button class="btn btn-cta nc-open-btn" type="button" data-nc-open="push"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Enable push</button>
           </div>
-          <button class="btn btn-cta" type="button" data-push><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Enable push</button>
+          <div class="nc-expand" hidden>
+            <div class="notify-tags">
+              <label><input type="checkbox" data-tag="news" checked> Breaking news &amp; leaks</label>
+              <label><input type="checkbox" data-tag="events" checked> Trailers &amp; events</label>
+              <label><input type="checkbox" data-tag="release" checked> Preload &amp; release reminders</label>
+              <label><input type="checkbox" data-tag="map_beta"> Map beta reopening</label>
+              <label><input type="checkbox" data-tag="deals"> Deals</label>
+            </div>
+            <button class="btn btn-cta" type="button" data-push><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg> Subscribe now</button>
+            <p class="nc-success" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> ✓ Push enabled!</p>
+          </div>
         </div>
-        <div class="notify-card">
+
+        <div class="notify-card" data-nc="nl">
           <div class="notify-card-art art-mail"><img src="../assets/notify-newsletter.webp" alt="" loading="lazy" width="1260" height="420"></div>
-          <h3>Newsletter</h3>
-          <p>The biggest GTA 6 news bundled into your inbox – no spam, unsubscribe anytime.</p>
-          <form class="nl-form" data-tags="news,events,release">
-            <input type="email" required placeholder="Email address" aria-label="Email address">
-            <button class="btn btn-cta btn-cta-alt" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> Subscribe</button>
-          </form>
+          <div class="nc-front">
+            <strong>Newsletter</strong>
+            <p>The biggest GTA 6 news in your inbox – no spam.</p>
+            <button class="btn btn-cta btn-cta-alt nc-open-btn" type="button" data-nc-open="nl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> Subscribe</button>
+          </div>
+          <div class="nc-expand" hidden>
+            <form class="nl-form" data-tags="news,events,release">
+              <input type="email" required placeholder="Email address" aria-label="Email address">
+              <button class="btn btn-cta btn-cta-alt" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14"/><path d="M2.5 6.5 12 13l9.5-6.5"/></svg> Subscribe</button>
+            </form>
+            <p class="nc-success" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg> ✓ Subscribed!</p>
+          </div>
         </div>
+
       </div>
-      <p class="fineprint">Both run via OneSignal and work independently of each other.</p>
+      <p class="fineprint">Both via OneSignal, independently. <a href='datenschutz.html'>Privacy</a>.</p>
     </div>
   </section>
 

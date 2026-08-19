@@ -57,6 +57,57 @@
     }
   } catch (e) {}
 
+
+  /* ---------- Notify-Karten: Expand-on-Click ---------- */
+  document.querySelectorAll(".nc-open-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var target = btn.getAttribute("data-nc-open");
+      var card = btn.closest(".notify-card[data-nc='" + target + "']");
+      if (!card) return;
+      btn.closest(".nc-front").style.display = "none";
+      var exp = card.querySelector(".nc-expand");
+      if (exp) exp.removeAttribute("hidden");
+      var first = exp && (exp.querySelector("input") || exp.querySelector("button"));
+      if (first) first.focus();
+    });
+  });
+
+  /* ---------- Push-Erfolg: Themen-UI ausblenden, Erfolgsmeldung zeigen ---------- */
+  // Patch: data-push-Button soll nach Erfolg Erfolgsnachricht im nc-expand zeigen
+  document.querySelectorAll("[data-push]").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      // (OneSignal-Logik weiter oben bleibt aktiv)
+      // Zeige Erfolgsmeldung sobald Button disabled wird
+      var observer = new MutationObserver(function() {
+        if (btn.disabled) {
+          var suc = btn.closest(".nc-expand, .card, .notify")
+            && btn.closest(".nc-expand");
+          if (suc) {
+            btn.style.display = "none";
+            var ok = suc.querySelector(".nc-success");
+            if (ok) ok.removeAttribute("hidden");
+          }
+          observer.disconnect();
+        }
+      });
+      observer.observe(btn, { attributes: true, attributeFilter: ["disabled"] });
+    });
+  });
+
+  document.querySelectorAll(".nl-form").forEach(function(form) {
+    // Patch: nach nl-submit Erfolgsnachricht im nc-expand
+    form.addEventListener("submit", function() {
+      setTimeout(function() {
+        var sub = form.querySelector("button");
+        if (sub && sub.disabled) {
+          form.style.display = "none";
+          var ok = form.closest(".nc-expand") && form.closest(".nc-expand").querySelector(".nc-success");
+          if (ok) ok.removeAttribute("hidden");
+        }
+      }, 1800);
+    });
+  });
+
   /* ---------- OneSignal: Push-Abos mit Themen-Tags + Newsletter ---------- */
   function collectTags(el) {
     var tags = {};

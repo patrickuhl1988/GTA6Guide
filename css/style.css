@@ -521,92 +521,88 @@ a:focus-visible, button:focus-visible {
 .card > .section-img { aspect-ratio: 3 / 1; margin: -1.4rem -1.5rem 1.2rem; width: calc(100% + 3rem); }
 
 
-/* ---------- Notify-Bar (Push & Newsletter) ---------- */
+/* ---------- Notify-Bar (kompakt, Expand-on-Click) ---------- */
 
 .notify {
   border-top: 1px solid rgba(123, 47, 247, 0.35);
   border-bottom: 1px solid rgba(123, 47, 247, 0.35);
-  background:
-    radial-gradient(ellipse 50% 100% at 15% 0%, rgba(255, 46, 136, 0.1), transparent 60%),
-    radial-gradient(ellipse 50% 100% at 85% 100%, rgba(45, 226, 230, 0.08), transparent 60%),
-    #120732;
-  padding: 2.25rem 0;
+  background: linear-gradient(180deg, rgba(12, 4, 40, 0.98) 0%, rgba(18, 4, 52, 0.95) 100%);
+  padding: 1.75rem 0;
 }
-.notify h2 { margin-bottom: 1.1rem; }
+.notify .eyebrow { display: block; margin-bottom: 0.35rem; }
+.notify h2 { margin-bottom: 1rem; font-size: clamp(1.2rem, 3vw, 1.6rem); }
 .notify-cards {
-  display: grid; gap: 1.25rem;
+  display: grid; gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.65rem;
 }
-@media (max-width: 760px) { .notify-cards { grid-template-columns: 1fr; } }
+@media (max-width: 680px) { .notify-cards { grid-template-columns: 1fr; } }
+
 .notify-card {
-  display: flex; flex-direction: column; gap: 0.6rem;
-  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-raised) 100%);
   border: 1px solid rgba(123, 47, 247, 0.3);
-  padding: 0 0 1.4rem;
   overflow: hidden;
+  transition: border-color 0.2s ease;
 }
-.notify-card > h3, .notify-card > p, .notify-card > .notify-tags,
-.notify-card > .btn, .notify-card > .nl-form { margin-left: 1.4rem; margin-right: 1.4rem; }
-.notify-card > h3 { margin-top: 0.4rem; margin-bottom: 0; }
-.notify-card > p { color: var(--text-dim); font-size: 0.92rem; margin-bottom: 0.25rem; }
-.notify-card > .btn { margin-top: auto; }
+.notify-card:hover { border-color: rgba(123, 47, 247, 0.6); }
+
 .notify-card-art {
-  aspect-ratio: 21 / 7;
-  display: flex; align-items: center; justify-content: center;
-  border-bottom: 1px solid rgba(123, 47, 247, 0.3);
+  height: 130px; overflow: hidden;
 }
-.notify-card-art svg { width: 52px; height: 52px; }
-.notify-card-art.art-push {
-  background:
-    radial-gradient(ellipse 70% 120% at 50% 130%, rgba(255, 46, 136, 0.35), transparent 65%),
-    #17093a;
-  color: var(--pink);
+.notify-card-art img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; transition: transform 0.35s ease;
 }
-.notify-card-art.art-mail {
-  background:
-    radial-gradient(ellipse 70% 120% at 50% 130%, rgba(45, 226, 230, 0.3), transparent 65%),
-    #0f1a3a;
-  color: var(--cyan);
+.notify-card:hover .notify-card-art img { transform: scale(1.04); }
+
+.nc-front, .nc-expand {
+  padding: 0.9rem 1.1rem 1rem;
+  display: flex; flex-direction: column; gap: 0.45rem;
 }
-.notify-card-art img { width: 100%; height: 100%; object-fit: cover; }
-.notify-tags { display: flex; flex-wrap: wrap; gap: 0.45rem 1.1rem; }
+.nc-front strong {
+  font: 600 0.95rem "Inter", sans-serif; color: var(--text);
+}
+.nc-front p { font-size: 0.82rem; color: var(--text-dim); margin: 0; }
+.nc-front .btn, .nc-expand .btn { margin: 0.2rem 0 0; align-self: flex-start; width: 100%; }
+
+.nc-expand { border-top: 1px solid rgba(123, 47, 247, 0.25); }
+.notify-tags { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-bottom: 0.25rem; }
 .notify-tags label {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  font-size: 0.85rem; color: var(--text);
-  cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; color: var(--text); cursor: pointer;
 }
 .notify-tags input {
-  appearance: none; width: 15px; height: 15px; margin: 0;
-  border: 1px solid rgba(45, 226, 230, 0.6);
-  background: rgba(13, 2, 33, 0.6);
-  cursor: pointer; position: relative; flex: none;
+  appearance: none; width: 14px; height: 14px; margin: 0; flex: none;
+  border: 1px solid rgba(45, 226, 230, 0.5);
+  background: rgba(13, 2, 33, 0.7); cursor: pointer; position: relative;
 }
 .notify-tags input:checked { background: var(--cyan); }
 .notify-tags input:checked::after {
-  content: ""; position: absolute; left: 4px; top: 1px;
+  content: ""; position: absolute; left: 3px; top: 0px;
   width: 4px; height: 8px;
   border: solid var(--bg-deep); border-width: 0 2px 2px 0;
   transform: rotate(42deg);
 }
-.notify-actions .btn { margin: 0; width: 100%; }
-.notify-card .btn { width: auto; }
-.notify-card .nl-form { flex-direction: column; gap: 0.6rem; }
-.notify-card .nl-form .btn { width: 100%; }
-.nl-form { display: flex; gap: 0.5rem; }
+.nc-success { font-size: 0.85rem; color: var(--cyan); margin: 0; display: flex; align-items: center; gap: 0.4rem; }
+.nc-success svg { width: 15px; height: 15px; flex: none; }
+.nl-form { display: flex; flex-direction: column; gap: 0.5rem; }
 .nl-form input {
-  flex: 1; min-width: 0;
-  background: rgba(13, 2, 33, 0.7);
-  border: 1px solid rgba(123, 47, 247, 0.45);
-  color: var(--text);
-  padding: 0.7rem 0.9rem;
-  font: 400 0.88rem "Inter", sans-serif;
+  background: rgba(13, 2, 33, 0.7); color: var(--text);
+  border: 1px solid rgba(123, 47, 247, 0.4);
+  padding: 0.6rem 0.85rem; font: 400 0.85rem "Inter", sans-serif;
 }
 .nl-form input:focus { outline: none; border-color: var(--cyan); }
 .nl-form input::placeholder { color: var(--text-dim); }
-.nl-form .btn { margin: 0; flex: none; width: auto; }
+
 .notify .fineprint { margin: 0; }
-.notify-actions { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0 0.75rem; max-width: 460px; }
+.notify-actions { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.75rem 0; }
+.notify-actions .btn { margin: 0; }
+.or-sep {
+  display: flex; align-items: center; gap: 0.6rem;
+  color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em;
+}
+.or-sep::before, .or-sep::after {
+  content: ""; flex: 1; height: 1px; background: rgba(123, 47, 247, 0.3);
+}
 
 /* ---------- Map-Teaser (Beta-Sperre) ---------- */
 
