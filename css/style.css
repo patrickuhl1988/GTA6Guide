@@ -1252,3 +1252,22 @@ a:focus-visible, button:focus-visible {
   .widget-promo:hover { transform: none; }
   .widget-promo:hover .wp-phone { transform: rotate(-6deg); }
 }
+
+
+/* ---------- Leak-Bereich (Fakten-Seite) ---------- */
+
+.eyebrow-warn { color: var(--orange); }
+.spoiler-warn { border-left: 3px solid var(--orange); }
+.spoiler-warn h3 { margin-bottom: 0.4rem; }
+.spoiler-warn p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+
+.spoiler-gate { margin-top: 1rem; }
+.spoiler-gate > summary {
+  font-family: "Righteous", sans-serif; font-weight: 400;
+  font-size: 0.98rem; color: var(--orange);
+}
+.spoiler-gate[open] > summary { color: var(--text); margin-bottom: 0.5rem; }
+.spoiler-gate > summary::before { color: var(--orange); }
+.spoiler-body { padding-top: 0.4rem; }
+.spoiler-body .tiles { margin-bottom: 1rem; }
+.spoiler-body .card + .card { margin-top: 0.8rem; }

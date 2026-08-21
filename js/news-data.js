@@ -4,11 +4,63 @@
 
 window.GTA6_NEWS = [
   {
+    date: "2026-08-21",
+    dateLabel: "21. August 2026",
+    title: "Rockstars Antwort auf den Leak: schweigen, löschen, Werbung schalten",
+    badge: "rumor",
+    top: false,
+    text: "Weder Rockstar noch Take-Two haben sich öffentlich zu den Leaks geäußert. Stattdessen laufen im Hintergrund DMCA-Löschungen, und seit dem Leak tauchen vermehrt bezahlte Anzeigen für den Extended Look auf. Die Botschaft dahinter: Der Zeitplan steht, die Show läuft wie geplant.",
+    url: "https://www.netzwelt.de/news/257608-gta-6-geleakt-so-radikal-geht-rockstar-gegen-leaks.html",
+    source: "Netzwelt"
+    ,dateLabel_en: "August 21, 2026",
+    title_en: "Rockstar's answer to the leak: silence, takedowns, ads",
+    text_en: "Neither Rockstar nor Take-Two have commented publicly on the leaks. Instead, DMCA takedowns are running in the background, and paid ads for the Extended Look have started appearing since the leak. The message: the schedule stands, the show goes on as planned."
+  },
+  {
+    date: "2026-08-20",
+    dateLabel: "20. August 2026",
+    title: "Leaker schießt seinen Namen in eine Wand – Zugriff auf spielbare Fassung",
+    badge: "rumor",
+    top: true,
+    text: "Ein neuer Clip zeigt, wie der Schriftzug „LEEK\u201c mit Schüssen in eine Hauswand geschrieben wird. Das legt nahe, dass die Gruppe nicht nur fremdes Videomaterial verbreitet, sondern selbst eine spielbare Version aufnimmt. Dazu kam ein Flug im Kleinflugzeug über Vice City, der die Größe der Karte zeigt. Take-Twos Aktie gab in den Tagen danach messbar nach.",
+    url: "https://www.gameswirtschaft.de/wirtschaft/rockstar-games-kaempft-gegen-gta-6-leak-schon-wieder/",
+    source: "GamesWirtschaft"
+    ,dateLabel_en: "August 20, 2026",
+    title_en: "Leaker shoots their name into a wall – access to a playable build",
+    text_en: "A new clip shows the word \u201cLEEK\u201d being written into a wall with gunfire, suggesting the group is recording a playable build itself rather than just spreading someone else's footage. A small-plane flight over Vice City also showed off the map's scale. Take-Two's stock dipped measurably in the days that followed."
+  },
+  {
+    date: "2026-08-20",
+    dateLabel: "20. August 2026",
+    title: "Entlassene Rockstar-Mitarbeiter: „Boykottiert GTA 6 nicht\u201c",
+    badge: "rumor",
+    top: false,
+    text: "Rund 30 im Vorjahr entlassene Beschäftigte von Rockstar North wenden sich an die Fans: Ein Boykott helfe niemandem. Ihr Verfahren gegen das Studio wird im September in Glasgow verhandelt. Auch die Verbraucherinitiative Stop Killing Games distanziert sich vom Leak und warnt ausdrücklich davor, der Gruppe Geld zu schicken.",
+    url: "https://www.play3.de/2026/08/19/gta-6-destruktiv-und-hilft-niemandem-verbraucherschuetzer-aeussern-sich-zum-aktuellen-leak/",
+    source: "play3.de"
+    ,dateLabel_en: "August 20, 2026",
+    title_en: "Laid-off Rockstar staff: \u201cdon't boycott GTA 6\u201d",
+    text_en: "Around 30 workers laid off from Rockstar North last year are asking fans not to boycott the game \u2013 it would help no one. Their case against the studio goes to a hearing in Glasgow in September. Consumer initiative Stop Killing Games has also distanced itself from the leak and warns against sending the group money."
+  },
+  {
+    date: "2026-08-19",
+    dateLabel: "19. August 2026",
+    title: "Extended Look findet statt: 27. August, 21 Uhr auf Netflix",
+    badge: "official",
+    top: true,
+    text: "Trotz der Leak-Welle bleibt es beim Termin. „Grand Theft Auto VI: An Extended Look\u201c läuft am Donnerstag, 27. August, ab 21 Uhr deutscher Zeit exklusiv auf Netflix. Sechs Stunden später, also in der Nacht auf Freitag, folgt die Veröffentlichung auf dem Rockstar-YouTube-Kanal und der offiziellen GTA-VI-Seite. Am selben Tag sollen zudem die ersten Previews der Fachpresse erscheinen.",
+    url: "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look",
+    source: "Rockstar Games"
+    ,dateLabel_en: "August 19, 2026",
+    title_en: "Extended Look is happening: August 27, 3 p.m. ET on Netflix",
+    text_en: "Despite the wave of leaks, the date stands. \u201cGrand Theft Auto VI: An Extended Look\u201d premieres Thursday, August 27 at 3 p.m. ET exclusively on Netflix. Six hours later it goes up on Rockstar's YouTube channel and the official GTA VI site. The first press previews are expected the same day."
+  },
+  {
     date: "2026-08-18",
     dateLabel: "18. August 2026",
     title: "Gameplay und Map geleakt – neun Tage vor dem Extended Look",
     badge: "rumor",
-    top: true,
+    top: false,
     text: "Kurz vor der offiziellen Präsentation kursieren Gameplay-Clips (Jason beim Basketball, Fahrsequenzen, Kämpfe) und ein Bild der angeblich kompletten Leonida-Map. Rockstar lässt das Material per DMCA entfernen – was für Echtheit spricht. Vorsicht: Der Leaker wirbt für Krypto-Zahlungen, hier droht Abzocke. Wir verlinken das Leak-Material bewusst nicht.",
     url: "https://www.pushsquare.com/news/2026/08/gta-6-gameplay-leak-appears-online-ahead-of-official-reveal",
     source: "Push Square"
