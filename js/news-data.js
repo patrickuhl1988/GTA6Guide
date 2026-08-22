@@ -4,6 +4,32 @@
 
 window.GTA6_NEWS = [
   {
+    date: "2026-08-22",
+    dateLabel: "22. August 2026",
+    title: "Extended Look soll 30 Minuten lang sein",
+    badge: "rumor",
+    top: true,
+    text: "Ein BBC-Bericht nennt erstmals eine konkrete Laufzeit für die Netflix-Präsentation am 27. August: rund 30 Minuten. Das passt zu einem Zeitstempel, den die Netflix-App vor Wochen kurz ausspielte (30:05). Der Netflix-Support hatte dagegen von etwa 20 Minuten gesprochen. Rockstar selbst hat keine Laufzeit bestätigt – zum Vergleich: Trailer 2 war 2:47 Minuten lang.",
+    url: "https://www.notebookcheck.net/BBC-leaks-GTA-6-Netflix-Extended-Look-length-after-Rockstar-confirmed-no-delay.1375714.0.html",
+    source: "BBC / Notebookcheck"
+    ,dateLabel_en: "August 22, 2026",
+    title_en: "Extended Look said to run 30 minutes",
+    text_en: "A BBC report gives the first concrete runtime for the August 27 Netflix presentation: around 30 minutes. That matches a timestamp the Netflix app briefly displayed weeks ago (30:05), while Netflix support had said roughly 20 minutes. Rockstar has confirmed no runtime \u2013 for comparison, trailer 2 ran 2:47."
+  },
+  {
+    date: "2026-08-22",
+    dateLabel: "22. August 2026",
+    title: "Leaks gehen weiter – siebter Clip trotz Website-Sperre",
+    badge: "rumor",
+    top: false,
+    text: "Nach über 24 Stunden Funkstille hielten viele die Leak-Serie für beendet. Stattdessen erschien ein weiterer Clip („Hypercar\u201c) auf der Seite der Gruppe, obwohl Take-Two versucht, sie offline zu nehmen. Take-Two hat inzwischen eine Vorladung gegen Discord beantragt, um die Hintermänner zu identifizieren. Parallel behauptet eine zweite Gruppe, über eine Phishing-Attacke an internes Rockstar-Material gekommen zu sein.",
+    url: "https://www.thegamer.com/gta-6-seventh-leak-released-website-offline-cyberleek-still-active/",
+    source: "TheGamer"
+    ,dateLabel_en: "August 22, 2026",
+    title_en: "Leaks continue \u2013 seventh clip despite website blocks",
+    text_en: "After more than 24 hours of silence many assumed the leak run was over. Instead another clip (\u201cHypercar\u201d) appeared on the group's site, even as Take-Two tries to take it offline. Take-Two has since requested a subpoena against Discord to identify those involved. Meanwhile a second group claims it obtained internal Rockstar material via a phishing attack."
+  },
+  {
     date: "2026-08-21",
     dateLabel: "21. August 2026",
     title: "Rockstars Antwort auf den Leak: schweigen, löschen, Werbung schalten",
@@ -21,7 +47,7 @@ window.GTA6_NEWS = [
     dateLabel: "20. August 2026",
     title: "Leaker schießt seinen Namen in eine Wand – Zugriff auf spielbare Fassung",
     badge: "rumor",
-    top: true,
+    top: false,
     text: "Ein neuer Clip zeigt, wie der Schriftzug „LEEK\u201c mit Schüssen in eine Hauswand geschrieben wird. Das legt nahe, dass die Gruppe nicht nur fremdes Videomaterial verbreitet, sondern selbst eine spielbare Version aufnimmt. Dazu kam ein Flug im Kleinflugzeug über Vice City, der die Größe der Karte zeigt. Take-Twos Aktie gab in den Tagen danach messbar nach.",
     url: "https://www.gameswirtschaft.de/wirtschaft/rockstar-games-kaempft-gegen-gta-6-leak-schon-wieder/",
     source: "GamesWirtschaft"
@@ -112,7 +138,7 @@ window.GTA6_NEWS = [
     dateLabel: "6. August 2026",
     title: "„An Extended Look“ kommt am 27. August",
     badge: "official",
-    top: true,
+    top: false,
     text: "Rockstar zeigt am 27. August erstmals ausführliches Material zu GTA VI: Premiere um 21:00 Uhr deutscher Zeit exklusiv auf Netflix, sechs Stunden später kostenlos auf YouTube und der offiziellen Seite. Was genau gezeigt wird, hält Rockstar geheim – erwartet wird deutlich mehr als ein normaler Trailer.",
     url: "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look",
     source: "Rockstar Newswire"
