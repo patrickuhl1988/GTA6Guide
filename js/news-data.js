@@ -6,6 +6,19 @@ window.GTA6_NEWS = [
   {
     date: "2026-08-23",
     dateLabel: "23. August 2026",
+    title: "Achter und neunter Clip – Leaker kündigt Lucia an",
+    badge: "rumor",
+    top: false,
+    text: "Die Serie läuft weiter: Zu sehen waren zuletzt eine längere Fahrt durch Vice City, ein Überfall auf eine Tankstelle samt Flucht vor der Polizei und ein Besuch im Stripclub. Am Ende des neunten Clips wird Lucia angeteast – bisher spielte der Leaker ausschließlich Jason. Sollte sie tatsächlich folgen, wäre das ein weiterer Beleg für eine vollständige Fassung. Bislang wurde nichts zur Story verraten.",
+    url: "https://www.notebookcheck.net/9th-GTA-6-leak-teases-Lucia-gameplay-after-prior-Cyberleek-videos-focus-on-Jason.1376275.0.html",
+    source: "Notebookcheck"
+    ,dateLabel_en: "August 23, 2026",
+    title_en: "Eighth and ninth clip \u2013 leaker teases Lucia",
+    text_en: "The run continues: recent clips showed an extended drive through Vice City, a gas station robbery with a police chase, and a strip club visit. The ninth clip ends by teasing Lucia \u2013 so far the leaker has only played as Jason. If she does follow, it would be further evidence of a complete build. No story details have surfaced yet."
+  },
+  {
+    date: "2026-08-23",
+    dateLabel: "23. August 2026",
     title: "Take-Two geht juristisch vor: Vorladungen für Microsoft und Discord",
     badge: "official",
     top: true,
