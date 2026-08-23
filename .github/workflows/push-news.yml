@@ -1,0 +1,53 @@
+name: Push-Nachricht bei neuen News
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "js/news-data.js"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Nur anzeigen, was gesendet würde (nichts verschicken)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: push-news
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Push-Nachricht prüfen und ggf. senden
+        env:
+          ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
+            node scripts/send-push.mjs --dry-run
+          else
+            node scripts/send-push.mjs
+          fi
+
+      - name: Versand-Status zurückschreiben
+        if: github.event_name == 'push'
+        run: |
+          if git diff --quiet -- scripts/push-state.json; then
+            echo "Keine Änderung am Versand-Status."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add scripts/push-state.json
+            git commit -m "chore: Push-Status aktualisiert [skip ci]"
+            git push
+          fi

@@ -4,11 +4,26 @@
 
 window.GTA6_NEWS = [
   {
+    date: "2026-08-23",
+    dateLabel: "23. August 2026",
+    title: "Take-Two geht juristisch vor: Vorladungen für Microsoft und Discord",
+    badge: "official",
+    top: true,
+    pushTopic: "news",
+    text: "Take-Two hat beim Bundesgericht in New York Anträge eingereicht, um über den DMCA an Daten von Microsoft und Discord zu kommen – Ziel ist die Identifizierung der Leaker. Laut Berichten wissen Rockstar und Take-Two bis heute weder, wer dahintersteckt, noch wie das Material abgeflossen ist. Zur Erinnerung: Der Täter des 2022er-Leaks sitzt in Haft; sein Verfahren läuft seit Juli 2026.",
+    url: "https://variety.com/2026/gaming/news/gta-6-leaks-rockstar-subpoenas-microsoft-discord-1236840176/",
+    source: "Variety"
+    ,dateLabel_en: "August 23, 2026",
+    title_en: "Take-Two goes legal: subpoenas for Microsoft and Discord",
+    text_en: "Take-Two has filed requests with a federal court in New York seeking data from Microsoft and Discord under the DMCA, aiming to identify those behind the leaks. Reports say Rockstar and Take-Two still don't know who is responsible or how the material got out. For context: the perpetrator of the 2022 leak is in custody, with proceedings running since July 2026."
+  },
+  {
     date: "2026-08-22",
     dateLabel: "22. August 2026",
     title: "Extended Look soll 30 Minuten lang sein",
     badge: "rumor",
     top: true,
+    pushTopic: "events",
     text: "Ein BBC-Bericht nennt erstmals eine konkrete Laufzeit für die Netflix-Präsentation am 27. August: rund 30 Minuten. Das passt zu einem Zeitstempel, den die Netflix-App vor Wochen kurz ausspielte (30:05). Der Netflix-Support hatte dagegen von etwa 20 Minuten gesprochen. Rockstar selbst hat keine Laufzeit bestätigt – zum Vergleich: Trailer 2 war 2:47 Minuten lang.",
     url: "https://www.notebookcheck.net/BBC-leaks-GTA-6-Netflix-Extended-Look-length-after-Rockstar-confirmed-no-delay.1375714.0.html",
     source: "BBC / Notebookcheck"
