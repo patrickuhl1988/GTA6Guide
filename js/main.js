@@ -474,3 +474,17 @@
   place();
   (mq.addEventListener ? mq.addEventListener.bind(mq, "change") : mq.addListener.bind(mq))(place);
 })();
+
+// ---------- Memes: nur das neueste zeigen, Rest auf Klick ----------
+(function () {
+  var btn = document.getElementById("meme-more");
+  var grid = document.getElementById("meme-grid");
+  if (!btn || !grid) return;
+  var hidden = Array.prototype.slice.call(grid.querySelectorAll(".meme[hidden]"));
+  if (!hidden.length) { btn.hidden = true; return; }
+  btn.textContent = "Mehr Memes anzeigen (" + hidden.length + ")";
+  btn.addEventListener("click", function () {
+    hidden.forEach(function (el) { el.hidden = false; });
+    btn.hidden = true;
+  });
+})();
