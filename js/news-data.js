@@ -4,6 +4,33 @@
 
 window.GTA6_NEWS = [
   {
+    date: "2026-08-26",
+    dateLabel: "26. August 2026",
+    title: "Rockstar bricht das Schweigen: Leaks sind echt",
+    badge: "official",
+    top: true,
+    pushTopic: "news",
+    text: "Nach über einer Woche äußert sich Rockstar erstmals öffentlich – per Statement auf Instagram und X. Das Studio bestätigt damit indirekt die Echtheit des Materials und nennt die Situation \u201eheartbreaking\u201c für das Team; so habe man das Spiel nicht zeigen wollen. Rockstar entschuldigt sich zudem für die lange Wartezeit und schreibt, das Spiel sei fast fertig. Die Bitte an die Fans: trotz Spoilern noch bis zum 19. November durchhalten. Der Extended Look läuft wie geplant.",
+    url: "https://kotaku.com/rockstar-gta-6-leaks-grand-theft-auto-cyberleek-official-statement-2000728341",
+    source: "Kotaku"
+    ,dateLabel_en: "August 26, 2026",
+    title_en: "Rockstar breaks its silence: the leaks are real",
+    text_en: "After more than a week, Rockstar has spoken publicly for the first time in a statement on Instagram and X. The studio indirectly confirms the footage is genuine, calling the situation heartbreaking for the team and not how it meant to show the game. Rockstar also apologises for the long wait and says the game is nearly finished, asking fans to hold out until November 19 despite spoilers. The Extended Look goes ahead as planned."
+  },
+  {
+    date: "2026-08-26",
+    dateLabel: "26. August 2026",
+    title: "Leaks erreichen Lucia – erstmals Story-Material",
+    badge: "rumor",
+    top: false,
+    text: "Der Takt hat sich auf bis zu drei Clips pro Tag erhöht, inzwischen sind es rund 15. Neu ist die Qualität des Materials: Erstmals tauchte eine Zwischensequenz mit Lucia auf, und die Gruppe kündigt weitere Story-Inhalte an. Genau darauf dürfte Rockstars Statement reagieren – bislang zeigten die Clips nur normales Gameplay ohne Handlung. Wir zeigen weiterhin keine Clips und verlinken nichts davon.",
+    url: "https://www.forbes.com/sites/paultassi/2026/08/26/rockstar-posts-statement-on-gta-6-leaks-as-lucia-story-spoilers-hit/",
+    source: "Forbes"
+    ,dateLabel_en: "August 26, 2026",
+    title_en: "Leaks reach Lucia \u2013 first story material",
+    text_en: "The pace has risen to as many as three clips a day, with roughly 15 out so far. What's new is the nature of the material: a cutscene featuring Lucia has appeared, and the group is promising more story content. That is likely what Rockstar's statement responds to \u2013 until now the clips showed only ordinary gameplay. We continue to show no clips and link to none of it."
+  },
+  {
     date: "2026-08-23",
     dateLabel: "23. August 2026",
     title: "Achter und neunter Clip – Leaker kündigt Lucia an",
@@ -35,7 +62,7 @@ window.GTA6_NEWS = [
     dateLabel: "22. August 2026",
     title: "Extended Look soll 30 Minuten lang sein",
     badge: "rumor",
-    top: true,
+    top: false,
     pushTopic: "events",
     text: "Ein BBC-Bericht nennt erstmals eine konkrete Laufzeit für die Netflix-Präsentation am 27. August: rund 30 Minuten. Das passt zu einem Zeitstempel, den die Netflix-App vor Wochen kurz ausspielte (30:05). Der Netflix-Support hatte dagegen von etwa 20 Minuten gesprochen. Rockstar selbst hat keine Laufzeit bestätigt – zum Vergleich: Trailer 2 war 2:47 Minuten lang.",
     url: "https://www.notebookcheck.net/BBC-leaks-GTA-6-Netflix-Extended-Look-length-after-Rockstar-confirmed-no-delay.1375714.0.html",
