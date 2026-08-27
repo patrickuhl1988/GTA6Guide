@@ -6,10 +6,36 @@ window.GTA6_NEWS = [
   {
     date: "2026-08-27",
     dateLabel: "27. August 2026",
-    title: "Heute Abend: der Extended Look – 21 Uhr auf Netflix",
+    title: "Der Extended Look ist da: 27 Minuten Gameplay",
     badge: "official",
     top: true,
     pushTopic: "events",
+    text: "Nach über drei Jahren Warten zeigt Rockstar endlich Spielszenen – 27 Minuten, komplett auf einer PS5 aufgenommen, ohne Kommentar. Zu sehen sind Jason und Lucia bei Missionen, im Alltag und in Vice City selbst. Bestätigt sind unter anderem der sofortige Wechsel zwischen beiden Figuren, ein Karma-System, der sechste Fahndungsstern und eine Zeitlupe im Stil von Red Dead. Ab 3:00 Uhr nachts läuft dasselbe Video kostenlos auf YouTube.",
+    url: "https://variety.com/2026/tv/news/gta-6-netflix-trailer-extended-look-release-1236845475/",
+    source: "Variety"
+    ,dateLabel_en: "August 27, 2026",
+    title_en: "The Extended Look is here: 27 minutes of gameplay",
+    text_en: "After more than three years of waiting, Rockstar has finally shown gameplay \u2013 27 minutes, captured entirely on a PS5, without commentary. It follows Jason and Lucia through missions, everyday moments and Vice City itself. Among the confirmed features: instant switching between the two, a karma system, the return of the sixth wanted star and a Red Dead-style bullet time. The same video goes up free on YouTube at 9 p.m. ET."
+  },
+  {
+    date: "2026-08-27",
+    dateLabel: "27. August 2026",
+    title: "Was der Extended Look verrät – die wichtigsten Systeme",
+    badge: "official",
+    top: false,
+    text: "Jason und Lucia lassen sich im Zusammenspiel verzögerungsfrei tauschen, getrennt dauert der Wechsel wie in GTA V ein paar Sekunden. NPCs lassen sich per gehaltener Taste ansprechen, wie in Red Dead Redemption 2. Das Karma reagiert auf Verhalten: Hund streicheln hebt es, ein Überfall drückt es. In Kämpfen gibt es eine Zeitlupe mit markierten Trefferzonen. Dazu Freizeit satt – Rennen, Jetski, Krafttraining, Tauchen – und dichtes Gedränge in Clubs. Alle Details in unserem Faktenbereich.",
+    url: "https://www.pushsquare.com/news/2026/08/gta-6-netflix-extended-look-live-now-here-are-all-the-new-things-weve-learned",
+    source: "Push Square"
+    ,dateLabel_en: "August 27, 2026",
+    title_en: "What the Extended Look reveals \u2013 the key systems",
+    text_en: "Jason and Lucia can be swapped instantly when together; apart, the switch takes a few seconds as in GTA V. NPCs can be addressed by holding a button, just like Red Dead Redemption 2. Karma responds to behaviour: petting a dog raises it, a robbery lowers it. Combat includes a bullet time with marked weak spots. Plus plenty of downtime \u2013 races, jet skis, weight lifting, diving \u2013 and dense crowds in clubs."
+  },
+  {
+    date: "2026-08-27",
+    dateLabel: "27. August 2026",
+    title: "Heute Abend: der Extended Look – 21 Uhr auf Netflix",
+    badge: "official",
+    top: false,
     text: "Es ist so weit. „Grand Theft Auto VI: An Extended Look\u201c startet heute um 21:00 Uhr deutscher Zeit exklusiv auf Netflix – laut Rockstar komplett aus Spielszenen auf der PS5 aufgenommen. Wer kein Netflix hat, wartet bis 3:00 Uhr in der Nacht auf Freitag: Dann erscheint dasselbe Video kostenlos auf dem Rockstar-YouTube-Kanal und der offiziellen GTA-VI-Seite. Eine offizielle Laufzeit gibt es weiterhin nicht; erwartet werden 20 bis 30 Minuten.",
     url: "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look",
     source: "Rockstar Games"
