@@ -4,11 +4,51 @@
 
 window.GTA6_NEWS = [
   {
+    date: "2026-08-27",
+    dateLabel: "27. August 2026",
+    title: "Heute Abend: der Extended Look – 21 Uhr auf Netflix",
+    badge: "official",
+    top: true,
+    pushTopic: "events",
+    text: "Es ist so weit. „Grand Theft Auto VI: An Extended Look\u201c startet heute um 21:00 Uhr deutscher Zeit exklusiv auf Netflix – laut Rockstar komplett aus Spielszenen auf der PS5 aufgenommen. Wer kein Netflix hat, wartet bis 3:00 Uhr in der Nacht auf Freitag: Dann erscheint dasselbe Video kostenlos auf dem Rockstar-YouTube-Kanal und der offiziellen GTA-VI-Seite. Eine offizielle Laufzeit gibt es weiterhin nicht; erwartet werden 20 bis 30 Minuten.",
+    url: "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look",
+    source: "Rockstar Games"
+    ,dateLabel_en: "August 27, 2026",
+    title_en: "Tonight: the Extended Look \u2013 3 p.m. ET on Netflix",
+    text_en: "This is it. \u201cGrand Theft Auto VI: An Extended Look\u201d premieres today at 3 p.m. ET exclusively on Netflix, captured entirely from PS5 in-game footage according to Rockstar. Without Netflix you wait until 9 p.m. ET, when the same video goes up free on Rockstar's YouTube channel and the official GTA VI site. No official runtime has been given; 20 to 30 minutes is the expectation."
+  },
+  {
+    date: "2026-08-27",
+    dateLabel: "27. August 2026",
+    title: "Direkt danach: die ersten Previews der Fachpresse",
+    badge: "official",
+    top: false,
+    text: "Der Abend endet nicht mit dem Video. Rockstar hatte im Juli ausgewählte Medien und Creator nach Edinburgh eingeladen – zu einer Vorführung ohne Controller in der Hand, bei der Entwickler das Spiel zeigten. Die Sperrfrist für diese Eindrücke fällt zeitgleich mit der Netflix-Premiere. Es gibt also erstmals ausführliche Einschätzungen von Leuten, die mehr gesehen haben als einen Trailer.",
+    url: "https://www.forbes.com/sites/paultassi/2026/08/26/netflixs-gta-6-extended-look-isnt-the-only-gta-preview-tomorrow/",
+    source: "Forbes"
+    ,dateLabel_en: "August 27, 2026",
+    title_en: "Right after: the first press previews",
+    text_en: "The evening doesn't end with the video. Rockstar invited selected press and creators to Edinburgh in July for a hands-off session where developers demonstrated the game. The embargo on those impressions lifts alongside the Netflix premiere, so for the first time there will be detailed takes from people who saw more than a trailer."
+  },
+  {
+    date: "2026-08-27",
+    dateLabel: "27. August 2026",
+    title: "Rockstar stellt klar: Livestreams sind erlaubt",
+    badge: "official",
+    top: false,
+    text: "Kurzzeitige Verwirrung bei Streamern: Darf man Netflix-Inhalte überhaupt zeigen? Rockstar hat nachgeschoben, dass Livestreams ab 21 Uhr in Ordnung gehen – solange das Video nicht einfach unbearbeitet und ohne eigenen Kommentar weiterverbreitet wird und die Regeln der jeweiligen Plattform eingehalten werden. Reaktionen, Analysen und Breakdowns sind ausdrücklich erwünscht.",
+    url: "https://kotaku.com/content-creators-nearly-crash-out-over-the-netflix-gta-6-reveals-confusing-streaming-guidelines-2000728828",
+    source: "Kotaku"
+    ,dateLabel_en: "August 27, 2026",
+    title_en: "Rockstar clarifies: livestreams are allowed",
+    text_en: "Brief confusion among streamers over whether Netflix content could be shown at all. Rockstar has since clarified that livestreaming from 3 p.m. ET is fine, as long as the video isn't simply reposted unedited without commentary and platform rules are followed. Reactions, analyses and breakdowns are explicitly welcome."
+  },
+  {
     date: "2026-08-26",
     dateLabel: "26. August 2026",
     title: "Rockstar bricht das Schweigen: Leaks sind echt",
     badge: "official",
-    top: true,
+    top: false,
     pushTopic: "news",
     text: "Nach über einer Woche äußert sich Rockstar erstmals öffentlich – per Statement auf Instagram und X. Das Studio bestätigt damit indirekt die Echtheit des Materials und nennt die Situation \u201eheartbreaking\u201c für das Team; so habe man das Spiel nicht zeigen wollen. Rockstar entschuldigt sich zudem für die lange Wartezeit und schreibt, das Spiel sei fast fertig. Die Bitte an die Fans: trotz Spoilern noch bis zum 19. November durchhalten. Der Extended Look läuft wie geplant.",
     url: "https://kotaku.com/rockstar-gta-6-leaks-grand-theft-auto-cyberleek-official-statement-2000728341",
