@@ -4,12 +4,77 @@
 
 window.GTA6_NEWS = [
   {
+    date: "2026-09-03",
+    dateLabel: "3. September 2026",
+    title: "Sony zeigt zwei DualSense-Controller im GTA-6-Design",
+    badge: "official",
+    top: true,
+    pushTopic: "deals",
+    text: "Passend zum Spiel bringt Sony zwei limitierte DualSense-Controller im Vice-City-Look. Vorbestellungen starten am 10. September, erhältlich sind sie zum Release am 19. November. Preise hat Sony noch nicht für alle Regionen genannt – wer eine Sonderedition will, sollte den Termin im Blick behalten: Limitierte GTA-Hardware war in der Vergangenheit binnen Stunden vergriffen.",
+    url: "https://vgtimes.com/tech-and-hardware/166365-sony-reveals-limited-edition-dualsense-controllers-inspired-by-gta-6-pre-orders-start-september-10.html",
+    source: "VGTimes"
+    ,dateLabel_en: "September 3, 2026",
+    title_en: "Sony unveils two DualSense controllers in GTA 6 design",
+    text_en: "Sony is releasing two limited-edition DualSense controllers in a Vice City look to match the game. Pre-orders open on September 10, with availability at launch on November 19. Prices haven't been announced for every region yet \u2013 if you want a special edition, keep an eye on the date: limited GTA hardware has sold out within hours before."
+  },
+  {
+    date: "2026-09-03",
+    dateLabel: "3. September 2026",
+    title: "Digital Foundry: riesiger Sprung – mit sichtbaren Kompromissen",
+    badge: "rumor",
+    top: false,
+    text: "Die Technikexperten haben die Spielszenen Bild für Bild auseinandergenommen. Ihr Fazit: Bei Figuren, Haaren und Beleuchtung liegen Welten zwischen GTA V und dem Nachfolger. Gleichzeitig zeigt die PS5-Fassung Abstriche, vor allem bei Spiegelungen. Das deckt sich mit dem Eindruck vieler Journalisten, die nach dem Video zum Warten auf die PC-Version rieten.",
+    url: "https://vgtimes.com/gaming-news/166313-digital-foundry-says-gta-6-looks-far-beyond-gta-5-but-ps5-has-trade-offs.html",
+    source: "Digital Foundry"
+    ,dateLabel_en: "September 3, 2026",
+    title_en: "Digital Foundry: a huge leap \u2013 with visible trade-offs",
+    text_en: "The technical analysts went through the footage frame by frame. Their verdict: character work, hair and lighting are worlds apart from GTA V. At the same time the PS5 version shows compromises, especially in reflections. That matches the impression of many journalists who advised waiting for the PC version after the showcase."
+  },
+  {
+    date: "2026-08-31",
+    dateLabel: "31. August 2026",
+    title: "Offiziell: keine Mikrotransaktionen im Singleplayer, keine KI-Inhalte",
+    badge: "official",
+    top: true,
+    text: "Rockstar stellt zwei Dinge klar, die viele Fans befürchtet hatten: Die Story-Kampagne kommt ohne Mikrotransaktionen aus, und für die Entwicklung wurde keine generative KI eingesetzt. Studio-Co-Chef Rob Nelson erzählte in mehreren Interviews außerdem, dass erste Arbeiten an GTA VI bereits 2015 begannen – fünf Jahre früher als bisher bekannt.",
+    url: "https://vgtimes.com/gaming-news/165958-official-gta-6-will-have-no-generative-ai-or-microtransactions.html",
+    source: "Rockstar Games"
+    ,dateLabel_en: "August 31, 2026",
+    title_en: "Official: no single-player microtransactions, no AI-generated content",
+    text_en: "Rockstar has cleared up two things many fans worried about: the story campaign ships without microtransactions, and no generative AI was used in development. Studio co-head Rob Nelson also revealed in interviews that early work on GTA VI began back in 2015 \u2013 five years earlier than previously known."
+  },
+  {
+    date: "2026-08-29",
+    dateLabel: "29. August 2026",
+    title: "Größter Gaming-Stream des Jahres – Netflix und Twitch gingen in die Knie",
+    badge: "rumor",
+    top: false,
+    text: "Fast vier Millionen Menschen schauten den Extended Look gleichzeitig über alle Plattformen hinweg – Rekord für 2026, knapp vor dem Summer Game Fest. Der Andrang hatte Folgen: Netflix meldete kurz nach dem Start massenhaft Störungen, und auch Twitch fiel zeitweise aus, weil unzählige Creator parallel mitstreamten.",
+    url: "https://vgtimes.com/gaming-news/165861-gta-6-gameplay-reveal-sets-2026-streaming-record.html",
+    source: "Streams Charts"
+    ,dateLabel_en: "August 29, 2026",
+    title_en: "Biggest gaming stream of the year \u2013 Netflix and Twitch buckled",
+    text_en: "Nearly four million people watched the Extended Look simultaneously across platforms \u2013 a 2026 record, just ahead of Summer Game Fest. The rush had consequences: Netflix reported widespread outages shortly after the start, and Twitch went down temporarily as countless creators co-streamed."
+  },
+  {
+    date: "2026-08-28",
+    dateLabel: "28. August 2026",
+    title: "Rockstar redet: 30 FPS zum Start, rund 80 Stunden Story",
+    badge: "official",
+    top: false,
+    text: "In einer Interviewwelle nach dem Video wurde Rob Nelson ungewohnt konkret. Die Konsolenfassungen laufen aktuell mit 30 Bildern pro Sekunde; einen 60-FPS-Modus mag er noch nicht versprechen. Sein eigener Durchgang durch die Hauptgeschichte plus einige Nebenaufträge dauerte rund 80 Stunden. Und: Für NPC-Verhalten wurde ein eigenes Büro in Los Angeles abgestellt – über 600.000 Animationen, gegenüber etwa 55.000 in GTA V.",
+    url: "https://vgtimes.com/gaming-news/165729-rockstar-to-hold-a-26-minute-gta-6-presentation-at-2200.html",
+    source: "Rob Nelson / VGTimes"
+    ,dateLabel_en: "August 28, 2026",
+    title_en: "Rockstar talks: 30 FPS at launch, around 80 hours of story",
+    text_en: "In a wave of interviews after the video, Rob Nelson got unusually specific. Console versions currently run at 30 frames per second, and he won't promise a 60 FPS mode yet. His own run through the main story plus some side missions took around 80 hours. And an entire Los Angeles office was dedicated to NPC behaviour \u2013 over 600,000 animations, against roughly 55,000 in GTA V."
+  },
+  {
     date: "2026-08-27",
     dateLabel: "27. August 2026",
     title: "Der Extended Look ist da: 27 Minuten Gameplay",
     badge: "official",
-    top: true,
-    pushTopic: "events",
+    top: false,
     text: "Nach über drei Jahren Warten zeigt Rockstar endlich Spielszenen – 27 Minuten, komplett auf einer PS5 aufgenommen, ohne Kommentar. Zu sehen sind Jason und Lucia bei Missionen, im Alltag und in Vice City selbst. Bestätigt sind unter anderem der sofortige Wechsel zwischen beiden Figuren, ein Karma-System, der sechste Fahndungsstern und eine Zeitlupe im Stil von Red Dead. Ab 3:00 Uhr nachts läuft dasselbe Video kostenlos auf YouTube.",
     url: "https://variety.com/2026/tv/news/gta-6-netflix-trailer-extended-look-release-1236845475/",
     source: "Variety"
@@ -114,7 +179,7 @@ window.GTA6_NEWS = [
     dateLabel: "23. August 2026",
     title: "Take-Two geht juristisch vor: Vorladungen für Microsoft und Discord",
     badge: "official",
-    top: true,
+    top: false,
     pushTopic: "news",
     text: "Take-Two hat beim Bundesgericht in New York Anträge eingereicht, um über den DMCA an Daten von Microsoft und Discord zu kommen – Ziel ist die Identifizierung der Leaker. Laut Berichten wissen Rockstar und Take-Two bis heute weder, wer dahintersteckt, noch wie das Material abgeflossen ist. Zur Erinnerung: Der Täter des 2022er-Leaks sitzt in Haft; sein Verfahren läuft seit Juli 2026.",
     url: "https://variety.com/2026/gaming/news/gta-6-leaks-rockstar-subpoenas-microsoft-discord-1236840176/",
@@ -194,7 +259,7 @@ window.GTA6_NEWS = [
     dateLabel: "19. August 2026",
     title: "Extended Look findet statt: 27. August, 21 Uhr auf Netflix",
     badge: "official",
-    top: true,
+    top: false,
     text: "Trotz der Leak-Welle bleibt es beim Termin. „Grand Theft Auto VI: An Extended Look\u201c läuft am Donnerstag, 27. August, ab 21 Uhr deutscher Zeit exklusiv auf Netflix. Sechs Stunden später, also in der Nacht auf Freitag, folgt die Veröffentlichung auf dem Rockstar-YouTube-Kanal und der offiziellen GTA-VI-Seite. Am selben Tag sollen zudem die ersten Previews der Fachpresse erscheinen.",
     url: "https://www.rockstargames.com/newswire/article/9k2kaa1o3297k9/grand-theft-auto-vi-an-extended-look",
     source: "Rockstar Games"
